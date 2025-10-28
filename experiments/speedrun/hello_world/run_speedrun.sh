@@ -37,7 +37,7 @@ nvidia-smi
 echo "============================================"
 
 # Run the speedrun
-python marin/run/ray_run.py -- python experiments/speedrun/hello_world/train.py
+python src/marin/run/ray_run.py -- python experiments/speedrun/hello_world/train.py
 
 # Print completion info
 echo "============================================"
