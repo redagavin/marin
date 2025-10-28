@@ -36,8 +36,8 @@ echo "GPU info:"
 nvidia-smi
 echo "============================================"
 
-# Run the speedrun
-python src/marin/run/ray_run.py -- python experiments/speedrun/hello_world/train.py
+# Run the speedrun directly (without ray_run.py for local execution)
+python experiments/speedrun/hello_world/train.py --prefix $MARIN_PREFIX
 
 # Print completion info
 echo "============================================"
