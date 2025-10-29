@@ -224,3 +224,9 @@ gha-creds-*.json
 *.jsonl
 **/*.jsonl
 scr/*
+
+# SLURM job outputs
+*.err
+*.out
+slurm_*.err
+slurm_*.out
