@@ -29,26 +29,27 @@ echo -e "\n${YELLOW}[1/5] Setting up environment...${NC}"
 source "${VENV_PATH}/bin/activate"
 
 # Unset proxy variables (they cause JAX to hang)
-# unset ftp_proxy https_proxy http_proxy
+unset ftp_proxy https_proxy http_proxy
 
 # Set offline modes
-# export HF_HUB_OFFLINE=1
-# export WANDB_MODE=offline
+export HF_HUB_OFFLINE=1
+export WANDB_MODE=offline
 
 echo -e "${GREEN}✓ Environment configured${NC}"
 
 # Step 2: Run training
-echo -e "\n${YELLOW}[2/5] Running training (this takes ~3-5 minutes)...${NC}"
+echo -e "\n${YELLOW}[2/5]Skipping training. We are just running evaluation...${NC}"
+# echo -e "\n${YELLOW}[2/5] Running training (this takes ~3-5 minutes)...${NC}"
 cd "${MARIN_DIR}"
 
-python "${TRAIN_SCRIPT}" --prefix "${OUTPUT_PREFIX}"
+# python "${TRAIN_SCRIPT}" --prefix "${OUTPUT_PREFIX}"
 
-if [ $? -eq 0 ]; then
-    echo -e "${GREEN}✓ Training completed successfully${NC}"
-else
-    echo -e "${RED}✗ Training failed${NC}"
-    exit 1
-fi
+# if [ $? -eq 0 ]; then
+#     echo -e "${GREEN}✓ Training completed successfully${NC}"
+# else
+#     echo -e "${RED}✗ Training failed${NC}"
+#     exit 1
+# fi
 
 # Step 3: Find the checkpoint directory
 echo -e "\n${YELLOW}[3/5] Locating checkpoint directory...${NC}"

@@ -23,10 +23,10 @@ speedrun_config = SpeedrunConfig(
     train_config=SimpleTrainConfig(
         GpuConfig(gpu_count=1, accelerator_type="A100"),
         train_batch_size=32,
-        num_train_steps=100,
+        num_train_steps=10,
         learning_rate=3e-3,
         weight_decay=0.1,
-        steps_per_eval=500,
+        steps_per_eval=1,
     ),
 )
 
