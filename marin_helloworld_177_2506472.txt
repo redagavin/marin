@@ -1,0 +1,206 @@
+/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+2025-10-29 11:03:47,195	INFO speedrun.py:126 -- Speedrun Configuration:
+2025-10-29 11:03:47,196	INFO speedrun.py:127 -- {
+    "author": {
+        "name": "Herumb Shandilya",
+        "affiliation": "Stanford University",
+        "url": "https://www.x.com/krypticmouse"
+    },
+    "description": "Nano model based on Llama architecture.",
+    "model_config": {
+        "cross_entropy_block_size": null,
+        "seq_len": 512,
+        "hidden_dim": 32,
+        "intermediate_dim": 128,
+        "num_layers": 2,
+        "num_heads": 2,
+        "head_dim": null,
+        "num_kv_heads": 2,
+        "activation_function": "silu",
+        "initializer_range": 0.02,
+        "layer_norm_epsilon": 1e-05,
+        "tie_word_embeddings": false,
+        "hybrid_norm": false,
+        "use_qk_norm": false,
+        "input_embedding_norm": false,
+        "upcast_attn": false,
+        "attn_backend": null,
+        "flash_attention_block_size": null,
+        "gradient_checkpointing": true,
+        "scan_layers": true,
+        "use_bias": false,
+        "use_layer_norm_weight": true,
+        "rope": {
+            "theta": 10000,
+            "factor": 1.0
+        },
+        "reference_checkpoint": "NousResearch/Llama-2-7b-hf",
+        "tokenizer": null
+    },
+    "train_config": {
+        "train_batch_size": 32,
+        "num_train_steps": 100,
+        "learning_rate": 0.003,
+        "data_seed": null,
+        "weight_decay": 0.1,
+        "beta1": null,
+        "beta2": null,
+        "epsilon": null,
+        "max_grad_norm": null,
+        "warmup": null,
+        "decay": null,
+        "rewarmup": null,
+        "lr_schedule": null,
+        "min_lr_ratio": null,
+        "cycle_length": null,
+        "z_loss_weight": null,
+        "ema_beta": null,
+        "skip_bad_steps": false,
+        "steps_per_eval": 500,
+        "steps_per_export": 10000,
+        "steps_per_task_eval": null,
+        "steps_per_hf_export": null,
+        "per_device_eval_parallelism": null,
+        "max_eval_batches": null,
+        "initialize_from_checkpoint_path": null,
+        "initialize_from_hf": null,
+        "reset_data_loader_on_init": true,
+        "allow_partial_checkpoint": false,
+        "int8": false,
+        "optimizer_config": null,
+        "watch": {
+            "watch_targets": [
+                "grads",
+                "params"
+            ],
+            "include_norms": true,
+            "include_per_parameter_norms": true,
+            "include_histograms": false,
+            "split_scan_layers": true,
+            "interval": 10
+        }
+    },
+    "tokenized_dataset": "ExecutorStep(name='tokenized/subcache/fineweb-edu-10B', fn=<function _actually_download_pretokenized_cache at 0x15507bb5ef20>, config=PretokenizedCacheDownloadConfig(cache_path=OutputName(name=None), tokenizer=VersionedValue(value='stanford-crfm/marin-tokenizer'), hf_repo_id=VersionedValue(value='marin-community/fineweb-edu-pretokenized-10B'), hf_revision=VersionedValue(value=None), hf_repo_type_prefix='datasets', hf_token=None, format=TextLmDatasetFormat(text_key='text'), cache_options=None, tags=[]), description=None, override_output_path=None, pip_dependency_groups=None)",
+    "resources": {
+        "gpu_count": 1,
+        "accelerator_type": "A100",
+        "device_flops_override": null
+    }
+}
+2025-10-29 11:03:47,196	INFO speedrun.py:163 -- The rough estimated compute (calculated as (total model FLOPs / Assumed MFU)) for your run is probably between:
+      * 8.27e+13 FLOPs assuming an MFU of 0.5, and
+      * 2.07e+14 FLOPs assuming an MFU of 0.2.
+
+This is calculated based on assumed MFU values and can be used as a rough estimate to guide your config/training setup.
+2025-10-29 11:03:47,196	INFO speedrun.py:131 -- Hardware and Model FLOPS Information:
+2025-10-29 11:03:47,196	INFO speedrun.py:132 -- Number of devices: 1
+2025-10-29 11:03:47,196	INFO speedrun.py:133 -- Number of chips: 1
+2025-10-29 11:03:47,196	INFO speedrun.py:134 -- Device FLOPs: 3.12e+14 FLOP/s
+2025-10-29 11:03:47,196	INFO speedrun.py:135 -- Total peak hardware FLOPs: 3.12e+14 FLOP/s
+2025-10-29 11:03:47,196	INFO speedrun.py:136 -- Model FLOPs: 4.13e+13 FLOP
+2025-10-29 11:03:47,196	INFO speedrun.py:140 -- Model size: 8.24 million parameters
+2025-10-29 11:03:47,196	INFO speedrun.py:336 -- Running speedrun llama_nano_gpu_speedrun
+2025-10-29 11:03:47,196	INFO speedrun.py:126 -- Speedrun Configuration:
+2025-10-29 11:03:47,196	INFO speedrun.py:127 -- {
+    "author": {
+        "name": "Herumb Shandilya",
+        "affiliation": "Stanford University",
+        "url": "https://www.x.com/krypticmouse"
+    },
+    "description": "Nano model based on Llama architecture.",
+    "model_config": {
+        "cross_entropy_block_size": null,
+        "seq_len": 512,
+        "hidden_dim": 32,
+        "intermediate_dim": 128,
+        "num_layers": 2,
+        "num_heads": 2,
+        "head_dim": null,
+        "num_kv_heads": 2,
+        "activation_function": "silu",
+        "initializer_range": 0.02,
+        "layer_norm_epsilon": 1e-05,
+        "tie_word_embeddings": false,
+        "hybrid_norm": false,
+        "use_qk_norm": false,
+        "input_embedding_norm": false,
+        "upcast_attn": false,
+        "attn_backend": null,
+        "flash_attention_block_size": null,
+        "gradient_checkpointing": true,
+        "scan_layers": true,
+        "use_bias": false,
+        "use_layer_norm_weight": true,
+        "rope": {
+            "theta": 10000,
+            "factor": 1.0
+        },
+        "reference_checkpoint": "NousResearch/Llama-2-7b-hf",
+        "tokenizer": null
+    },
+    "train_config": {
+        "train_batch_size": 32,
+        "num_train_steps": 100,
+        "learning_rate": 0.003,
+        "data_seed": null,
+        "weight_decay": 0.1,
+        "beta1": null,
+        "beta2": null,
+        "epsilon": null,
+        "max_grad_norm": null,
+        "warmup": null,
+        "decay": null,
+        "rewarmup": null,
+        "lr_schedule": null,
+        "min_lr_ratio": null,
+        "cycle_length": null,
+        "z_loss_weight": null,
+        "ema_beta": null,
+        "skip_bad_steps": false,
+        "steps_per_eval": 500,
+        "steps_per_export": 10000,
+        "steps_per_task_eval": null,
+        "steps_per_hf_export": null,
+        "per_device_eval_parallelism": null,
+        "max_eval_batches": null,
+        "initialize_from_checkpoint_path": null,
+        "initialize_from_hf": null,
+        "reset_data_loader_on_init": true,
+        "allow_partial_checkpoint": false,
+        "int8": false,
+        "optimizer_config": null,
+        "watch": {
+            "watch_targets": [
+                "grads",
+                "params"
+            ],
+            "include_norms": true,
+            "include_per_parameter_norms": true,
+            "include_histograms": false,
+            "split_scan_layers": true,
+            "interval": 10
+        }
+    },
+    "tokenized_dataset": "ExecutorStep(name='tokenized/subcache/fineweb-edu-10B', fn=<function _actually_download_pretokenized_cache at 0x15507bb5ef20>, config=PretokenizedCacheDownloadConfig(cache_path=OutputName(name=None), tokenizer=VersionedValue(value='stanford-crfm/marin-tokenizer'), hf_repo_id=VersionedValue(value='marin-community/fineweb-edu-pretokenized-10B'), hf_revision=VersionedValue(value=None), hf_repo_type_prefix='datasets', hf_token=None, format=TextLmDatasetFormat(text_key='text'), cache_options=None, tags=[]), description=None, override_output_path=None, pip_dependency_groups=None)",
+    "resources": {
+        "gpu_count": 1,
+        "accelerator_type": "A100",
+        "device_flops_override": null
+    }
+}
+2025-10-29 11:03:47,196	INFO speedrun.py:163 -- The rough estimated compute (calculated as (total model FLOPs / Assumed MFU)) for your run is probably between:
+      * 8.27e+13 FLOPs assuming an MFU of 0.5, and
+      * 2.07e+14 FLOPs assuming an MFU of 0.2.
+
+This is calculated based on assumed MFU values and can be used as a rough estimate to guide your config/training setup.
+2025-10-29 11:03:47,196	INFO speedrun.py:131 -- Hardware and Model FLOPS Information:
+2025-10-29 11:03:47,196	INFO speedrun.py:132 -- Number of devices: 1
+2025-10-29 11:03:47,196	INFO speedrun.py:133 -- Number of chips: 1
+2025-10-29 11:03:47,196	INFO speedrun.py:134 -- Device FLOPs: 3.12e+14 FLOP/s
+2025-10-29 11:03:47,196	INFO speedrun.py:135 -- Total peak hardware FLOPs: 3.12e+14 FLOP/s
+2025-10-29 11:03:47,196	INFO speedrun.py:136 -- Model FLOPs: 4.13e+13 FLOP
+2025-10-29 11:03:47,196	INFO speedrun.py:140 -- Model size: 8.24 million parameters
+slurmstepd: error: *** JOB 2506472 ON d3204 CANCELLED AT 2025-10-29T11:48:57 ***

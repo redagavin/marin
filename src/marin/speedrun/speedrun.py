@@ -309,8 +309,6 @@ def speedrun_results(config: SpeedrunResultsConfig):
 
 
 ### Default speedrun function ###
-
-
 def default_speedrun(
     name: str,
     config: SpeedrunConfig,

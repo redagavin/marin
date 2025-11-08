@@ -1,0 +1,838 @@
+/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+2025-10-29 01:15:43,595	INFO speedrun.py:126 -- Speedrun Configuration:
+2025-10-29 01:15:43,595	INFO speedrun.py:127 -- {
+    "author": {
+        "name": "Herumb Shandilya",
+        "affiliation": "Stanford University",
+        "url": "https://www.x.com/krypticmouse"
+    },
+    "description": "Nano model based on Llama architecture.",
+    "model_config": {
+        "cross_entropy_block_size": null,
+        "seq_len": 512,
+        "hidden_dim": 32,
+        "intermediate_dim": 128,
+        "num_layers": 2,
+        "num_heads": 2,
+        "head_dim": null,
+        "num_kv_heads": 2,
+        "activation_function": "silu",
+        "initializer_range": 0.02,
+        "layer_norm_epsilon": 1e-05,
+        "tie_word_embeddings": false,
+        "hybrid_norm": false,
+        "use_qk_norm": false,
+        "input_embedding_norm": false,
+        "upcast_attn": false,
+        "attn_backend": null,
+        "flash_attention_block_size": null,
+        "gradient_checkpointing": true,
+        "scan_layers": true,
+        "use_bias": false,
+        "use_layer_norm_weight": true,
+        "rope": {
+            "theta": 10000,
+            "factor": 1.0
+        },
+        "reference_checkpoint": "NousResearch/Llama-2-7b-hf",
+        "tokenizer": null
+    },
+    "train_config": {
+        "train_batch_size": 32,
+        "num_train_steps": 100,
+        "learning_rate": 0.003,
+        "data_seed": null,
+        "weight_decay": 0.1,
+        "beta1": null,
+        "beta2": null,
+        "epsilon": null,
+        "max_grad_norm": null,
+        "warmup": null,
+        "decay": null,
+        "rewarmup": null,
+        "lr_schedule": null,
+        "min_lr_ratio": null,
+        "cycle_length": null,
+        "z_loss_weight": null,
+        "ema_beta": null,
+        "skip_bad_steps": false,
+        "steps_per_eval": 500,
+        "steps_per_export": 10000,
+        "steps_per_task_eval": null,
+        "steps_per_hf_export": null,
+        "per_device_eval_parallelism": null,
+        "max_eval_batches": null,
+        "initialize_from_checkpoint_path": null,
+        "initialize_from_hf": null,
+        "reset_data_loader_on_init": true,
+        "allow_partial_checkpoint": false,
+        "int8": false,
+        "optimizer_config": null,
+        "watch": {
+            "watch_targets": [
+                "grads",
+                "params"
+            ],
+            "include_norms": true,
+            "include_per_parameter_norms": true,
+            "include_histograms": false,
+            "split_scan_layers": true,
+            "interval": 10
+        }
+    },
+    "tokenized_dataset": "ExecutorStep(name='tokenized/subcache/fineweb-edu-10B', fn=<function _actually_download_pretokenized_cache at 0x146855bdab60>, config=PretokenizedCacheDownloadConfig(cache_path=OutputName(name=None), tokenizer=VersionedValue(value='stanford-crfm/marin-tokenizer'), hf_repo_id=VersionedValue(value='marin-community/fineweb-edu-pretokenized-10B'), hf_revision=VersionedValue(value=None), hf_repo_type_prefix='datasets', hf_token=None, format=TextLmDatasetFormat(text_key='text'), cache_options=None, tags=[]), description=None, override_output_path=None, pip_dependency_groups=None)",
+    "resources": {
+        "gpu_count": 1,
+        "accelerator_type": "A100",
+        "device_flops_override": null
+    }
+}
+2025-10-29 01:15:43,595	INFO speedrun.py:163 -- The rough estimated compute (calculated as (total model FLOPs / Assumed MFU)) for your run is probably between:
+      * 8.27e+13 FLOPs assuming an MFU of 0.5, and
+      * 2.07e+14 FLOPs assuming an MFU of 0.2.
+
+This is calculated based on assumed MFU values and can be used as a rough estimate to guide your config/training setup.
+2025-10-29 01:15:43,595	INFO speedrun.py:131 -- Hardware and Model FLOPS Information:
+2025-10-29 01:15:43,595	INFO speedrun.py:132 -- Number of devices: 1
+2025-10-29 01:15:43,595	INFO speedrun.py:133 -- Number of chips: 1
+2025-10-29 01:15:43,595	INFO speedrun.py:134 -- Device FLOPs: 3.12e+14 FLOP/s
+2025-10-29 01:15:43,595	INFO speedrun.py:135 -- Total peak hardware FLOPs: 3.12e+14 FLOP/s
+2025-10-29 01:15:43,595	INFO speedrun.py:136 -- Model FLOPs: 4.13e+13 FLOP
+2025-10-29 01:15:43,595	INFO speedrun.py:140 -- Model size: 8.24 million parameters
+2025-10-29 01:15:43,596	INFO speedrun.py:336 -- Running speedrun llama_nano_gpu_speedrun
+2025-10-29 01:15:43,596	INFO speedrun.py:126 -- Speedrun Configuration:
+2025-10-29 01:15:43,596	INFO speedrun.py:127 -- {
+    "author": {
+        "name": "Herumb Shandilya",
+        "affiliation": "Stanford University",
+        "url": "https://www.x.com/krypticmouse"
+    },
+    "description": "Nano model based on Llama architecture.",
+    "model_config": {
+        "cross_entropy_block_size": null,
+        "seq_len": 512,
+        "hidden_dim": 32,
+        "intermediate_dim": 128,
+        "num_layers": 2,
+        "num_heads": 2,
+        "head_dim": null,
+        "num_kv_heads": 2,
+        "activation_function": "silu",
+        "initializer_range": 0.02,
+        "layer_norm_epsilon": 1e-05,
+        "tie_word_embeddings": false,
+        "hybrid_norm": false,
+        "use_qk_norm": false,
+        "input_embedding_norm": false,
+        "upcast_attn": false,
+        "attn_backend": null,
+        "flash_attention_block_size": null,
+        "gradient_checkpointing": true,
+        "scan_layers": true,
+        "use_bias": false,
+        "use_layer_norm_weight": true,
+        "rope": {
+            "theta": 10000,
+            "factor": 1.0
+        },
+        "reference_checkpoint": "NousResearch/Llama-2-7b-hf",
+        "tokenizer": null
+    },
+    "train_config": {
+        "train_batch_size": 32,
+        "num_train_steps": 100,
+        "learning_rate": 0.003,
+        "data_seed": null,
+        "weight_decay": 0.1,
+        "beta1": null,
+        "beta2": null,
+        "epsilon": null,
+        "max_grad_norm": null,
+        "warmup": null,
+        "decay": null,
+        "rewarmup": null,
+        "lr_schedule": null,
+        "min_lr_ratio": null,
+        "cycle_length": null,
+        "z_loss_weight": null,
+        "ema_beta": null,
+        "skip_bad_steps": false,
+        "steps_per_eval": 500,
+        "steps_per_export": 10000,
+        "steps_per_task_eval": null,
+        "steps_per_hf_export": null,
+        "per_device_eval_parallelism": null,
+        "max_eval_batches": null,
+        "initialize_from_checkpoint_path": null,
+        "initialize_from_hf": null,
+        "reset_data_loader_on_init": true,
+        "allow_partial_checkpoint": false,
+        "int8": false,
+        "optimizer_config": null,
+        "watch": {
+            "watch_targets": [
+                "grads",
+                "params"
+            ],
+            "include_norms": true,
+            "include_per_parameter_norms": true,
+            "include_histograms": false,
+            "split_scan_layers": true,
+            "interval": 10
+        }
+    },
+    "tokenized_dataset": "ExecutorStep(name='tokenized/subcache/fineweb-edu-10B', fn=<function _actually_download_pretokenized_cache at 0x146855bdab60>, config=PretokenizedCacheDownloadConfig(cache_path=OutputName(name=None), tokenizer=VersionedValue(value='stanford-crfm/marin-tokenizer'), hf_repo_id=VersionedValue(value='marin-community/fineweb-edu-pretokenized-10B'), hf_revision=VersionedValue(value=None), hf_repo_type_prefix='datasets', hf_token=None, format=TextLmDatasetFormat(text_key='text'), cache_options=None, tags=[]), description=None, override_output_path=None, pip_dependency_groups=None)",
+    "resources": {
+        "gpu_count": 1,
+        "accelerator_type": "A100",
+        "device_flops_override": null
+    }
+}
+2025-10-29 01:15:43,596	INFO speedrun.py:163 -- The rough estimated compute (calculated as (total model FLOPs / Assumed MFU)) for your run is probably between:
+      * 8.27e+13 FLOPs assuming an MFU of 0.5, and
+      * 2.07e+14 FLOPs assuming an MFU of 0.2.
+
+This is calculated based on assumed MFU values and can be used as a rough estimate to guide your config/training setup.
+2025-10-29 01:15:43,596	INFO speedrun.py:131 -- Hardware and Model FLOPS Information:
+2025-10-29 01:15:43,596	INFO speedrun.py:132 -- Number of devices: 1
+2025-10-29 01:15:43,596	INFO speedrun.py:133 -- Number of chips: 1
+2025-10-29 01:15:43,596	INFO speedrun.py:134 -- Device FLOPs: 3.12e+14 FLOP/s
+2025-10-29 01:15:43,596	INFO speedrun.py:135 -- Total peak hardware FLOPs: 3.12e+14 FLOP/s
+2025-10-29 01:15:43,596	INFO speedrun.py:136 -- Model FLOPs: 4.13e+13 FLOP
+2025-10-29 01:15:43,596	INFO speedrun.py:140 -- Model size: 8.24 million parameters
+2025-10-29 01:15:51,442	INFO worker.py:1879 -- Started a local Ray instance. View the dashboard at [1m[32mhttp://127.0.0.1:8265 [39m[22m
+2025-10-29 01:16:14,996	INFO executor.py:1115 -- Ray init took 30.57s
+2025-10-29 01:16:14,996	WARNING executor.py:1127 -- MARIN_PREFIX environment variable (/projects/frink/wang.xil/marin/output) is different from the specified prefix (output)
+2025-10-29 01:16:15,010	INFO executor.py:576 -- ### Inspecting the 2 provided steps ###
+2025-10-29 01:16:15,065	INFO executor.py:584 -- ### Reading 20 statuses ###
+2025-10-29 01:16:15,065	INFO executor.py:594 -- ### Writing metadata ###
+2025-10-29 01:16:15,068	INFO executor.py:915 -- Writing executor info to output/experiments/hello_world_gpu_speedrun-0a84c3.json
+2025-10-29 01:16:15,068	INFO executor.py:916 -- To view the experiment page, go to:
+2025-10-29 01:16:15,068	INFO executor.py:917 -- 
+2025-10-29 01:16:15,068	INFO executor.py:918 -- http://localhost:5000/experiment?path=output/experiments/hello_world_gpu_speedrun-0a84c3.json
+2025-10-29 01:16:15,069	INFO executor.py:919 -- 
+2025-10-29 01:16:15,433	INFO executor.py:597 -- ### Launching 20 steps ###
+2025-10-29 01:16:15,434	INFO executor.py:669 -- raw/paloma-speedrun: marin.download.huggingface.download_hf.download_hf
+2025-10-29 01:16:15,434	INFO executor.py:670 --   output_path = output/raw/paloma-speedrun-1d28d7
+2025-10-29 01:16:15,434	INFO executor.py:671 --   config = {"hf_dataset_id": "allenai/paloma", "revision": "65cd6fc"}
+2025-10-29 01:16:15,434	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-10-29 01:16:16,019	INFO executor.py:1023 -- Status raw/paloma-speedrun: marin.download.huggingface.download_hf.download_hf : SUCCESS.
+2025-10-29 01:16:16,020	INFO executor.py:1047 -- Step raw/paloma-speedrun: marin.download.huggingface.download_hf.download_hf has already succeeded. Status: SUCCESS
+2025-10-29 01:16:16,028	INFO executor.py:669 -- tokenized/subcache/fineweb-edu-10B: marin.processing.tokenize.download_pretokenized._actually_download_pretokenized_cache
+2025-10-29 01:16:16,028	INFO executor.py:670 --   output_path = output/tokenized/subcache/fineweb-edu-10B-6fbcbb
+2025-10-29 01:16:16,028	INFO executor.py:671 --   config = {"tokenizer": "stanford-crfm/marin-tokenizer", "hf_repo_id": "marin-community/fineweb-edu-pretokenized-10B", "hf_revision": null}
+2025-10-29 01:16:16,028	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-10-29 01:16:16,031	INFO executor.py:1023 -- Status tokenized/subcache/fineweb-edu-10B: marin.processing.tokenize.download_pretokenized._actually_download_pretokenized_cache : SUCCESS.
+2025-10-29 01:16:16,032	INFO executor.py:1047 -- Step tokenized/subcache/fineweb-edu-10B: marin.processing.tokenize.download_pretokenized._actually_download_pretokenized_cache has already succeeded. Status: SUCCESS
+2025-10-29 01:16:16,038	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step raw/paloma-speedrun
+2025-10-29 01:16:16,038	INFO executor.py:669 -- tokenized/paloma/wikitext_103: marin.processing.tokenize.tokenize.tokenize
+2025-10-29 01:16:16,038	INFO executor.py:670 --   output_path = output/tokenized/paloma/wikitext_103-70e03f
+2025-10-29 01:16:16,038	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/wikitext_103/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-10-29 01:16:16,038	INFO executor.py:673 --   DEP[0] = output/raw/paloma-speedrun-1d28d7
+2025-10-29 01:16:16,038	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-10-29 01:16:16,042	INFO executor.py:994 -- Status of output_path = 'output/tokenized/paloma/wikitext_103-70e03f' is RUNNING as per GCP. But as per Ray, the task has terminated, it's likely that this task was cancelled previously
+2025-10-29 01:16:16,042	INFO executor.py:1023 -- Status tokenized/paloma/wikitext_103: marin.processing.tokenize.tokenize.tokenize : CANCELLED.
+2025-10-29 01:16:16,043	INFO executor.py:1038 -- Step tokenized/paloma/wikitext_103: marin.processing.tokenize.tokenize.tokenize was cancelled previously. Retrying.
+2025-10-29 01:16:16,074	INFO executor.py:669 -- tokenized/paloma/twitterAAE_HELM_fixed: marin.processing.tokenize.tokenize.tokenize
+2025-10-29 01:16:16,074	INFO executor.py:670 --   output_path = output/tokenized/paloma/twitterAAE_HELM_fixed-8681d4
+2025-10-29 01:16:16,074	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/twitterAAE_HELM_fixed/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-10-29 01:16:16,074	INFO executor.py:673 --   DEP[0] = output/raw/paloma-speedrun-1d28d7
+2025-10-29 01:16:16,074	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-10-29 01:16:16,078	INFO executor.py:994 -- Status of output_path = 'output/tokenized/paloma/twitterAAE_HELM_fixed-8681d4' is RUNNING as per GCP. But as per Ray, the task has terminated, it's likely that this task was cancelled previously
+2025-10-29 01:16:16,078	INFO executor.py:1023 -- Status tokenized/paloma/twitterAAE_HELM_fixed: marin.processing.tokenize.tokenize.tokenize : CANCELLED.
+2025-10-29 01:16:16,081	INFO executor.py:1038 -- Step tokenized/paloma/twitterAAE_HELM_fixed: marin.processing.tokenize.tokenize.tokenize was cancelled previously. Retrying.
+2025-10-29 01:16:16,090	INFO executor.py:669 -- tokenized/paloma/redpajama: marin.processing.tokenize.tokenize.tokenize
+2025-10-29 01:16:16,090	INFO executor.py:670 --   output_path = output/tokenized/paloma/redpajama-c4c2cd
+2025-10-29 01:16:16,090	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/redpajama/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-10-29 01:16:16,090	INFO executor.py:673 --   DEP[0] = output/raw/paloma-speedrun-1d28d7
+2025-10-29 01:16:16,090	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-10-29 01:16:16,095	INFO executor.py:994 -- Status of output_path = 'output/tokenized/paloma/redpajama-c4c2cd' is RUNNING as per GCP. But as per Ray, the task has terminated, it's likely that this task was cancelled previously
+2025-10-29 01:16:16,095	INFO executor.py:1023 -- Status tokenized/paloma/redpajama: marin.processing.tokenize.tokenize.tokenize : CANCELLED.
+2025-10-29 01:16:16,097	INFO executor.py:1038 -- Step tokenized/paloma/redpajama: marin.processing.tokenize.tokenize.tokenize was cancelled previously. Retrying.
+2025-10-29 01:16:16,104	INFO executor.py:669 -- tokenized/paloma/ptb: marin.processing.tokenize.tokenize.tokenize
+2025-10-29 01:16:16,104	INFO executor.py:670 --   output_path = output/tokenized/paloma/ptb-34ecda
+2025-10-29 01:16:16,104	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/ptb/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-10-29 01:16:16,104	INFO executor.py:673 --   DEP[0] = output/raw/paloma-speedrun-1d28d7
+2025-10-29 01:16:16,104	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-10-29 01:16:16,110	INFO executor.py:994 -- Status of output_path = 'output/tokenized/paloma/ptb-34ecda' is RUNNING as per GCP. But as per Ray, the task has terminated, it's likely that this task was cancelled previously
+2025-10-29 01:16:16,110	INFO executor.py:1023 -- Status tokenized/paloma/ptb: marin.processing.tokenize.tokenize.tokenize : CANCELLED.
+2025-10-29 01:16:16,115	INFO executor.py:1038 -- Step tokenized/paloma/ptb: marin.processing.tokenize.tokenize.tokenize was cancelled previously. Retrying.
+2025-10-29 01:16:16,121	INFO executor.py:669 -- tokenized/paloma/mc4: marin.processing.tokenize.tokenize.tokenize
+2025-10-29 01:16:16,122	INFO executor.py:670 --   output_path = output/tokenized/paloma/mc4-170a00
+2025-10-29 01:16:16,122	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/mc4/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-10-29 01:16:16,122	INFO executor.py:673 --   DEP[0] = output/raw/paloma-speedrun-1d28d7
+2025-10-29 01:16:16,122	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-10-29 01:16:16,171	INFO executor.py:994 -- Status of output_path = 'output/tokenized/paloma/mc4-170a00' is RUNNING as per GCP. But as per Ray, the task has terminated, it's likely that this task was cancelled previously
+2025-10-29 01:16:16,171	INFO executor.py:1023 -- Status tokenized/paloma/mc4: marin.processing.tokenize.tokenize.tokenize : CANCELLED.
+2025-10-29 01:16:16,236	INFO executor.py:1038 -- Step tokenized/paloma/mc4: marin.processing.tokenize.tokenize.tokenize was cancelled previously. Retrying.
+2025-10-29 01:16:16,242	INFO executor.py:669 -- tokenized/paloma/manosphere_meta_sep: marin.processing.tokenize.tokenize.tokenize
+2025-10-29 01:16:16,242	INFO executor.py:670 --   output_path = output/tokenized/paloma/manosphere_meta_sep-0d11c3
+2025-10-29 01:16:16,242	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/manosphere_meta_sep/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-10-29 01:16:16,242	INFO executor.py:673 --   DEP[0] = output/raw/paloma-speedrun-1d28d7
+2025-10-29 01:16:16,242	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-10-29 01:16:16,320	INFO executor.py:994 -- Status of output_path = 'output/tokenized/paloma/manosphere_meta_sep-0d11c3' is RUNNING as per GCP. But as per Ray, the task has terminated, it's likely that this task was cancelled previously
+2025-10-29 01:16:16,320	INFO executor.py:1023 -- Status tokenized/paloma/manosphere_meta_sep: marin.processing.tokenize.tokenize.tokenize : CANCELLED.
+2025-10-29 01:16:16,388	INFO executor.py:1038 -- Step tokenized/paloma/manosphere_meta_sep: marin.processing.tokenize.tokenize.tokenize was cancelled previously. Retrying.
+2025-10-29 01:16:16,394	INFO executor.py:669 -- tokenized/paloma/m2d2_wikipedia_unsplit: marin.processing.tokenize.tokenize.tokenize
+2025-10-29 01:16:16,394	INFO executor.py:670 --   output_path = output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43
+2025-10-29 01:16:16,394	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/m2d2_wikipedia_unsplit/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-10-29 01:16:16,394	INFO executor.py:673 --   DEP[0] = output/raw/paloma-speedrun-1d28d7
+2025-10-29 01:16:16,394	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-10-29 01:16:16,448	INFO executor.py:994 -- Status of output_path = 'output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43' is RUNNING as per GCP. But as per Ray, the task has terminated, it's likely that this task was cancelled previously
+2025-10-29 01:16:16,448	INFO executor.py:1023 -- Status tokenized/paloma/m2d2_wikipedia_unsplit: marin.processing.tokenize.tokenize.tokenize : CANCELLED.
+2025-10-29 01:16:16,649	INFO executor.py:1038 -- Step tokenized/paloma/m2d2_wikipedia_unsplit: marin.processing.tokenize.tokenize.tokenize was cancelled previously. Retrying.
+2025-10-29 01:16:16,654	INFO executor.py:669 -- tokenized/paloma/m2d2_s2orc_unsplit: marin.processing.tokenize.tokenize.tokenize
+2025-10-29 01:16:16,654	INFO executor.py:670 --   output_path = output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc
+2025-10-29 01:16:16,655	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/m2d2_s2orc_unsplit/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-10-29 01:16:16,655	INFO executor.py:673 --   DEP[0] = output/raw/paloma-speedrun-1d28d7
+2025-10-29 01:16:16,655	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-10-29 01:16:16,754	INFO executor.py:994 -- Status of output_path = 'output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc' is RUNNING as per GCP. But as per Ray, the task has terminated, it's likely that this task was cancelled previously
+2025-10-29 01:16:16,754	INFO executor.py:1023 -- Status tokenized/paloma/m2d2_s2orc_unsplit: marin.processing.tokenize.tokenize.tokenize : CANCELLED.
+2025-10-29 01:16:16,941	INFO executor.py:1038 -- Step tokenized/paloma/m2d2_s2orc_unsplit: marin.processing.tokenize.tokenize.tokenize was cancelled previously. Retrying.
+2025-10-29 01:16:16,973	INFO executor.py:669 -- tokenized/paloma/gab: marin.processing.tokenize.tokenize.tokenize
+2025-10-29 01:16:16,973	INFO executor.py:670 --   output_path = output/tokenized/paloma/gab-d3f648
+2025-10-29 01:16:16,973	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/gab/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-10-29 01:16:16,973	INFO executor.py:673 --   DEP[0] = output/raw/paloma-speedrun-1d28d7
+2025-10-29 01:16:16,973	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-10-29 01:16:16,989	INFO executor.py:994 -- Status of output_path = 'output/tokenized/paloma/gab-d3f648' is RUNNING as per GCP. But as per Ray, the task has terminated, it's likely that this task was cancelled previously
+2025-10-29 01:16:16,989	INFO executor.py:1023 -- Status tokenized/paloma/gab: marin.processing.tokenize.tokenize.tokenize : CANCELLED.
+2025-10-29 01:16:17,202	INFO executor.py:1038 -- Step tokenized/paloma/gab: marin.processing.tokenize.tokenize.tokenize was cancelled previously. Retrying.
+2025-10-29 01:16:17,210	INFO executor.py:669 -- tokenized/paloma/falcon-refinedweb: marin.processing.tokenize.tokenize.tokenize
+2025-10-29 01:16:17,210	INFO executor.py:670 --   output_path = output/tokenized/paloma/falcon-refinedweb-09af65
+2025-10-29 01:16:17,210	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/falcon-refinedweb/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-10-29 01:16:17,210	INFO executor.py:673 --   DEP[0] = output/raw/paloma-speedrun-1d28d7
+2025-10-29 01:16:17,210	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-10-29 01:16:17,334	INFO executor.py:994 -- Status of output_path = 'output/tokenized/paloma/falcon-refinedweb-09af65' is RUNNING as per GCP. But as per Ray, the task has terminated, it's likely that this task was cancelled previously
+2025-10-29 01:16:17,334	INFO executor.py:1023 -- Status tokenized/paloma/falcon-refinedweb: marin.processing.tokenize.tokenize.tokenize : CANCELLED.
+2025-10-29 01:16:17,490	INFO executor.py:1038 -- Step tokenized/paloma/falcon-refinedweb: marin.processing.tokenize.tokenize.tokenize was cancelled previously. Retrying.
+2025-10-29 01:16:17,498	INFO executor.py:669 -- tokenized/paloma/dolma_100_subreddits: marin.processing.tokenize.tokenize.tokenize
+2025-10-29 01:16:17,498	INFO executor.py:670 --   output_path = output/tokenized/paloma/dolma_100_subreddits-6fdd4c
+2025-10-29 01:16:17,498	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/dolma_100_subreddits/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-10-29 01:16:17,498	INFO executor.py:673 --   DEP[0] = output/raw/paloma-speedrun-1d28d7
+2025-10-29 01:16:17,499	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-10-29 01:16:17,807	INFO executor.py:994 -- Status of output_path = 'output/tokenized/paloma/dolma_100_subreddits-6fdd4c' is RUNNING as per GCP. But as per Ray, the task has terminated, it's likely that this task was cancelled previously
+2025-10-29 01:16:17,807	INFO executor.py:1023 -- Status tokenized/paloma/dolma_100_subreddits: marin.processing.tokenize.tokenize.tokenize : CANCELLED.
+2025-10-29 01:16:17,974	INFO executor.py:1038 -- Step tokenized/paloma/dolma_100_subreddits: marin.processing.tokenize.tokenize.tokenize was cancelled previously. Retrying.
+2025-10-29 01:16:17,981	INFO executor.py:669 -- tokenized/paloma/dolma_100_programing_languages: marin.processing.tokenize.tokenize.tokenize
+2025-10-29 01:16:17,981	INFO executor.py:670 --   output_path = output/tokenized/paloma/dolma_100_programing_languages-9ef134
+2025-10-29 01:16:17,981	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/dolma_100_programing_languages/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-10-29 01:16:17,981	INFO executor.py:673 --   DEP[0] = output/raw/paloma-speedrun-1d28d7
+2025-10-29 01:16:17,981	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-10-29 01:16:18,271	INFO executor.py:994 -- Status of output_path = 'output/tokenized/paloma/dolma_100_programing_languages-9ef134' is RUNNING as per GCP. But as per Ray, the task has terminated, it's likely that this task was cancelled previously
+2025-10-29 01:16:18,271	INFO executor.py:1023 -- Status tokenized/paloma/dolma_100_programing_languages: marin.processing.tokenize.tokenize.tokenize : CANCELLED.
+2025-10-29 01:16:18,362	INFO executor.py:1038 -- Step tokenized/paloma/dolma_100_programing_languages: marin.processing.tokenize.tokenize.tokenize was cancelled previously. Retrying.
+2025-10-29 01:16:18,369	INFO executor.py:669 -- tokenized/paloma/dolma-v1_5: marin.processing.tokenize.tokenize.tokenize
+2025-10-29 01:16:18,369	INFO executor.py:670 --   output_path = output/tokenized/paloma/dolma-v1_5-591cb4
+2025-10-29 01:16:18,369	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/dolma-v1_5/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-10-29 01:16:18,369	INFO executor.py:673 --   DEP[0] = output/raw/paloma-speedrun-1d28d7
+2025-10-29 01:16:18,369	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-10-29 01:16:18,605	INFO executor.py:994 -- Status of output_path = 'output/tokenized/paloma/dolma-v1_5-591cb4' is RUNNING as per GCP. But as per Ray, the task has terminated, it's likely that this task was cancelled previously
+2025-10-29 01:16:18,606	INFO executor.py:1023 -- Status tokenized/paloma/dolma-v1_5: marin.processing.tokenize.tokenize.tokenize : CANCELLED.
+2025-10-29 01:16:18,821	INFO executor.py:1038 -- Step tokenized/paloma/dolma-v1_5: marin.processing.tokenize.tokenize.tokenize was cancelled previously. Retrying.
+2025-10-29 01:16:18,827	INFO executor.py:669 -- tokenized/paloma/c4_en: marin.processing.tokenize.tokenize.tokenize
+2025-10-29 01:16:18,827	INFO executor.py:670 --   output_path = output/tokenized/paloma/c4_en-a852aa
+2025-10-29 01:16:18,827	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/c4_en/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-10-29 01:16:18,827	INFO executor.py:673 --   DEP[0] = output/raw/paloma-speedrun-1d28d7
+2025-10-29 01:16:18,827	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-10-29 01:16:19,072	INFO executor.py:994 -- Status of output_path = 'output/tokenized/paloma/c4_en-a852aa' is RUNNING as per GCP. But as per Ray, the task has terminated, it's likely that this task was cancelled previously
+2025-10-29 01:16:19,072	INFO executor.py:1023 -- Status tokenized/paloma/c4_en: marin.processing.tokenize.tokenize.tokenize : CANCELLED.
+2025-10-29 01:16:19,210	INFO executor.py:1038 -- Step tokenized/paloma/c4_en: marin.processing.tokenize.tokenize.tokenize was cancelled previously. Retrying.
+2025-10-29 01:16:19,217	INFO executor.py:669 -- tokenized/paloma/c4_100_domains: marin.processing.tokenize.tokenize.tokenize
+2025-10-29 01:16:19,217	INFO executor.py:670 --   output_path = output/tokenized/paloma/c4_100_domains-a0a5bf
+2025-10-29 01:16:19,217	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/c4_100_domains/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-10-29 01:16:19,217	INFO executor.py:673 --   DEP[0] = output/raw/paloma-speedrun-1d28d7
+2025-10-29 01:16:19,217	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-10-29 01:16:19,336	INFO executor.py:994 -- Status of output_path = 'output/tokenized/paloma/c4_100_domains-a0a5bf' is RUNNING as per GCP. But as per Ray, the task has terminated, it's likely that this task was cancelled previously
+2025-10-29 01:16:19,336	INFO executor.py:1023 -- Status tokenized/paloma/c4_100_domains: marin.processing.tokenize.tokenize.tokenize : CANCELLED.
+2025-10-29 01:16:19,710	INFO executor.py:1038 -- Step tokenized/paloma/c4_100_domains: marin.processing.tokenize.tokenize.tokenize was cancelled previously. Retrying.
+2025-10-29 01:16:19,718	INFO executor.py:669 -- tokenized/paloma/4chan: marin.processing.tokenize.tokenize.tokenize
+2025-10-29 01:16:19,718	INFO executor.py:670 --   output_path = output/tokenized/paloma/4chan-6aff8f
+2025-10-29 01:16:19,718	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/4chan_meta_sep/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-10-29 01:16:19,718	INFO executor.py:673 --   DEP[0] = output/raw/paloma-speedrun-1d28d7
+2025-10-29 01:16:19,718	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-10-29 01:16:19,875	INFO executor.py:994 -- Status of output_path = 'output/tokenized/paloma/4chan-6aff8f' is RUNNING as per GCP. But as per Ray, the task has terminated, it's likely that this task was cancelled previously
+2025-10-29 01:16:19,875	INFO executor.py:1023 -- Status tokenized/paloma/4chan: marin.processing.tokenize.tokenize.tokenize : CANCELLED.
+2025-10-29 01:16:19,933	INFO executor.py:1038 -- Step tokenized/paloma/4chan: marin.processing.tokenize.tokenize.tokenize was cancelled previously. Retrying.
+2025-10-29 01:16:19,938	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/subcache/fineweb-edu-10B
+[36m(pid=870084)[0m E1029 01:16:30.608594824  870084 completion_queue.cc:257]              ASSERTION FAILED: queue.num_items() == 0
+[36m(pid=870084)[0m *** SIGABRT received at time=1761714990 on cpu 56 ***
+[36m(pid=870084)[0m PC: @     0x151ce3ea154c  (unknown)  __pthread_kill_implementation
+[36m(pid=870084)[0m     @     0x151ce3e54db0  (unknown)  (unknown)
+[36m(pid=870084)[0m [2025-10-29 01:16:30,609 E 870084 870084] logging.cc:496: *** SIGABRT received at time=1761714990 on cpu 56 ***
+[36m(pid=870084)[0m [2025-10-29 01:16:30,609 E 870084 870084] logging.cc:496: PC: @     0x151ce3ea154c  (unknown)  __pthread_kill_implementation
+[36m(pid=870084)[0m [2025-10-29 01:16:30,610 E 870084 870084] logging.cc:496:     @     0x151ce3e54db0  (unknown)  (unknown)
+[36m(pid=870084)[0m Fatal Python error: Aborted
+[36m(pid=870084)[0m 
+[36m(pid=870084)[0m Stack (most recent call first):
+[36m(pid=870084)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 946 in main_loop
+[36m(pid=870084)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/workers/default_worker.py", line 330 in <module>
+[36m(pid=870084)[0m 
+[36m(pid=870084)[0m Extension modules: msgpack._cmsgpack, google._upb._message, psutil._psutil_linux, psutil._psutil_posix, setproctitle, yaml._yaml, _brotli, zstandard.backend_c, simplejson._speedups, charset_normalizer.md, uvloop.loop, ray._raylet (total: 12)
+[36m(pid=870079)[0m E1029 01:19:09.872138119  870079 completion_queue.cc:257]              ASSERTION FAILED: queue.num_items() == 0
+[36m(pid=870079)[0m *** SIGABRT received at time=1761715149 on cpu 56 ***
+[36m(pid=870079)[0m PC: @     0x150f07aa154c  (unknown)  __pthread_kill_implementation
+[36m(pid=870079)[0m     @     0x150f07a54db0  (unknown)  (unknown)
+[36m(pid=870079)[0m [2025-10-29 01:19:10,002 E 870079 870079] logging.cc:496: *** SIGABRT received at time=1761715150 on cpu 56 ***
+[36m(pid=870079)[0m [2025-10-29 01:19:10,002 E 870079 870079] logging.cc:496: PC: @     0x150f07aa154c  (unknown)  __pthread_kill_implementation
+[36m(pid=870079)[0m [2025-10-29 01:19:10,002 E 870079 870079] logging.cc:496:     @     0x150f07a54db0  (unknown)  (unknown)
+[36m(pid=870079)[0m Fatal Python error: Aborted
+[36m(pid=870079)[0m 
+[36m(pid=870079)[0m Stack (most recent call first):
+[36m(pid=870079)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 946 in main_loop
+[36m(pid=870079)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/workers/default_worker.py", line 330 in <module>
+[36m(pid=870079)[0m 
+[36m(pid=870079)[0m Extension modules: msgpack._cmsgpack, google._upb._message, psutil._psutil_linux, psutil._psutil_posix, setproctitle, yaml._yaml, _brotli, zstandard.backend_c, simplejson._speedups, charset_normalizer.md, uvloop.loop, ray._raylet (total: 12)
+[36m(pid=870075)[0m E1029 01:19:10.014729756  870075 completion_queue.cc:257]              ASSERTION FAILED: queue.num_items() == 0
+[36m(pid=870075)[0m *** SIGABRT received at time=1761715150 on cpu 56 ***
+[36m(pid=870075)[0m 
+[36m(pid=870075)[0m 
+[36m(pid=870072)[0m 
+[36m(pid=870072)[0m 
+[36m(writer::redpajama-c4c2cd/validation pid=879083)[0m 2025-10-29 01:28:37,516 - INFO - Starting writer task
+[36m(pid=870072)[0m PC: @     0x1553bdca154c  (unknown)  __pthread_kill_implementation[32m [repeated 2x across cluster] (Ray deduplicates logs by default. Set RAY_DEDUP_LOGS=0 to disable log deduplication, or see https://docs.ray.io/en/master/ray-observability/user-guides/configure-logging.html#log-deduplication for more options.)[0m
+[36m(pid=870072)[0m     @     0x1553bdc54db0  (unknown)  (unknown)[32m [repeated 2x across cluster][0m
+[36m(pid=870072)[0m [2025-10-29 01:19:10,698 E 870072 870072] logging.cc:496: *** SIGABRT received at time=1761715150 on cpu 56 ***[32m [repeated 2x across cluster][0m
+[36m(pid=870072)[0m [2025-10-29 01:19:10,698 E 870072 870072] logging.cc:496: PC: @     0x1553bdca154c  (unknown)  __pthread_kill_implementation[32m [repeated 2x across cluster][0m
+[36m(pid=870072)[0m [2025-10-29 01:19:10,831 E 870072 870072] logging.cc:496:     @     0x1553bdc54db0  (unknown)  (unknown)[32m [repeated 2x across cluster][0m
+[36m(pid=870072)[0m Fatal Python error: Aborted[32m [repeated 2x across cluster][0m
+[36m(pid=870072)[0m Stack (most recent call first):[32m [repeated 2x across cluster][0m
+[36m(pid=870072)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 946 in main_loop[32m [repeated 2x across cluster][0m
+[36m(pid=870072)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/workers/default_worker.py", line 330 in <module>[32m [repeated 2x across cluster][0m
+[36m(pid=870072)[0m Extension modules: msgpack._cmsgpack, google._upb._message, psutil._psutil_linux, psutil._psutil_posix, setproctitle, yaml._yaml, _brotli, zstandard.backend_c, simplejson._speedups, charset_normalizer.md, uvloop.loop, ray._raylet (total: 12)[32m [repeated 2x across cluster][0m
+[36m(pid=870072)[0m E1029 01:19:10.634274787  870072 completion_queue.cc:257]              ASSERTION FAILED: queue.num_items() == 0
+[36m(pid=870072)[0m *** SIGABRT received at time=1761715150 on cpu 56 ***
+[36m(writer::wikitext_103-70e03f/validation pid=879070)[0m 2025-10-29 01:28:45,784 - INFO - Waiting for first group val_jsonl_gz to finish
+[36m(writer::4chan-6aff8f/validation pid=879068)[0m 2025-10-29 01:28:38,659 - INFO - Starting writer task[32m [repeated 15x across cluster][0m
+[36m(writer::twitterAAE_HELM_fixed-8681d4/validation pid=879076)[0m 2025-10-29 01:28:49,208 - INFO - Waiting for first group AA_jsonl_gz to finish
+[36m(writer::redpajama-c4c2cd/validation pid=879083)[0m 2025-10-29 01:28:52,571 - INFO - Waiting for first group arxiv_jsonl_gz to finish
+[36m(pid=870067)[0m E1029 01:28:59.672317194  870067 completion_queue.cc:257]              ASSERTION FAILED: queue.num_items() == 0
+[36m(pid=870067)[0m *** SIGABRT received at time=1761715739 on cpu 56 ***
+[36m(pid=870067)[0m PC: @     0x1543670a154c  (unknown)  __pthread_kill_implementation
+[36m(pid=870067)[0m     @     0x154367054db0  (unknown)  (unknown)
+[36m(pid=870067)[0m [2025-10-29 01:28:59,673 E 870067 870067] logging.cc:496: *** SIGABRT received at time=1761715739 on cpu 56 ***
+[36m(pid=870067)[0m [2025-10-29 01:28:59,673 E 870067 870067] logging.cc:496: PC: @     0x1543670a154c  (unknown)  __pthread_kill_implementation
+[36m(pid=870067)[0m [2025-10-29 01:28:59,673 E 870067 870067] logging.cc:496:     @     0x154367054db0  (unknown)  (unknown)
+[36m(pid=870067)[0m Fatal Python error: Aborted
+[36m(pid=870067)[0m 
+[36m(pid=870067)[0m Stack (most recent call first):
+[36m(pid=870067)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 946 in main_loop
+[36m(pid=870067)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/workers/default_worker.py", line 330 in <module>
+[36m(pid=870067)[0m 
+[36m(pid=870067)[0m Extension modules: msgpack._cmsgpack, google._upb._message, psutil._psutil_linux, psutil._psutil_posix, setproctitle, yaml._yaml, _brotli, zstandard.backend_c, simplejson._speedups, charset_normalizer.md, uvloop.loop, ray._raylet (total: 12)
+[36m(writer::ptb-34ecda/validation pid=879073)[0m 2025-10-29 01:29:01,255 - INFO - Waiting for first group val_jsonl_gz to finish
+[36m(writer::mc4-170a00/validation pid=879077)[0m 2025-10-29 01:29:03,821 - INFO - Waiting for first group 0_jsonl_gz to finish
+[36m(pid=870066)[0m E1029 01:29:08.990177978  870066 completion_queue.cc:257]              ASSERTION FAILED: queue.num_items() == 0
+[36m(pid=870066)[0m *** SIGABRT received at time=1761715748 on cpu 56 ***
+[36m(pid=870066)[0m PC: @     0x14dcb9ca154c  (unknown)  __pthread_kill_implementation
+[36m(pid=870066)[0m     @     0x14dcb9c54db0  (unknown)  (unknown)
+[36m(pid=870066)[0m [2025-10-29 01:29:10,930 E 870066 870066] logging.cc:496: *** SIGABRT received at time=1761715750 on cpu 56 ***
+[36m(pid=870066)[0m [2025-10-29 01:29:10,930 E 870066 870066] logging.cc:496: PC: @     0x14dcb9ca154c  (unknown)  __pthread_kill_implementation
+[36m(pid=870063)[0m E1029 01:29:13.341029575  870063 completion_queue.cc:257]              ASSERTION FAILED: queue.num_items() == 0
+[36m(pid=870063)[0m *** SIGABRT received at time=1761715753 on cpu 56 ***
+[36m(pid=870063)[0m [2025-10-29 01:29:14,993 E 870063 870063] logging.cc:496:     @     0x145a17454db0  (unknown)  (unknown)
+[36m(pid=870063)[0m Fatal Python error: Aborted
+[36m(pid=870063)[0m 
+[36m(pid=870063)[0m Stack (most recent call first):
+[36m(pid=870063)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 946 in main_loop
+[36m(pid=870063)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/workers/default_worker.py", line 330 in <module>
+[36m(pid=870063)[0m 
+[36m(pid=870063)[0m Extension modules: msgpack._cmsgpack, google._upb._message, psutil._psutil_linux, psutil._psutil_posix, setproctitle, yaml._yaml, _brotli, zstandard.backend_c, simplejson._speedups, charset_normalizer.md, uvloop.loop, ray._raylet (total: 12)
+[36m(writer::falcon-refinedweb-09af65/validation pid=879078)[0m 2025-10-29 01:29:17,860 - INFO - Waiting for first group 0_jsonl_gz to finish
+[36m(pid=870063)[0m PC: @     0x145a174a154c  (unknown)  __pthread_kill_implementation
+[36m(pid=870063)[0m     @     0x145a17454db0  (unknown)  (unknown)
+[36m(pid=870063)[0m [2025-10-29 01:29:14,993 E 870063 870063] logging.cc:496: *** SIGABRT received at time=1761715754 on cpu 56 ***
+[36m(pid=870063)[0m [2025-10-29 01:29:14,993 E 870063 870063] logging.cc:496: PC: @     0x145a174a154c  (unknown)  __pthread_kill_implementation
+[36m(pid=870060)[0m E1029 01:29:18.359612861  870060 completion_queue.cc:257]              ASSERTION FAILED: queue.num_items() == 0
+[36m(pid=870060)[0m *** SIGABRT received at time=1761715758 on cpu 56 ***
+[36m(pid=870060)[0m PC: @     0x155404ea154c  (unknown)  __pthread_kill_implementation
+[36m(pid=870060)[0m     @     0x155404e54db0  (unknown)  (unknown)
+[36m(pid=870060)[0m [2025-10-29 01:29:20,571 E 870060 870060] logging.cc:496: *** SIGABRT received at time=1761715760 on cpu 56 ***
+[36m(pid=870060)[0m [2025-10-29 01:29:20,571 E 870060 870060] logging.cc:496: PC: @     0x155404ea154c  (unknown)  __pthread_kill_implementation
+[36m(pid=870060)[0m 
+[36m(pid=870060)[0m 
+[36m(pid=870060)[0m [2025-10-29 01:29:20,572 E 870060 870060] logging.cc:496:     @     0x155404e54db0  (unknown)  (unknown)
+[36m(pid=870060)[0m Fatal Python error: Aborted
+[36m(pid=870060)[0m Stack (most recent call first):
+[36m(pid=870060)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 946 in main_loop
+[36m(pid=870060)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/workers/default_worker.py", line 330 in <module>
+[36m(pid=870060)[0m Extension modules: msgpack._cmsgpack, google._upb._message, psutil._psutil_linux, psutil._psutil_posix, setproctitle, yaml._yaml, _brotli, zstandard.backend_c, simplejson._speedups, charset_normalizer.md, uvloop.loop, ray._raylet (total: 12)
+[36m(pid=870065)[0m E1029 01:29:20.599487037  870065 completion_queue.cc:257]              ASSERTION FAILED: queue.num_items() == 0
+[36m(pid=870065)[0m *** SIGABRT received at time=1761715760 on cpu 56 ***
+[36m(pid=870062)[0m [2025-10-29 01:29:22,695 E 870062 870062] logging.cc:496:     @     0x15008e654db0  (unknown)  (unknown)
+[36m(pid=870062)[0m Fatal Python error: Aborted
+[36m(pid=870062)[0m 
+[36m(pid=870062)[0m Stack (most recent call first):
+[36m(pid=870062)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 946 in main_loop
+[36m(pid=870062)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/workers/default_worker.py", line 330 in <module>
+[36m(pid=870062)[0m 
+[36m(pid=870062)[0m Extension modules: msgpack._cmsgpack, google._upb._message, psutil._psutil_linux, psutil._psutil_posix, setproctitle, yaml._yaml, _brotli, zstandard.backend_c, simplejson._speedups, charset_normalizer.md, uvloop.loop, ray._raylet (total: 12)
+[36m(pid=870065)[0m 
+[36m(pid=870065)[0m 
+[36m(pid=870062)[0m PC: @     0x15008e6a154c  (unknown)  __pthread_kill_implementation[32m [repeated 2x across cluster][0m
+[36m(pid=870065)[0m     @     0x153d5d254db0  (unknown)  (unknown)[32m [repeated 2x across cluster][0m
+[36m(pid=870065)[0m [2025-10-29 01:29:22,853 E 870065 870065] logging.cc:496: *** SIGABRT received at time=1761715762 on cpu 56 ***[32m [repeated 2x across cluster][0m
+[36m(pid=870065)[0m [2025-10-29 01:29:23,288 E 870065 870065] logging.cc:496: PC: @     0x153d5d2a154c  (unknown)  __pthread_kill_implementation[32m [repeated 2x across cluster][0m
+[36m(pid=870061)[0m E1029 01:29:26.710086285  870061 completion_queue.cc:257]              ASSERTION FAILED: queue.num_items() == 0[32m [repeated 2x across cluster][0m
+[36m(pid=870061)[0m *** SIGABRT received at time=1761715766 on cpu 56 ***[32m [repeated 2x across cluster][0m
+[36m(pid=870065)[0m [2025-10-29 01:29:23,289 E 870065 870065] logging.cc:496:     @     0x153d5d254db0  (unknown)  (unknown)
+[36m(pid=870065)[0m Fatal Python error: Aborted
+[36m(pid=870065)[0m Stack (most recent call first):
+[36m(pid=870065)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 946 in main_loop
+[36m(pid=870065)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/workers/default_worker.py", line 330 in <module>
+[36m(pid=870065)[0m Extension modules: msgpack._cmsgpack, google._upb._message, psutil._psutil_linux, psutil._psutil_posix, setproctitle, yaml._yaml, _brotli, zstandard.backend_c, simplejson._speedups, charset_normalizer.md, uvloop.loop, ray._raylet (total: 12)
+[36m(pid=870057)[0m [2025-10-29 01:29:27,849 E 870057 870057] logging.cc:496:     @     0x153402254db0  (unknown)  (unknown)
+[36m(pid=870057)[0m Fatal Python error: Aborted
+[36m(pid=870057)[0m 
+[36m(pid=870057)[0m Stack (most recent call first):
+[36m(pid=870057)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 946 in main_loop
+[36m(pid=870057)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/workers/default_worker.py", line 330 in <module>
+[36m(pid=870057)[0m 
+[36m(pid=870057)[0m Extension modules: msgpack._cmsgpack, google._upb._message, psutil._psutil_linux, psutil._psutil_posix, setproctitle, yaml._yaml, _brotli, zstandard.backend_c, simplejson._speedups, charset_normalizer.md, uvloop.loop, ray._raylet (total: 12)
+[36m(pid=870061)[0m 
+[36m(pid=870050)[0m 
+[36m(pid=870050)[0m 
+[36m(pid=870055)[0m 
+[36m(pid=870055)[0m 
+[36m(writer::c4_en-a852aa/validation pid=879092)[0m 2025-10-29 01:29:30,893 - INFO - Waiting for first group 0_jsonl_gz to finish
+[36m(pid=870055)[0m PC: @     0x1502f8aa154c  (unknown)  __pthread_kill_implementation[32m [repeated 4x across cluster][0m
+[36m(pid=870055)[0m     @     0x1502f8a54db0  (unknown)  (unknown)[32m [repeated 4x across cluster][0m
+[36m(pid=870055)[0m [2025-10-29 01:29:30,721 E 870055 870055] logging.cc:496: *** SIGABRT received at time=1761715770 on cpu 56 ***[32m [repeated 4x across cluster][0m
+[36m(pid=870055)[0m [2025-10-29 01:29:30,721 E 870055 870055] logging.cc:496: PC: @     0x1502f8aa154c  (unknown)  __pthread_kill_implementation[32m [repeated 4x across cluster][0m
+[36m(pid=870054)[0m E1029 01:29:32.391452030  870054 completion_queue.cc:257]              ASSERTION FAILED: queue.num_items() == 0[32m [repeated 4x across cluster][0m
+[36m(pid=870054)[0m *** SIGABRT received at time=1761715772 on cpu 56 ***[32m [repeated 4x across cluster][0m
+[36m(pid=870054)[0m 
+[36m(pid=870054)[0m 
+[36m(pid=870054)[0m [2025-10-29 01:29:33,225 E 870054 870054] logging.cc:496:     @     0x149ce0654db0  (unknown)  (unknown)[32m [repeated 4x across cluster][0m
+[36m(pid=870054)[0m Fatal Python error: Aborted[32m [repeated 4x across cluster][0m
+[36m(pid=870054)[0m Stack (most recent call first):[32m [repeated 4x across cluster][0m
+[36m(pid=870054)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 946 in main_loop[32m [repeated 4x across cluster][0m
+[36m(pid=870054)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/workers/default_worker.py", line 330 in <module>[32m [repeated 4x across cluster][0m
+[36m(pid=870054)[0m Extension modules: msgpack._cmsgpack, google._upb._message, psutil._psutil_linux, psutil._psutil_posix, setproctitle, yaml._yaml, _brotli, zstandard.backend_c, simplejson._speedups, charset_normalizer.md, uvloop.loop, ray._raylet (total: 12)[32m [repeated 3x across cluster][0m
+[36m(pid=870051)[0m 
+[36m(pid=870051)[0m 
+[36m(pid=870052)[0m 
+[36m(pid=870052)[0m 
+[36m(pid=870046)[0m 
+[36m(pid=870046)[0m 
+[36m(pid=870043)[0m 
+[36m(pid=870043)[0m 
+[36m(pid=870047)[0m 
+[36m(pid=870047)[0m 
+[36m(pid=870047)[0m PC: @     0x14dfa80a154c  (unknown)  __pthread_kill_implementation[32m [repeated 6x across cluster][0m
+[36m(pid=870047)[0m     @     0x14dfa8054db0  (unknown)  (unknown)[32m [repeated 6x across cluster][0m
+[36m(pid=870047)[0m [2025-10-29 01:29:37,604 E 870047 870047] logging.cc:496: *** SIGABRT received at time=1761715777 on cpu 56 ***[32m [repeated 6x across cluster][0m
+[36m(pid=870047)[0m [2025-10-29 01:29:37,604 E 870047 870047] logging.cc:496: PC: @     0x14dfa80a154c  (unknown)  __pthread_kill_implementation[32m [repeated 6x across cluster][0m
+[36m(pid=870047)[0m E1029 01:29:37.603381751  870047 completion_queue.cc:257]              ASSERTION FAILED: queue.num_items() == 0[32m [repeated 5x across cluster][0m
+[36m(pid=870047)[0m *** SIGABRT received at time=1761715777 on cpu 56 ***[32m [repeated 5x across cluster][0m
+[36m(pid=870023)[0m 
+[36m(pid=870023)[0m 
+[36m(pid=870023)[0m [2025-10-29 01:29:38,958 E 870023 870023] logging.cc:496:     @     0x14e4bba54db0  (unknown)  (unknown)[32m [repeated 6x across cluster][0m
+[36m(pid=870023)[0m Fatal Python error: Aborted[32m [repeated 6x across cluster][0m
+[36m(pid=870023)[0m Stack (most recent call first):[32m [repeated 6x across cluster][0m
+[36m(pid=870023)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 946 in main_loop[32m [repeated 6x across cluster][0m
+[36m(pid=870023)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/workers/default_worker.py", line 330 in <module>[32m [repeated 6x across cluster][0m
+[36m(pid=870023)[0m Extension modules: msgpack._cmsgpack, google._upb._message, psutil._psutil_linux, psutil._psutil_posix, setproctitle, yaml._yaml, _brotli, zstandard.backend_c, simplejson._speedups, charset_normalizer.md, uvloop.loop, ray._raylet (total: 12)[32m [repeated 6x across cluster][0m
+[36m(pid=870028)[0m 
+[36m(pid=870028)[0m 
+[36m(pid=870038)[0m 
+[36m(pid=870038)[0m 
+[36m(pid=870039)[0m 
+[36m(pid=870039)[0m 
+[36m(pid=870039)[0m PC: @     0x151f3eea154c  (unknown)  __pthread_kill_implementation[32m [repeated 4x across cluster][0m
+[36m(pid=870039)[0m     @     0x151f3ee54db0  (unknown)  (unknown)[32m [repeated 4x across cluster][0m
+[36m(pid=870039)[0m [2025-10-29 01:29:43,115 E 870039 870039] logging.cc:496: *** SIGABRT received at time=1761715783 on cpu 56 ***[32m [repeated 4x across cluster][0m
+[36m(pid=870039)[0m [2025-10-29 01:29:43,115 E 870039 870039] logging.cc:496: PC: @     0x151f3eea154c  (unknown)  __pthread_kill_implementation[32m [repeated 4x across cluster][0m
+[36m(pid=870039)[0m E1029 01:29:43.114612000  870039 completion_queue.cc:257]              ASSERTION FAILED: queue.num_items() == 0[32m [repeated 4x across cluster][0m
+[36m(pid=870039)[0m *** SIGABRT received at time=1761715783 on cpu 56 ***[32m [repeated 4x across cluster][0m
+[36m(writer::4chan-6aff8f/validation pid=879068)[0m 2025-10-29 01:29:43,260 - INFO - Waiting for first group 0_jsonl_gz to finish
+[36m(pid=870029)[0m 
+[36m(pid=870029)[0m 
+[36m(writer::manosphere_meta_sep-0d11c3/validation pid=879081)[0m 2025-10-29 01:29:44,319 - INFO - Waiting for first group avfm_jsonl_gz to finish
+[36m(pid=870029)[0m [2025-10-29 01:29:43,388 E 870029 870029] logging.cc:496:     @     0x148eb2c54db0  (unknown)  (unknown)[32m [repeated 4x across cluster][0m
+[36m(pid=870029)[0m Fatal Python error: Aborted[32m [repeated 4x across cluster][0m
+[36m(pid=870029)[0m Stack (most recent call first):[32m [repeated 4x across cluster][0m
+[36m(pid=870029)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 946 in main_loop[32m [repeated 4x across cluster][0m
+[36m(pid=870029)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/workers/default_worker.py", line 330 in <module>[32m [repeated 4x across cluster][0m
+[36m(pid=870029)[0m Extension modules: msgpack._cmsgpack, google._upb._message, psutil._psutil_linux, psutil._psutil_posix, setproctitle, yaml._yaml, _brotli, zstandard.backend_c, simplejson._speedups, charset_normalizer.md, uvloop.loop, ray._raylet (total: 12)[32m [repeated 4x across cluster][0m
+[36m(writer::dolma-v1_5-591cb4/validation pid=879085)[0m 2025-10-29 01:29:44,612 - INFO - Waiting for first group books_jsonl_gz to finish
+[36m(pid=870036)[0m 
+[36m(pid=870036)[0m 
+[36m(pid=870027)[0m 
+[36m(pid=870027)[0m 
+[36m(pid=870041)[0m 
+[36m(pid=870041)[0m 
+[36m(pid=870032)[0m 
+[36m(pid=870032)[0m 
+[36m(writer::m2d2_wikipedia_unsplit-f69b43/validation pid=879088)[0m 2025-10-29 01:30:04,575 - INFO - Waiting for first group Culture_and_the_arts_jsonl_gz to finish
+[36m(pid=870032)[0m PC: @     0x1464caca154c  (unknown)  __pthread_kill_implementation[32m [repeated 5x across cluster][0m
+[36m(pid=870032)[0m     @     0x1464cac54db0  (unknown)  (unknown)[32m [repeated 5x across cluster][0m
+[36m(pid=870032)[0m [2025-10-29 01:29:46,063 E 870032 870032] logging.cc:496: *** SIGABRT received at time=1761715786 on cpu 56 ***[32m [repeated 5x across cluster][0m
+[36m(pid=870032)[0m [2025-10-29 01:29:46,063 E 870032 870032] logging.cc:496: PC: @     0x1464caca154c  (unknown)  __pthread_kill_implementation[32m [repeated 5x across cluster][0m
+[36m(pid=870032)[0m E1029 01:29:46.062122240  870032 completion_queue.cc:257]              ASSERTION FAILED: queue.num_items() == 0[32m [repeated 5x across cluster][0m
+[36m(pid=870032)[0m *** SIGABRT received at time=1761715786 on cpu 56 ***[32m [repeated 5x across cluster][0m
+[36m(writer::gab-d3f648/validation pid=879069)[0m 2025-10-29 01:29:47,231 - INFO - Waiting for first group 0_jsonl_gz to finish
+[36m(pid=870032)[0m [2025-10-29 01:29:46,064 E 870032 870032] logging.cc:496:     @     0x1464cac54db0  (unknown)  (unknown)[32m [repeated 4x across cluster][0m
+[36m(pid=870032)[0m Fatal Python error: Aborted[32m [repeated 4x across cluster][0m
+[36m(pid=870032)[0m Stack (most recent call first):[32m [repeated 4x across cluster][0m
+[36m(pid=870032)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 946 in main_loop[32m [repeated 4x across cluster][0m
+[36m(pid=870032)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/workers/default_worker.py", line 330 in <module>[32m [repeated 4x across cluster][0m
+[36m(pid=870032)[0m Extension modules: msgpack._cmsgpack, google._upb._message, psutil._psutil_linux, psutil._psutil_posix, setproctitle, yaml._yaml, _brotli, zstandard.backend_c, simplejson._speedups, charset_normalizer.md, uvloop.loop, ray._raylet (total: 12)[32m [repeated 4x across cluster][0m
+[36m(writer::c4_100_domains-a0a5bf/validation pid=879105)[0m 2025-10-29 01:30:53,024 - INFO - Waiting for first group 100_www_ign_com_jsonl_gz to finish
+[36m(writer::dolma_100_subreddits-6fdd4c/validation pid=879555)[0m 2025-10-29 01:30:58,811 - INFO - Waiting for first group 00_AskReddit_jsonl_gz to finish[32m [repeated 2x across cluster][0m
+[36m(writer::m2d2_s2orc_unsplit-e886dc/validation pid=879581)[0m 2025-10-29 01:31:28,098 - INFO - Waiting for first group Art_jsonl_gz to finish
+[36m(tokenize::output/tokenized/paloma/dolma_100_subreddits-6fdd4c/validation/___temp::00_AskReddit_jsonl_gz pid=880568)[0m 2025-10-29 01:43:30,347 - INFO - Shard 00_AskReddit_jsonl_gz already processed.
+[36m(tokenize::output/tokenized/paloma/dolma_100_subreddits-6fdd4c/validation/___temp::00_AskReddit_jsonl_gz pid=880568)[0m 2025-10-29 01:43:30,348 - INFO - Finished processing 1 shards. Wrote 508 rows.
+[36m(tokenize::output/tokenized/paloma/manosphere_meta_sep-0d11c3/validation/___temp::avfm_jsonl_gz pid=880780)[0m 2025-10-29 01:43:30,337 - INFO - Shard avfm_jsonl_gz already processed.
+[36m(writer::manosphere_meta_sep-0d11c3/validation pid=879081)[0m 2025-10-29 01:43:34,846 - INFO - First group avfm_jsonl_gz finished. Copying other groups into permanent cache.
+[36m(writer::dolma_100_subreddits-6fdd4c/validation pid=879555)[0m 2025-10-29 01:43:35,150 - INFO - First group 00_AskReddit_jsonl_gz finished. Copying other groups into permanent cache.
+[36m(tokenize::output/tokenized/paloma/dolma_100_programing_languages-9ef134/validation/___temp::00_text_jsonl_gz pid=880817)[0m 2025-10-29 01:43:32,188 - INFO - Shard 00_text_jsonl_gz already processed.
+[36m(tokenize::output/tokenized/paloma/dolma_100_programing_languages-9ef134/validation/___temp::00_text_jsonl_gz pid=880817)[0m 2025-10-29 01:43:32,188 - INFO - Finished processing 1 shards. Wrote 33 rows.[32m [repeated 2x across cluster][0m
+[36m(pid=886304)[0m E1029 01:43:41.892967928  886304 completion_queue.cc:257]              ASSERTION FAILED: queue.num_items() == 0
+[36m(pid=886304)[0m *** SIGABRT received at time=1761716621 on cpu 56 ***
+[36m(pid=886304)[0m PC: @     0x1540ccaa154c  (unknown)  __pthread_kill_implementation
+[36m(pid=886304)[0m     @     0x1540cca54db0  (unknown)  (unknown)
+[36m(pid=886304)[0m [2025-10-29 01:43:41,894 E 886304 886304] logging.cc:496: *** SIGABRT received at time=1761716621 on cpu 56 ***
+[36m(pid=886304)[0m [2025-10-29 01:43:41,894 E 886304 886304] logging.cc:496: PC: @     0x1540ccaa154c  (unknown)  __pthread_kill_implementation
+[36m(pid=886304)[0m [2025-10-29 01:43:41,894 E 886304 886304] logging.cc:496:     @     0x1540cca54db0  (unknown)  (unknown)
+[36m(pid=886304)[0m Fatal Python error: Aborted
+[36m(pid=886304)[0m 
+[36m(pid=886304)[0m Stack (most recent call first):
+[36m(pid=886304)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 946 in main_loop
+[36m(pid=886304)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/workers/default_worker.py", line 330 in <module>
+[36m(pid=886304)[0m 
+[36m(pid=886304)[0m Extension modules: msgpack._cmsgpack, google._upb._message, psutil._psutil_linux, psutil._psutil_posix, setproctitle, yaml._yaml, _brotli, zstandard.backend_c, simplejson._speedups, charset_normalizer.md, uvloop.loop, ray._raylet (total: 12)
+[36m(writer::dolma_100_programing_languages-9ef134/validation pid=879067)[0m 2025-10-29 01:43:36,370 - INFO - First group 00_text_jsonl_gz finished. Copying other groups into permanent cache.
+[36m(tokenize::output/tokenized/paloma/manosphere_meta_sep-0d11c3 pid=876363)[0m ERROR:2025-10-29 01:43:50,373:jax._src.xla_bridge:444: Jax plugin configuration error: Exception when calling jax_plugins.xla_cuda12.initialize()
+[36m(tokenize::output/tokenized/paloma/manosphere_meta_sep-0d11c3 pid=876363)[0m Traceback (most recent call last):
+[36m(tokenize::output/tokenized/paloma/manosphere_meta_sep-0d11c3 pid=876363)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax/_src/xla_bridge.py", line 442, in discover_pjrt_plugins
+[36m(tokenize::output/tokenized/paloma/manosphere_meta_sep-0d11c3 pid=876363)[0m     plugin_module.initialize()
+[36m(tokenize::output/tokenized/paloma/manosphere_meta_sep-0d11c3 pid=876363)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax_plugins/xla_cuda12/__init__.py", line 324, in initialize
+[36m(tokenize::output/tokenized/paloma/manosphere_meta_sep-0d11c3 pid=876363)[0m     _check_cuda_versions(raise_on_first_error=True)
+[36m(tokenize::output/tokenized/paloma/manosphere_meta_sep-0d11c3 pid=876363)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax_plugins/xla_cuda12/__init__.py", line 281, in _check_cuda_versions
+[36m(tokenize::output/tokenized/paloma/manosphere_meta_sep-0d11c3 pid=876363)[0m     local_device_count = cuda_versions.cuda_device_count()
+[36m(tokenize::output/tokenized/paloma/manosphere_meta_sep-0d11c3 pid=876363)[0m                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36m(tokenize::output/tokenized/paloma/manosphere_meta_sep-0d11c3 pid=876363)[0m RuntimeError: jaxlib/cuda/versions_helpers.cc:113: operation cuInit(0) failed: CUDA_ERROR_NO_DEVICE
+[36m(tokenize::output/tokenized/paloma/manosphere_meta_sep-0d11c3 pid=876363)[0m  done: Shards: 1 | Docs: 12
+[36m(tokenize::output/tokenized/paloma/dolma_100_subreddits-6fdd4c/validation/___temp::06_news_jsonl_gz pid=883808)[0m 2025-10-29 01:43:56,397 - INFO - Finished processing 1 shards. Wrote 443 rows.
+[36m(tokenize::output/tokenized/paloma/dolma_100_subreddits-6fdd4c pid=876348)[0m ERROR:2025-10-29 01:43:50,522:jax._src.xla_bridge:444: Jax plugin configuration error: Exception when calling jax_plugins.xla_cuda12.initialize()[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/dolma_100_subreddits-6fdd4c pid=876348)[0m Traceback (most recent call last):[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/dolma_100_subreddits-6fdd4c pid=876348)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax/_src/xla_bridge.py", line 442, in discover_pjrt_plugins[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/dolma_100_subreddits-6fdd4c pid=876348)[0m     plugin_module.initialize()[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/dolma_100_subreddits-6fdd4c pid=876348)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax_plugins/xla_cuda12/__init__.py", line 324, in initialize[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/dolma_100_subreddits-6fdd4c pid=876348)[0m     _check_cuda_versions(raise_on_first_error=True)[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/dolma_100_subreddits-6fdd4c pid=876348)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax_plugins/xla_cuda12/__init__.py", line 281, in _check_cuda_versions[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/dolma_100_subreddits-6fdd4c pid=876348)[0m     local_device_count = cuda_versions.cuda_device_count()[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/dolma_100_subreddits-6fdd4c pid=876348)[0m                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/dolma_100_subreddits-6fdd4c pid=876348)[0m RuntimeError: jaxlib/cuda/versions_helpers.cc:113: operation cuInit(0) failed: CUDA_ERROR_NO_DEVICE[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/dolma_100_subreddits-6fdd4c pid=876348)[0m  done: Shards: 1 | Docs: 508[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/c4_100_domains-a0a5bf/validation/___temp::100_www_ign_com_jsonl_gz pid=880546)[0m 2025-10-29 01:44:02,957 - INFO - Finished processing 1 shards. Wrote 134 rows.[32m [repeated 8x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/gab-d3f648/validation/___temp::0_jsonl_gz pid=880738)[0m 2025-10-29 01:44:10,036 - INFO - Finished processing 1 shards. Wrote 2430 rows.[32m [repeated 9x across cluster][0m
+[36m(writer::c4_100_domains-a0a5bf/validation pid=879105)[0m 2025-10-29 01:44:10,313 - INFO - First group 100_www_ign_com_jsonl_gz finished. Copying other groups into permanent cache.
+[36m(writer::redpajama-c4c2cd/validation pid=879083)[0m 2025-10-29 01:44:10,317 - INFO - First group arxiv_jsonl_gz finished. Copying other groups into permanent cache.
+[36m(writer::ptb-34ecda/validation pid=879073)[0m 2025-10-29 01:44:12,299 - INFO - First group val_jsonl_gz finished. Copying other groups into permanent cache.
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43/validation/___temp::Culture_and_the_arts__Mass_media_jsonl_gz pid=880556)[0m 2025-10-29 01:44:15,580 - INFO - Finished processing 1 shards. Wrote 1 rows.
+[36m(writer::gab-d3f648/validation pid=879069)[0m 2025-10-29 01:44:14,475 - INFO - First group 0_jsonl_gz finished. Copying other groups into permanent cache.
+[36m(tokenize::output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc/validation/___temp::Philosophy_jsonl_gz pid=880525)[0m 2025-10-29 01:44:15,618 - INFO - Finished processing 1 shards. Wrote 1 rows.
+[36m(pid=886694)[0m E1029 01:44:15.646520733  886694 completion_queue.cc:257]              ASSERTION FAILED: queue.num_items() == 0
+[36m(pid=886694)[0m *** SIGABRT received at time=1761716655 on cpu 56 ***
+[36m(pid=886694)[0m PC: @     0x14674b8a154c  (unknown)  __pthread_kill_implementation
+[36m(pid=886694)[0m     @     0x14674b854db0  (unknown)  (unknown)
+[36m(pid=886694)[0m [2025-10-29 01:44:15,647 E 886694 886694] logging.cc:496: *** SIGABRT received at time=1761716655 on cpu 56 ***
+[36m(pid=886694)[0m [2025-10-29 01:44:15,647 E 886694 886694] logging.cc:496: PC: @     0x14674b8a154c  (unknown)  __pthread_kill_implementation
+[36m(pid=886694)[0m [2025-10-29 01:44:15,647 E 886694 886694] logging.cc:496:     @     0x14674b854db0  (unknown)  (unknown)
+[36m(pid=886694)[0m Fatal Python error: Aborted
+[36m(pid=886694)[0m 
+[36m(pid=886694)[0m Stack (most recent call first):
+[36m(pid=886694)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 946 in main_loop
+[36m(pid=886694)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/workers/default_worker.py", line 330 in <module>
+[36m(pid=886694)[0m 
+[36m(pid=886694)[0m Extension modules: msgpack._cmsgpack, google._upb._message, psutil._psutil_linux, psutil._psutil_posix, setproctitle, yaml._yaml, _brotli, zstandard.backend_c, simplejson._speedups, charset_normalizer.md, uvloop.loop, ray._raylet (total: 12)
+[36m(writer::ptb-34ecda/validation pid=879073)[0m 2025-10-29 01:44:17,874 - INFO - Cleaning up temporary cache at output/tokenized/paloma/ptb-34ecda/validation/___temp
+[36m(pid=886708)[0m 
+[36m(pid=886708)[0m 
+[36m(tokenize::output/tokenized/paloma/c4_100_domains-a0a5bf pid=876349)[0m ERROR:2025-10-29 01:44:24,556:jax._src.xla_bridge:444: Jax plugin configuration error: Exception when calling jax_plugins.xla_cuda12.initialize()
+[36m(tokenize::output/tokenized/paloma/c4_100_domains-a0a5bf pid=876349)[0m Traceback (most recent call last):
+[36m(tokenize::output/tokenized/paloma/c4_100_domains-a0a5bf pid=876349)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax/_src/xla_bridge.py", line 442, in discover_pjrt_plugins
+[36m(tokenize::output/tokenized/paloma/c4_100_domains-a0a5bf pid=876349)[0m     plugin_module.initialize()
+[36m(tokenize::output/tokenized/paloma/c4_100_domains-a0a5bf pid=876349)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax_plugins/xla_cuda12/__init__.py", line 324, in initialize
+[36m(tokenize::output/tokenized/paloma/c4_100_domains-a0a5bf pid=876349)[0m     _check_cuda_versions(raise_on_first_error=True)
+[36m(tokenize::output/tokenized/paloma/c4_100_domains-a0a5bf pid=876349)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax_plugins/xla_cuda12/__init__.py", line 281, in _check_cuda_versions
+[36m(tokenize::output/tokenized/paloma/c4_100_domains-a0a5bf pid=876349)[0m     local_device_count = cuda_versions.cuda_device_count()
+[36m(tokenize::output/tokenized/paloma/c4_100_domains-a0a5bf pid=876349)[0m                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36m(tokenize::output/tokenized/paloma/c4_100_domains-a0a5bf pid=876349)[0m RuntimeError: jaxlib/cuda/versions_helpers.cc:113: operation cuInit(0) failed: CUDA_ERROR_NO_DEVICE
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43/validation/___temp::Culture_and_the_arts__Culture_and_Humanities_jsonl_gz pid=880535)[0m 2025-10-29 01:44:19,600 - INFO - Finished processing 1 shards. Wrote 1 rows.[32m [repeated 13x across cluster][0m
+[36m(pid=886708)[0m E1029 01:44:19.494683104  886708 completion_queue.cc:257]              ASSERTION FAILED: queue.num_items() == 0
+[36m(pid=886708)[0m *** SIGABRT received at time=1761716659 on cpu 56 ***
+[36m(pid=886708)[0m PC: @     0x14e5772a154c  (unknown)  __pthread_kill_implementation
+[36m(pid=886708)[0m     @     0x14e577254db0  (unknown)  (unknown)
+[36m(pid=886708)[0m [2025-10-29 01:44:19,845 E 886708 886708] logging.cc:496: *** SIGABRT received at time=1761716659 on cpu 56 ***
+[36m(pid=886708)[0m [2025-10-29 01:44:19,845 E 886708 886708] logging.cc:496: PC: @     0x14e5772a154c  (unknown)  __pthread_kill_implementation
+[36m(pid=886708)[0m [2025-10-29 01:44:19,845 E 886708 886708] logging.cc:496:     @     0x14e577254db0  (unknown)  (unknown)
+[36m(pid=886708)[0m Fatal Python error: Aborted
+[36m(pid=886708)[0m Stack (most recent call first):
+[36m(pid=886708)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 946 in main_loop
+[36m(pid=886708)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/workers/default_worker.py", line 330 in <module>
+[36m(pid=886708)[0m Extension modules: msgpack._cmsgpack, google._upb._message, psutil._psutil_linux, psutil._psutil_posix, setproctitle, yaml._yaml, _brotli, zstandard.backend_c, simplejson._speedups, charset_normalizer.md, uvloop.loop, ray._raylet (total: 12)
+[36m(tokenize::output/tokenized/paloma/c4_100_domains-a0a5bf pid=876349)[0m  done: Shards: 0 | Docs: 0
+[36m(tokenize::output/tokenized/paloma/ptb-34ecda pid=876347)[0m ERROR:2025-10-29 01:44:30,758:jax._src.xla_bridge:444: Jax plugin configuration error: Exception when calling jax_plugins.xla_cuda12.initialize()[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/ptb-34ecda pid=876347)[0m Traceback (most recent call last):[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/ptb-34ecda pid=876347)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax/_src/xla_bridge.py", line 442, in discover_pjrt_plugins[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/ptb-34ecda pid=876347)[0m     plugin_module.initialize()[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/ptb-34ecda pid=876347)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax_plugins/xla_cuda12/__init__.py", line 324, in initialize[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/ptb-34ecda pid=876347)[0m     _check_cuda_versions(raise_on_first_error=True)[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/ptb-34ecda pid=876347)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax_plugins/xla_cuda12/__init__.py", line 281, in _check_cuda_versions[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/ptb-34ecda pid=876347)[0m     local_device_count = cuda_versions.cuda_device_count()[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/ptb-34ecda pid=876347)[0m                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/ptb-34ecda pid=876347)[0m RuntimeError: jaxlib/cuda/versions_helpers.cc:113: operation cuInit(0) failed: CUDA_ERROR_NO_DEVICE[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/redpajama-c4c2cd/validation/___temp::books_jsonl_gz pid=880522)[0m 2025-10-29 01:44:28,772 - INFO - Finished processing 1 shards. Wrote 2 rows.[32m [repeated 4x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/redpajama-c4c2cd pid=876346)[0m  done: Shards: 0 | Docs: 0
+[36m(tokenize::output/tokenized/paloma/ptb-34ecda pid=876347)[0m  done: Shards: 0 | Docs: 0
+[36m(tokenize::output/tokenized/paloma/ptb-34ecda pid=876347)[0m Cache creation finished
+[36m(writer::m2d2_wikipedia_unsplit-f69b43/validation pid=879088)[0m 2025-10-29 01:44:31,512 - INFO - First group Culture_and_the_arts_jsonl_gz finished. Copying other groups into permanent cache.
+[36m(writer::m2d2_s2orc_unsplit-e886dc/validation pid=879581)[0m 2025-10-29 01:44:31,484 - INFO - First group Art_jsonl_gz finished. Copying other groups into permanent cache.
+2025-10-29 01:44:33,980	INFO executor.py:637 -- Waiting for ObjectRef(5d4b8d1788f12d2dffffffffffffffffffffffff0100000001000000) to finish for step tokenized/paloma/ptb
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43/validation/___temp::Culture_and_the_arts_jsonl_gz pid=880523)[0m E1029 01:44:38.290236157  880523 completion_queue.cc:257]              ASSERTION FAILED: queue.num_items() == 0
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43/validation/___temp::Culture_and_the_arts_jsonl_gz pid=880523)[0m *** SIGABRT received at time=1761716678 on cpu 56 ***
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43/validation/___temp::Culture_and_the_arts_jsonl_gz pid=880523)[0m PC: @     0x147b102a154c  (unknown)  __pthread_kill_implementation
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43/validation/___temp::Culture_and_the_arts_jsonl_gz pid=880523)[0m     @     0x147b10254db0  (unknown)  (unknown)
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43/validation/___temp::Culture_and_the_arts_jsonl_gz pid=880523)[0m [2025-10-29 01:44:38,293 E 880523 880523] logging.cc:496: *** SIGABRT received at time=1761716678 on cpu 56 ***
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43/validation/___temp::Culture_and_the_arts_jsonl_gz pid=880523)[0m [2025-10-29 01:44:38,293 E 880523 880523] logging.cc:496: PC: @     0x147b102a154c  (unknown)  __pthread_kill_implementation
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43/validation/___temp::Culture_and_the_arts_jsonl_gz pid=880523)[0m [2025-10-29 01:44:38,294 E 880523 880523] logging.cc:496:     @     0x147b10254db0  (unknown)  (unknown)
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43/validation/___temp::Culture_and_the_arts_jsonl_gz pid=880523)[0m Fatal Python error: Aborted
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43/validation/___temp::Culture_and_the_arts_jsonl_gz pid=880523)[0m 
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43/validation/___temp::Culture_and_the_arts_jsonl_gz pid=880523)[0m Stack (most recent call first):
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43/validation/___temp::Culture_and_the_arts_jsonl_gz pid=880523)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 946 in main_loop
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43/validation/___temp::Culture_and_the_arts_jsonl_gz pid=880523)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/workers/default_worker.py", line 330 in <module>
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43/validation/___temp::Culture_and_the_arts_jsonl_gz pid=880523)[0m 
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43/validation/___temp::Culture_and_the_arts_jsonl_gz pid=880523)[0m Extension modules: msgpack._cmsgpack, google._upb._message, psutil._psutil_linux, psutil._psutil_posix, setproctitle, yaml._yaml, _brotli, zstandard.backend_c, simplejson._speedups, charset_normalizer.md, uvloop.loop, ray._raylet, 
+[36m(tokenize::output/tokenized/paloma/gab-d3f648 pid=876352)[0m ERROR:2025-10-29 01:44:32,030:jax._src.xla_bridge:444: Jax plugin configuration error: Exception when calling jax_plugins.xla_cuda12.initialize()
+[36m(tokenize::output/tokenized/paloma/gab-d3f648 pid=876352)[0m Traceback (most recent call last):
+[36m(tokenize::output/tokenized/paloma/gab-d3f648 pid=876352)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax/_src/xla_bridge.py", line 442, in discover_pjrt_plugins
+[36m(tokenize::output/tokenized/paloma/gab-d3f648 pid=876352)[0m     plugin_module.initialize()
+[36m(tokenize::output/tokenized/paloma/gab-d3f648 pid=876352)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax_plugins/xla_cuda12/__init__.py", line 324, in initialize
+[36m(tokenize::output/tokenized/paloma/gab-d3f648 pid=876352)[0m     _check_cuda_versions(raise_on_first_error=True)
+[36m(tokenize::output/tokenized/paloma/gab-d3f648 pid=876352)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax_plugins/xla_cuda12/__init__.py", line 281, in _check_cuda_versions
+[36m(tokenize::output/tokenized/paloma/gab-d3f648 pid=876352)[0m     local_device_count = cuda_versions.cuda_device_count()
+[36m(tokenize::output/tokenized/paloma/gab-d3f648 pid=876352)[0m                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36m(tokenize::output/tokenized/paloma/gab-d3f648 pid=876352)[0m RuntimeError: jaxlib/cuda/versions_helpers.cc:113: operation cuInit(0) failed: CUDA_ERROR_NO_DEVICE
+[36m(tokenize::output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc/validation/___temp::astro-ph_SR_jsonl_gz pid=880725)[0m 2025-10-29 01:44:31,755 - INFO - Finished processing 1 shards. Wrote 1 rows.[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/gab-d3f648 pid=876352)[0m  done: Shards: 0 | Docs: 0
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43/validation/___temp::Culture_and_the_arts_jsonl_gz pid=880523)[0m jaxlib.cpu_feature_guard, numpy._core._multiarray_umath, numpy.linalg._umath_linalg, numpy.random._common, numpy.random.bit_generator, numpy.random._bounded_integers, numpy.random._pcg64, numpy.random._mt19937, numpy.random._generator, numpy.random._philox, numpy.random._sfc64, numpy.random.mtrand, lz4._version, lz4.frame._frame, pyarrow.lib, pandas._libs.tslibs.ccalendar, pandas._libs.tslibs.np_datetime, pandas._libs.tslibs.dtypes, pandas._libs.tslibs.base, pandas._libs.tslibs.nattype
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43/validation/___temp::Culture_and_the_arts_jsonl_gz pid=880523)[0m , pandas._libs.tslibs.timezones, pandas._libs.tslibs.fields, pandas._libs.tslibs.timedeltas, pandas._libs.tslibs.tzconversion, pandas._libs.tslibs.timestamps, pandas._libs.properties, pandas._libs.tslibs.offsets, pandas._libs.tslibs.strptime, pandas._libs.tslibs.parsing, pandas._libs.tslibs.conversion, pandas._libs.tslibs.period, pandas._libs.tslibs.vectorized, pandas._libs.ops_dispatch, pandas._libs.missing, pandas._libs.hashtable, pandas._libs.algos, pandas._libs.interval, pandas._libs.lib, pyarrow._compute, pandas._libs.ops, pandas._libs.hashing, pandas._libs.arrays, pandas._libs.tslib, pandas._libs.sparse, pandas._libs.internals, pandas._libs.indexing, pandas._libs.index, pandas._libs.writers, pandas._libs.join, pandas._libs.window.aggregations, pandas._libs.window.indexers, pandas._libs.reshape, pandas._libs.groupby, pandas._libs.json, pandas._libs.parsers, pandas._libs.testing, pyarrow._parquet, pyarrow._fs, pyarrow._azurefs, pyarrow._hdfs, pyarrow._gcsfs, pyarrow._s3fs, multidict._multidict, yarl._quoting_c, propcache._helpers_c, aiohttp._http_writer, aiohttp._http_parser, aiohttp._websocket.mask, aiohttp._websocket.reader_c, frozenlist._frozenlist, xxhash._xxhash, pyarrow._acero, pyarrow._csv, pyarrow._json, pyarrow._substrait, pyarrow._dataset, pyarrow._dataset_orc, pyarrow._parquet_encryption, pyarrow._dataset_parquet_encryption, pyarrow._dataset_parquet, regex._regex, torch._C, torch._C._dynamo.autograd_compiler, torch._C._dynamo.eval_frame, torch._C._dynamo.guards, torch._C._dynamo.utils, torch._C._fft, torch._C._linalg, torch._C._nested, torch._C._nn, torch._C._sparse, torch._C._special, markupsafe._speedups, PIL._imaging, scipy._lib._ccallback_c, scipy.linalg._fblas, scipy.linalg._flapack, _cyutility, scipy._cyutility, scipy.linalg.cython_lapack, scipy.linalg._cythonized_array_utils, scipy.linalg._solve_toeplitz, scipy.linalg._decomp_lu_cython, scipy.linalg._matfuncs_schur_sqrtm, scipy.linalg._matfuncs_expm, scipy.linalg._linalg_pythran, scipy.linalg.cython_blas, scipy.linalg._decomp_update, scipy.sparse._sparsetools, _csparsetools, scipy.sparse._csparsetools, scipy.sparse.linalg._dsolve._superlu, scipy.sparse.linalg._eigen.arpack._arpack, scipy.sparse.linalg._propack._spropack, scipy.sparse.linalg._propack._dpropack, scipy.sparse.linalg._propack._cpropack, scipy.sparse.linalg._propack._zpropack, scipy.optimize._group_columns, scipy._lib.messagestream, scipy.optimize._trlib._trlib, scipy.optimize._lbfgsb, _moduleTNC, scipy.optimize._moduleTNC, scipy.optimize._slsqplib, scipy.optimize._minpack, scipy.optimize._lsq.givens_elimination, scipy.optimize._zeros, scipy._lib._uarray._uarray, scipy.special._ufuncs_cxx, scipy.special._ellip_harm_2, scipy.special._special_ufuncs, scipy.special._gufuncs, scipy.special._ufuncs, scipy.special._specfun, scipy.special._comb, scipy.linalg._decomp_interpolative, scipy.optimize._bglu_dense, scipy.optimize._lsap, scipy.spatial._ckdtree, scipy.spatial._qhull, scipy.spatial._voronoi, scipy.spatial._hausdorff, scipy.spatial._distance_wrap, scipy.spatial.transform._rotation, scipy.spatial.transform._rigid_transform, scipy.optimize._direct (total: 158)
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43 pid=876350)[0m ERROR:2025-10-29 01:44:46,061:jax._src.xla_bridge:444: Jax plugin configuration error: Exception when calling jax_plugins.xla_cuda12.initialize()
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43 pid=876350)[0m Traceback (most recent call last):
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43 pid=876350)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax/_src/xla_bridge.py", line 442, in discover_pjrt_plugins
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43 pid=876350)[0m     plugin_module.initialize()
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43 pid=876350)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax_plugins/xla_cuda12/__init__.py", line 324, in initialize
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43 pid=876350)[0m     _check_cuda_versions(raise_on_first_error=True)
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43 pid=876350)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax_plugins/xla_cuda12/__init__.py", line 281, in _check_cuda_versions
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43 pid=876350)[0m     local_device_count = cuda_versions.cuda_device_count()
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43 pid=876350)[0m                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43 pid=876350)[0m RuntimeError: jaxlib/cuda/versions_helpers.cc:113: operation cuInit(0) failed: CUDA_ERROR_NO_DEVICE
+[36m(tokenize::output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43 pid=876350)[0m  done: Shards: 0 | Docs: 0
+[36m(tokenize::output/tokenized/paloma/4chan-6aff8f/validation/___temp::3_jsonl_gz pid=883641)[0m 2025-10-29 01:44:49,241 - INFO - Finished processing 1 shards. Wrote 106 rows.
+[36m(tokenize::output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc pid=876425)[0m ERROR:2025-10-29 01:44:46,982:jax._src.xla_bridge:444: Jax plugin configuration error: Exception when calling jax_plugins.xla_cuda12.initialize()
+[36m(tokenize::output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc pid=876425)[0m Traceback (most recent call last):
+[36m(tokenize::output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc pid=876425)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax/_src/xla_bridge.py", line 442, in discover_pjrt_plugins
+[36m(tokenize::output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc pid=876425)[0m     plugin_module.initialize()
+[36m(tokenize::output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc pid=876425)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax_plugins/xla_cuda12/__init__.py", line 324, in initialize
+[36m(tokenize::output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc pid=876425)[0m     _check_cuda_versions(raise_on_first_error=True)
+[36m(tokenize::output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc pid=876425)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax_plugins/xla_cuda12/__init__.py", line 281, in _check_cuda_versions
+[36m(tokenize::output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc pid=876425)[0m     local_device_count = cuda_versions.cuda_device_count()
+[36m(tokenize::output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc pid=876425)[0m                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36m(tokenize::output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc pid=876425)[0m RuntimeError: jaxlib/cuda/versions_helpers.cc:113: operation cuInit(0) failed: CUDA_ERROR_NO_DEVICE
+[36m(tokenize::output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc pid=876425)[0m  done: Shards: 0 | Docs: 0
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa/validation/___temp::1_jsonl_gz pid=880723)[0m 2025-10-29 01:44:54,220 - INFO - Finished processing 1 shards. Wrote 412 rows.[32m [repeated 4x across cluster][0m
+[36m(writer::falcon-refinedweb-09af65/validation pid=879078)[0m 2025-10-29 01:44:59,178 - INFO - First group 0_jsonl_gz finished. Copying other groups into permanent cache.
+[36m(tokenize::output/tokenized/paloma/mc4-170a00/validation/___temp::2_jsonl_gz pid=880573)[0m 2025-10-29 01:45:00,438 - INFO - Finished processing 1 shards. Wrote 255 rows.[32m [repeated 5x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa/validation/___temp::0_jsonl_gz pid=880602)[0m E1029 01:45:07.396324332  880602 completion_queue.cc:257]              ASSERTION FAILED: queue.num_items() == 0
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa/validation/___temp::0_jsonl_gz pid=880602)[0m *** SIGABRT received at time=1761716707 on cpu 56 ***
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa/validation/___temp::0_jsonl_gz pid=880602)[0m PC: @     0x14b828ca154c  (unknown)  __pthread_kill_implementation
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa/validation/___temp::0_jsonl_gz pid=880602)[0m     @     0x14b828c54db0  (unknown)  (unknown)
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa/validation/___temp::0_jsonl_gz pid=880602)[0m [2025-10-29 01:45:07,399 E 880602 880602] logging.cc:496: *** SIGABRT received at time=1761716707 on cpu 56 ***
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa/validation/___temp::0_jsonl_gz pid=880602)[0m [2025-10-29 01:45:07,399 E 880602 880602] logging.cc:496: PC: @     0x14b828ca154c  (unknown)  __pthread_kill_implementation
+[36m(writer::c4_en-a852aa/validation pid=879092)[0m 2025-10-29 01:45:00,488 - INFO - First group 0_jsonl_gz finished. Copying other groups into permanent cache.
+[36m(tokenize::output/tokenized/paloma/mc4-170a00/validation/___temp::3_jsonl_gz pid=880592)[0m 2025-10-29 01:45:04,153 - INFO - Finished processing 1 shards. Wrote 237 rows.[32m [repeated 3x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa/validation/___temp::0_jsonl_gz pid=880602)[0m [2025-10-29 01:45:08,151 E 880602 880602] logging.cc:496:     @     0x14b828c54db0  (unknown)  (unknown)
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa/validation/___temp::0_jsonl_gz pid=880602)[0m Fatal Python error: Aborted
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa/validation/___temp::0_jsonl_gz pid=880602)[0m 
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa/validation/___temp::0_jsonl_gz pid=880602)[0m Stack (most recent call first):
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa/validation/___temp::0_jsonl_gz pid=880602)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 946 in main_loop
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa/validation/___temp::0_jsonl_gz pid=880602)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/workers/default_worker.py", line 330 in <module>
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa/validation/___temp::0_jsonl_gz pid=880602)[0m 
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa/validation/___temp::0_jsonl_gz pid=880602)[0m Extension modules: msgpack._cmsgpack, google._upb._message, psutil._psutil_linux, psutil._psutil_posix, setproctitle, yaml._yaml, _brotli, zstandard.backend_c, simplejson._speedups, charset_normalizer.md, uvloop.loop, ray._raylet, jaxlib.cpu_feature_guard, numpy._core._multiarray_umath, numpy.linalg._umath_linalg, numpy.random._common, numpy.random.bit_generator, numpy.random._bounded_integers, numpy.random._pcg64, numpy.random._mt19937, numpy.random._generator, numpy.random._philox, numpy.random._sfc64, numpy.random.mtrand, lz4._version, lz4.frame._frame, pyarrow.lib, pandas._libs.tslibs.ccalendar, pandas._libs.tslibs.np_datetime, pandas._libs.tslibs.dtypes, pandas._libs.tslibs.base, pandas._libs.tslibs.nattype, pandas._libs.tslibs.timezones, pandas._libs.tslibs.fields, pandas._libs.tslibs.timedeltas, pandas._libs.tslibs.tzconversion, pandas._libs.tslibs.timestamps, pandas._libs.properties, pandas._libs.tslibs.offsets, pandas._libs.tslibs.strptime, pandas._libs.tslibs.parsing, pandas._libs.tslibs.conversion, pandas._libs.tslibs.period, pandas._libs.tslibs.vectorized, pandas._libs.ops_dispatch, pandas._libs.missing, pandas._libs.hashtable, pandas._libs.algos, pandas._libs.interval, pandas._libs.lib, pyarrow._compute, pandas._libs.ops, pandas._libs.hashing, pandas._libs.arrays, pandas._libs.tslib, pandas._libs.sparse, pandas._libs.internals, pandas._libs.indexing, pandas._libs.index, pandas._libs.writers, pandas._libs.join, pandas._libs.window.aggregations, pandas._libs.window.indexers, pandas._libs.reshape, pandas._libs.groupby, pandas._libs.json, pandas._libs.parsers, pandas._libs.testing, pyarrow._parquet, pyarrow._fs, pyarrow._azurefs, pyarrow._hdfs, pyarrow._gcsfs, pyarrow._s3fs, multidict._multidict, yarl._quoting_c, propcache._helpers_c, aiohttp._http_writer, aiohttp._http_parser, aiohttp._websocket.mask, aiohttp._websocket.reader_c, frozenlist._frozenlist, xxhash._xxhash, pyarrow._acero, pyarrow._csv, pyarrow._json, pyarrow._substrait, pyarrow._dataset, pyarrow._dataset_orc, pyarrow._parquet_encryption, pyarrow._dataset_parquet_encryption, pyarrow._dataset_parquet, regex._regex, torch._C, torch._C._dynamo.autograd_compiler, torch._C._dynamo.eval_frame, torch._C._dynamo.guards, torch._C._dynamo.utils, torch._C._fft, torch._C._linalg, torch._C._nested, torch._C._nn, torch._C._sparse, torch._C._special, markupsafe._speedups, PIL._imaging, scipy._lib._ccallback_c, scipy.linalg._fblas
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa/validation/___temp::0_jsonl_gz pid=880602)[0m , scipy.linalg._flapack, _cyutility, scipy._cyutility, scipy.linalg.cython_lapack, scipy.linalg._cythonized_array_utils, scipy.linalg._solve_toeplitz, scipy.linalg._decomp_lu_cython, scipy.linalg._matfuncs_schur_sqrtm, scipy.linalg._matfuncs_expm, scipy.linalg._linalg_pythran, scipy.linalg.cython_blas, scipy.linalg._decomp_update, scipy.sparse._sparsetools, _csparsetools, scipy.sparse._csparsetools, scipy.sparse.linalg._dsolve._superlu, scipy.sparse.linalg._eigen.arpack._arpack, scipy.sparse.linalg._propack._spropack, scipy.sparse.linalg._propack._dpropack, scipy.sparse.linalg._propack._cpropack, scipy.sparse.linalg._propack._zpropack, scipy.optimize._group_columns, scipy._lib.messagestream, scipy.optimize._trlib._trlib, scipy.optimize._lbfgsb, _moduleTNC, scipy.optimize._moduleTNC, scipy.optimize._slsqplib, scipy.optimize._minpack, scipy.optimize._lsq.givens_elimination, scipy.optimize._zeros, scipy._lib._uarray._uarray, scipy.special._ufuncs_cxx, scipy.special._ellip_harm_2, scipy.special._special_ufuncs, scipy.special._gufuncs, scipy.special._ufuncs, scipy.special._specfun, scipy.special._comb, scipy.linalg._decomp_interpolative, scipy.optimize._bglu_dense, scipy.optimize._lsap, scipy.spatial._ckdtree, scipy.spatial._qhull, scipy.spatial._voronoi, scipy.spatial._hausdorff, scipy.spatial._distance_wrap, scipy.spatial.transform._rotation, scipy.spatial.transform._rigid_transform, scipy.optimize._direct (total: 158)
+[36m(writer::mc4-170a00/validation pid=879077)[0m 2025-10-29 01:45:11,465 - INFO - First group 0_jsonl_gz finished. Copying other groups into permanent cache.
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa pid=876351)[0m ERROR:2025-10-29 01:45:14,692:jax._src.xla_bridge:444: Jax plugin configuration error: Exception when calling jax_plugins.xla_cuda12.initialize()
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa pid=876351)[0m Traceback (most recent call last):
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa pid=876351)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax/_src/xla_bridge.py", line 442, in discover_pjrt_plugins
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa pid=876351)[0m     plugin_module.initialize()
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa pid=876351)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax_plugins/xla_cuda12/__init__.py", line 324, in initialize
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa pid=876351)[0m     _check_cuda_versions(raise_on_first_error=True)
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa pid=876351)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax_plugins/xla_cuda12/__init__.py", line 281, in _check_cuda_versions
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa pid=876351)[0m     local_device_count = cuda_versions.cuda_device_count()
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa pid=876351)[0m                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa pid=876351)[0m RuntimeError: jaxlib/cuda/versions_helpers.cc:113: operation cuInit(0) failed: CUDA_ERROR_NO_DEVICE
+[36m(tokenize::output/tokenized/paloma/c4_en-a852aa pid=876351)[0m  done: Shards: 0 | Docs: 0
+[36m(tokenize::output/tokenized/paloma/mc4-170a00 pid=876362)[0m ERROR:2025-10-29 01:45:21,977:jax._src.xla_bridge:444: Jax plugin configuration error: Exception when calling jax_plugins.xla_cuda12.initialize()[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/mc4-170a00 pid=876362)[0m Traceback (most recent call last):[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/mc4-170a00 pid=876362)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax/_src/xla_bridge.py", line 442, in discover_pjrt_plugins[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/mc4-170a00 pid=876362)[0m     plugin_module.initialize()[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/mc4-170a00 pid=876362)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax_plugins/xla_cuda12/__init__.py", line 324, in initialize[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/mc4-170a00 pid=876362)[0m     _check_cuda_versions(raise_on_first_error=True)[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/mc4-170a00 pid=876362)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax_plugins/xla_cuda12/__init__.py", line 281, in _check_cuda_versions[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/mc4-170a00 pid=876362)[0m     local_device_count = cuda_versions.cuda_device_count()[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/mc4-170a00 pid=876362)[0m                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/mc4-170a00 pid=876362)[0m RuntimeError: jaxlib/cuda/versions_helpers.cc:113: operation cuInit(0) failed: CUDA_ERROR_NO_DEVICE[32m [repeated 2x across cluster][0m
+[36m(tokenize::output/tokenized/paloma/mc4-170a00 pid=876362)[0m  done: Shards: 0 | Docs: 0[32m [repeated 2x across cluster][0m
+[36m(pid=888589)[0m E1029 01:45:22.611059695  888589 completion_queue.cc:257]              ASSERTION FAILED: queue.num_items() == 0
+[36m(pid=888589)[0m *** SIGABRT received at time=1761716722 on cpu 56 ***
+[36m(pid=888589)[0m PC: @     0x14f5c0ea154c  (unknown)  __pthread_kill_implementation
+[36m(pid=888589)[0m     @     0x14f5c0e54db0  (unknown)  (unknown)
+[36m(pid=888589)[0m [2025-10-29 01:45:22,612 E 888589 888589] logging.cc:496: *** SIGABRT received at time=1761716722 on cpu 56 ***
+[36m(pid=888589)[0m [2025-10-29 01:45:22,612 E 888589 888589] logging.cc:496: PC: @     0x14f5c0ea154c  (unknown)  __pthread_kill_implementation
+[36m(pid=888589)[0m [2025-10-29 01:45:22,613 E 888589 888589] logging.cc:496:     @     0x14f5c0e54db0  (unknown)  (unknown)
+[36m(pid=888589)[0m Fatal Python error: Aborted
+[36m(pid=888589)[0m 
+[36m(pid=888589)[0m Stack (most recent call first):
+[36m(pid=888589)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 946 in main_loop
+[36m(pid=888589)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/workers/default_worker.py", line 330 in <module>
+[36m(pid=888589)[0m 
+[36m(pid=888589)[0m Extension modules: msgpack._cmsgpack, google._upb._message, psutil._psutil_linux, psutil._psutil_posix, setproctitle, yaml._yaml, _brotli, zstandard.backend_c, simplejson._speedups, charset_normalizer.md, uvloop.loop, ray._raylet (total: 12)
+[36m(pid=888596)[0m 
+[36m(pid=888596)[0m 
+[36m(tokenize::output/tokenized/paloma/wikitext_103-70e03f/validation/___temp::val_jsonl_gz pid=880526)[0m 2025-10-29 01:45:27,906 - INFO - Finished processing 1 shards. Wrote 59 rows.
+[36m(pid=888596)[0m E1029 01:45:24.336129662  888596 completion_queue.cc:257]              ASSERTION FAILED: queue.num_items() == 0
+[36m(pid=888596)[0m *** SIGABRT received at time=1761716724 on cpu 56 ***
+[36m(pid=888596)[0m PC: @     0x148e016a154c  (unknown)  __pthread_kill_implementation
+[36m(pid=888596)[0m     @     0x148e01654db0  (unknown)  (unknown)
+[36m(pid=888596)[0m [2025-10-29 01:45:24,337 E 888596 888596] logging.cc:496: *** SIGABRT received at time=1761716724 on cpu 56 ***
+[36m(pid=888596)[0m [2025-10-29 01:45:24,337 E 888596 888596] logging.cc:496: PC: @     0x148e016a154c  (unknown)  __pthread_kill_implementation
+[36m(pid=888596)[0m [2025-10-29 01:45:24,337 E 888596 888596] logging.cc:496:     @     0x148e01654db0  (unknown)  (unknown)
+[36m(pid=888596)[0m Fatal Python error: Aborted
+[36m(pid=888596)[0m Stack (most recent call first):
+[36m(pid=888596)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 946 in main_loop
+[36m(pid=888596)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/workers/default_worker.py", line 330 in <module>
+[36m(pid=888596)[0m Extension modules: msgpack._cmsgpack, google._upb._message, psutil._psutil_linux, psutil._psutil_posix, setproctitle, yaml._yaml, _brotli, zstandard.backend_c, simplejson._speedups, charset_normalizer.md, uvloop.loop, ray._raylet (total: 12)
+[36m(writer::wikitext_103-70e03f/validation pid=879070)[0m 2025-10-29 01:45:31,307 - INFO - First group val_jsonl_gz finished. Copying other groups into permanent cache.
+[36m(writer::wikitext_103-70e03f/validation pid=879070)[0m 2025-10-29 01:45:34,387 - INFO - Cleaning up temporary cache at output/tokenized/paloma/wikitext_103-70e03f/validation/___temp
+[36m(tokenize::output/tokenized/paloma/wikitext_103-70e03f pid=876353)[0m ERROR:2025-10-29 01:45:41,383:jax._src.xla_bridge:444: Jax plugin configuration error: Exception when calling jax_plugins.xla_cuda12.initialize()
+[36m(tokenize::output/tokenized/paloma/wikitext_103-70e03f pid=876353)[0m Traceback (most recent call last):
+[36m(tokenize::output/tokenized/paloma/wikitext_103-70e03f pid=876353)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax/_src/xla_bridge.py", line 442, in discover_pjrt_plugins
+[36m(tokenize::output/tokenized/paloma/wikitext_103-70e03f pid=876353)[0m     plugin_module.initialize()
+[36m(tokenize::output/tokenized/paloma/wikitext_103-70e03f pid=876353)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax_plugins/xla_cuda12/__init__.py", line 324, in initialize
+[36m(tokenize::output/tokenized/paloma/wikitext_103-70e03f pid=876353)[0m     _check_cuda_versions(raise_on_first_error=True)
+[36m(tokenize::output/tokenized/paloma/wikitext_103-70e03f pid=876353)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/jax_plugins/xla_cuda12/__init__.py", line 281, in _check_cuda_versions
+[36m(tokenize::output/tokenized/paloma/wikitext_103-70e03f pid=876353)[0m     local_device_count = cuda_versions.cuda_device_count()
+[36m(tokenize::output/tokenized/paloma/wikitext_103-70e03f pid=876353)[0m                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36m(tokenize::output/tokenized/paloma/wikitext_103-70e03f pid=876353)[0m RuntimeError: jaxlib/cuda/versions_helpers.cc:113: operation cuInit(0) failed: CUDA_ERROR_NO_DEVICE
+[36m(tokenize::output/tokenized/paloma/wikitext_103-70e03f pid=876353)[0m  done: Shards: 0 | Docs: 0
+[36m(tokenize::output/tokenized/paloma/wikitext_103-70e03f pid=876353)[0m Cache creation finished
+2025-10-29 01:45:45,118	INFO executor.py:637 -- Waiting for ObjectRef(82891771158d68c1ffffffffffffffffffffffff0100000001000000) to finish for step tokenized/paloma/wikitext_103
+[36m(tokenize::output/tokenized/paloma/dolma_100_subreddits-6fdd4c/validation/___temp::66_depression_jsonl_gz pid=880780)[0m 2025-10-29 01:45:55,668 - INFO - Finished processing 1 shards. Wrote 455 rows.
+[36m(tokenize::output/tokenized/paloma/twitterAAE_HELM_fixed-8681d4/validation/___temp::AA_jsonl_gz pid=880527)[0m 2025-10-29 01:46:07,709 - INFO - Finished processing 1 shards. Wrote 25000 rows.[32m [repeated 2x across cluster][0m
+[36m(writer::twitterAAE_HELM_fixed-8681d4/validation pid=879076)[0m 2025-10-29 01:46:11,029 - INFO - First group AA_jsonl_gz finished. Copying other groups into permanent cache.
+slurmstepd: error: *** JOB 2495422 ON d1026 CANCELLED AT 2025-10-29T01:46:13 ***

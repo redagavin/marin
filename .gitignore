@@ -1,8 +1,8 @@
 # redundant, but Ray looks for this otherwise.
 .git
-
+marin_conda/
 CLAUDE.md
-
+.venv/
 logs/
 
 # CPU profiles

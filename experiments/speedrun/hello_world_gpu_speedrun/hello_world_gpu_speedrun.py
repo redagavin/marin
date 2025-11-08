@@ -20,12 +20,14 @@ and process.
 """
 
 import logging
-
 from experiments.llama import llama_nano
 from experiments.simple_train_config import SimpleTrainConfig
 from marin.execution.executor import executor_main
 from marin.resources import GpuConfig
 from marin.speedrun.speedrun import Author, SpeedrunConfig, default_speedrun
+import os
+
+# os.environ["CUDA_VISIBLE_DEVICES"]="0"
 
 logger = logging.getLogger("ray")
 
