@@ -38,14 +38,15 @@ speedrun_config = SpeedrunConfig(
         weight_decay=0.1,
         steps_per_eval=500,
         optimizer_config=AdamHConfig(
-            adam_lr=0.008,
             learning_rate=0.02,
+            adam_lr=0.008,
+            min_lr_ratio=0,
             warmup=1000,
-            lr_schedule="cosine",
             beta1=0.9,
             beta2=0.98,
             epsilon=1e-10,
             max_grad_norm=1.0,
+            nesterov=False,
         ),
     ),
 )
