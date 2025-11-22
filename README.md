@@ -2,6 +2,28 @@ aka Arya's Notes:
 
 # Experiments Logs:
 
+## 11/22:
+### Pretraining Data
+**Try curriculum learning with 9TB token steps(much more than chinchilla)**
+This turns out to be extremely hard to do. There's three ways of preparing the dataset:
+1. create a new dataset sorted by length and go through the tokenize steps.
+Tokenization is extremely slow / gets stuck with 9 TB of raw sequences. Not practical for datasets of this scale.
+2. sort the pretokenized dataset.
+It is in zarr format which makes it hard to operate on. Zarr is designed for chunked storage, not in-place global sorting. Moving hundreds of billions of tokens across chunks is very slow.
+3. do the sorting on the fly through marin/levanter framework:
+Marin currently only supports shuffling permutations (linear, feistel) applied inside shuffle_ds(). adding a sort is tricky to integrate without touching low-level dataset internals.
+
+### New Training Trick from Kimi K2:
+**Try Muon-Clip. Note that its not really a new "optimizer".**
+MuonClip = Muon + an extra “clip” or preprocessing step applied to certain parameters (like QK matrices in attention layers).
+So it cant be implemented in optimizer layer. 
+QK-Clip should be applied separately after the optimizer step in your training loop, as it requires access to attention logits.
+
+I can't find a way to patch with the flexibity Marin gives:
+1. Patch the model instance directly using callback hooks: Problem is Marin’s SpeedrunConfig does not accept a ready-made model.
+2. Custom train_step_fn to Intercept the forward pass and clip attention logits: Problem is Marin’s SpeedrunConfig / executor also does not takein a custom training step logic.
+
+
 ## 11/5 - 11/6: Ideas and what's in scope:
 ### optimizers and sweep
 In hello_word_lion_sweep: A sweep across llama model sizes with lion optimizer, with Chinchilla optimal steps.
