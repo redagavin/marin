@@ -97,8 +97,8 @@ from experiments.speedrun.${SUBMISSION_NAME}.train import speedrun_config
 
 config = SpeedrunResultsConfig(
     wandb_run_id='${RUN_ID}',
-    wandb_entity='${WANDB_ENTITY}',
-    wandb_project='marin',  # Note: actual project name, not marin-speedrun
+    wandb_entity='marin-speedrun',
+    wandb_project='marin-speedrun',
     speedrun_config=speedrun_config,
     output_path='${CHECKPOINT_DIR}/speedrun_results.json'
 )
@@ -129,5 +129,5 @@ echo -e "  📊 Results file:    ${SUBMISSION_DIR}/speedrun_results.json"
 echo -e "  📋 README:          ${SUBMISSION_DIR}/README.md"
 echo -e "  💾 Checkpoint:      ${CHECKPOINT_DIR}/hf/"
 echo -e "\n${BLUE}WandB Run:${NC}"
-echo -e "  🔗 https://wandb.ai/${WANDB_ENTITY}/marin/runs/${RUN_ID}"
+echo -e "  🔗 https://wandb.ai/marin-speedrun/marin-speedrun/runs/${RUN_ID}"
 echo -e "\n${GREEN}Ready for submission to Marin leaderboard!${NC}\n"
