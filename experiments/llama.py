@@ -18,6 +18,7 @@ Specifies a sequence of Llama 3 models from small to large.
 
 from levanter.layers.rotary import Llama3RotaryEmbeddingsConfig
 from levanter.models.llama import LlamaConfig
+from levanter.models.qwen import Qwen3Config
 
 from experiments.simple_train_config import SimpleTrainConfig
 from marin.resources import TpuPodConfig
@@ -209,28 +210,40 @@ llama_70b = LlamaConfig(
 )
 
 
-qwen3_30m = LlamaConfig(
+qwen3_30m = Qwen3Config(
     seq_len=1024,
-    hidden_dim=288,
-    intermediate_dim=768,
-    num_layers=6,
-    num_heads=6,
-    num_kv_heads=6,
-    gradient_checkpointing=True,
-    use_qk_norm=True,  # Qwen3 uses QK normalization
+    hidden_dim=128,
+    intermediate_dim=448,
+    num_heads=2,
+    num_kv_heads=2,
+    num_layers=4,
+    use_bias=False,
+    rope=Llama3RotaryEmbeddingsConfig(theta=10000, factor=1.0),
+    activation_function="silu",
+    initializer_range=0.02,
+    layer_norm_epsilon=1e-5,
+    tie_word_embeddings=False,
+    upcast_attn=False,
     scan_layers=True,
+    gradient_checkpointing=True,
 )
 
-qwen3_50m = LlamaConfig(
+qwen3_50m = Qwen3Config(
     seq_len=1024,
-    hidden_dim=320,
-    intermediate_dim=896,
-    num_layers=8,
-    num_heads=8,
-    num_kv_heads=8,
-    gradient_checkpointing=True,
-    use_qk_norm=True,  # Qwen3 uses QK normalization
+    hidden_dim=192,
+    intermediate_dim=448,
+    num_heads=2,
+    num_kv_heads=2,
+    num_layers=4,
+    use_bias=False,
+    rope=Llama3RotaryEmbeddingsConfig(theta=10000, factor=1.0),
+    activation_function="silu",
+    initializer_range=0.02,
+    layer_norm_epsilon=1e-5,
+    tie_word_embeddings=False,
+    upcast_attn=False,
     scan_layers=True,
+    gradient_checkpointing=True,
 )
 
 
