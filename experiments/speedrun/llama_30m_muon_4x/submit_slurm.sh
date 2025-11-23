@@ -6,7 +6,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=32
 #SBATCH --mem=128G
-#SBATCH --time=02:00:00
+#SBATCH --time=03:00:00
 #SBATCH --output=/scratch/yang.zih/marin_speedrun/marin/experiments/speedrun/llama_30m_muon_4x/slurm_%j.out
 #SBATCH --error=/scratch/yang.zih/marin_speedrun/marin/experiments/speedrun/llama_30m_muon_4x/slurm_%j.err
 
