@@ -16,7 +16,7 @@ echo -e "${BLUE}Marin Speedrun Training Pipeline${NC}"
 echo -e "${BLUE}========================================${NC}"
 
 # Configuration
-SUBMISSION_NAME="phase1_muon"
+SUBMISSION_NAME="phase1_test"
 MARIN_DIR="/scratch/yang.zih/marin_speedrun/marin"
 OUTPUT_PREFIX="/scratch/yang.zih/marin_speedrun/output"
 ENV_FILE="/scratch/yang.zih/marin_speedrun/.env"
@@ -68,6 +68,15 @@ echo -e "${BLUE}  Run ID: ${RUN_ID}${NC}"
 
 # Step 4: Sync to WandB
 echo -e "\n${YELLOW}[4/5] Syncing to WandB...${NC}"
+
+# Re-enable network access for WandB sync (training is complete, safe to use proxy now)
+echo -e "${BLUE}  Re-enabling network access through proxy...${NC}"
+export ftp_proxy=http://10.99.0.130:3128
+export https_proxy=http://10.99.0.130:3128
+export http_proxy=http://10.99.0.130:3128
+unset WANDB_MODE  # Switch from offline to online mode
+unset HF_HUB_OFFLINE
+
 WANDB_DIR="${MARIN_DIR}/wandb/offline-run-*-${RUN_ID}"
 
 # Find the WandB offline directory

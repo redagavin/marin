@@ -326,7 +326,7 @@ def default_train(
         data=pretraining_data,
         trainer=TrainerConfig(
             tracker=WandbConfig(
-                project="marin",
+                project="marin-speedrun",
                 tags=[*tags],
             ),
             mp=jmp.get_policy("p=f32,c=bfloat16"),

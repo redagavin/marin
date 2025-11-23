@@ -1,10 +1,8 @@
 """
-Phase 1 Long Context Speedrun Submission
+Phase 1 Test Run - Minimal Steps
 
-Extended sequence length experiment (seq_len=4096) with 75M Llama model.
+Quick test with only 10 steps to verify the pipeline works.
 """
-
-import dataclasses
 
 from experiments.llama import llama_75m
 from experiments.simple_train_config import SimpleTrainConfig
@@ -13,25 +11,22 @@ from marin.resources import GpuConfig
 from marin.speedrun.speedrun import Author, SpeedrunConfig, default_speedrun
 
 
-# Create modified llama_75m with longer sequence length
-llama_75m_long = dataclasses.replace(llama_75m, seq_len=4096)
-
-# Configure the speedrun with author information and training settings
+# Configure the speedrun with minimal steps for testing
 speedrun_config = SpeedrunConfig(
     author=Author(
         name="redagavin",
         affiliation="Northeastern University",
         url="https://redagavin.github.io/"
     ),
-    description="Phase 1 Long Context: 75M Llama with seq_len=4096",
-    model_config=llama_75m_long,
+    description="Phase 1 Test: 75M Llama with 10 steps (testing only)",
+    model_config=llama_75m,
     train_config=SimpleTrainConfig(
-        GpuConfig(gpu_count=1, accelerator_type="A100"),
+        GpuConfig(gpu_count=1, accelerator_type="H200"),
         train_batch_size=128,
-        num_train_steps=3000,
+        num_train_steps=10,
         learning_rate=3e-3,
         weight_decay=0.1,
-        steps_per_eval=500,
+        steps_per_eval=5,
     ),
 )
 
@@ -40,4 +35,4 @@ speedrun_config.print_run_info()
 
 # Run the speedrun
 if __name__ == "__main__":
-    executor_main(steps=default_speedrun("phase1_long_context", speedrun_config))
+    executor_main(steps=default_speedrun("phase1_test", speedrun_config))

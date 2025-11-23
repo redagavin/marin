@@ -209,6 +209,31 @@ llama_70b = LlamaConfig(
 )
 
 
+qwen3_30m = LlamaConfig(
+    seq_len=1024,
+    hidden_dim=288,
+    intermediate_dim=768,
+    num_layers=6,
+    num_heads=6,
+    num_kv_heads=6,
+    gradient_checkpointing=True,
+    use_qk_norm=True,  # Qwen3 uses QK normalization
+    scan_layers=True,
+)
+
+qwen3_50m = LlamaConfig(
+    seq_len=1024,
+    hidden_dim=320,
+    intermediate_dim=896,
+    num_layers=8,
+    num_heads=8,
+    num_kv_heads=8,
+    gradient_checkpointing=True,
+    use_qk_norm=True,  # Qwen3 uses QK normalization
+    scan_layers=True,
+)
+
+
 llama_150m_train_config = SimpleTrainConfig(
     resources=TpuPodConfig(tpu_type="v4-32"),
     train_batch_size=512,
