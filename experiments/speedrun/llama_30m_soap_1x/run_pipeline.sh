@@ -16,7 +16,7 @@ echo -e "${BLUE}Marin Speedrun Training Pipeline${NC}"
 echo -e "${BLUE}========================================${NC}"
 
 # Configuration
-SUBMISSION_NAME="llama_50m_muon_1x"
+SUBMISSION_NAME="llama_30m_soap_1x"
 MARIN_DIR="/scratch/yang.zih/marin_speedrun/marin"
 OUTPUT_PREFIX="/scratch/yang.zih/marin_speedrun/output"
 ENV_FILE="/scratch/yang.zih/marin_speedrun/.env"
@@ -116,28 +116,3 @@ config = SpeedrunResultsConfig(
 print('Generating speedrun_results.json...')
 speedrun_results(config)
 print('Done!')
-EOF
-
-if [ $? -eq 0 ]; then
-    echo -e "${GREEN}✓ Results file generated${NC}"
-else
-    echo -e "${RED}✗ Results generation failed${NC}"
-    exit 1
-fi
-
-# Copy results to submission directory
-cp "${CHECKPOINT_DIR}/speedrun_results.json" "${SUBMISSION_DIR}/"
-echo -e "${GREEN}✓ Results copied to submission directory${NC}"
-
-# Summary
-echo -e "\n${BLUE}========================================${NC}"
-echo -e "${GREEN}Pipeline completed successfully!${NC}"
-echo -e "${BLUE}========================================${NC}"
-echo -e "\n${BLUE}Submission files:${NC}"
-echo -e "  📄 Training script: ${SUBMISSION_DIR}/train.py"
-echo -e "  📊 Results file:    ${SUBMISSION_DIR}/speedrun_results.json"
-echo -e "  📋 README:          ${SUBMISSION_DIR}/README.md"
-echo -e "  💾 Checkpoint:      ${CHECKPOINT_DIR}/hf/"
-echo -e "\n${BLUE}WandB Run:${NC}"
-echo -e "  🔗 https://wandb.ai/marin-speedrun/marin-speedrun/runs/${RUN_ID}"
-echo -e "\n${GREEN}Ready for submission to Marin leaderboard!${NC}\n"

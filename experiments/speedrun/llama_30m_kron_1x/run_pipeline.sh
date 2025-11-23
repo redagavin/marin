@@ -16,7 +16,7 @@ echo -e "${BLUE}Marin Speedrun Training Pipeline${NC}"
 echo -e "${BLUE}========================================${NC}"
 
 # Configuration
-SUBMISSION_NAME="llama_50m_muon_1x"
+SUBMISSION_NAME="llama_30m_kron_1x"
 MARIN_DIR="/scratch/yang.zih/marin_speedrun/marin"
 OUTPUT_PREFIX="/scratch/yang.zih/marin_speedrun/output"
 ENV_FILE="/scratch/yang.zih/marin_speedrun/.env"

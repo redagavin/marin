@@ -31,7 +31,6 @@ from marin.speedrun.speedrun import Author, SpeedrunConfig, default_speedrun
 kron_config = KronConfig(
     learning_rate=0.010,
     beta1=0.9,
-    beta2=0.98,
     weight_decay=0.1,
     warmup=2000,
     max_grad_norm=1,

@@ -35,6 +35,7 @@ unset ftp_proxy https_proxy http_proxy
 # Set offline modes
 export HF_HUB_OFFLINE=1
 export WANDB_MODE=offline
+export XLA_PYTHON_CLIENT_PREALLOCATE=false
 
 echo -e "${GREEN}✓ Environment configured${NC}"
 
