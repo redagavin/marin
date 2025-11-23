@@ -5,6 +5,3 @@ auto_submit.log
 # SLURM output files
 slurm_*.out
 slurm_*.err
-
-# Speedrun results (generated during training)
-*/speedrun_results.json
