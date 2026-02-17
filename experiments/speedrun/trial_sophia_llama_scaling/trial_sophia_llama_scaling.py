@@ -12,30 +12,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Speedruns using the AdamW optimizer for various Llama model sizes (Chinchilla optimal steps).
+"""Speedruns using the Sophia-H optimizer for various Llama model sizes (Chinchilla optimal steps).
 
-Optimizer configs were searched & provided by Kaiyue Wen in https://wandb.ai/marin-community/marin/reports/Fantastic-Optimizers-and-Where-to-Find-Them--VmlldzoxMjgzMzQ2NQ
+Uses default Sophia-H hyperparameters across all model sizes.
 """
 
 import dataclasses
 import logging
 
-from levanter.optim import AdamConfig
+from levanter.optim import SophiaHConfig
 
 from experiments.llama import llama_1_4b, llama_150m, llama_300m, llama_600m
 from experiments.simple_train_config import SimpleTrainConfig
 from marin.execution.executor import executor_main
-from marin.resources import TpuPodConfig
+from marin.resources import TpuPodConfig, GpuConfig
 from marin.speedrun.speedrun import Author, SpeedrunConfig, default_speedrun
 
-AUTHOR = Author(name="William Held", affiliation="Georgia Tech", url="https://WilliamHeld.com")
+AUTHOR = Author(name="Rice", affiliation="NEU", url="")
 
 logger = logging.getLogger("ray")
 
 
 def get_num_train_steps(param_count, batch_size, seq_len):
     """Compute the number of steps for Chinchilla optimal training (20x params tokens)."""
-    total_tokens = param_count * 20
+    total_tokens = param_count * 10
     tokens_per_step = batch_size * seq_len
     return total_tokens // tokens_per_step
 
@@ -61,80 +61,91 @@ def build_config(size: str) -> tuple[str, SpeedrunConfig]:
     batch_sizes = {
         "130m": 128,
         "300m": 128,
-        "520m": 256,
+        "520m": 128,
         "1_2b": 256,
     }
 
     # Resource configs
     resource_cfgs = {
-        "130m": TpuPodConfig(tpu_type="v5p-32"),
-        "300m": TpuPodConfig(tpu_type="v5p-32"),
-        "520m": TpuPodConfig(tpu_type="v5p-32"),
-        "1_2b": TpuPodConfig(tpu_type="v5p-32"),
-    }2
+        "130m": GpuConfig(gpu_count=1, accelerator_type="H200"),
+        "300m": GpuConfig(gpu_count=1, accelerator_type="H200"),
+        "520m": GpuConfig(gpu_count=1, accelerator_type="H200"),
+        "1_2b": GpuConfig(gpu_count=1, accelerator_type="H200"),
+    }
 
-    # AdamW optimizer configs for each size
-    adam_configs = {
-        "130m": AdamConfig(
-            learning_rate=0.008,
+    # Sophia-H configs - using default hyperparameters across all sizes
+    # Note: Learning rate may need adjustment per size, but hyperparameters stay the same
+    sophia_configs = {
+        "130m": SophiaHConfig(
+            # Sophia-H specific (default)
+            gamma=0.01,
+            # First and second moments (defaults)
+            beta1=0.96,
+            beta2=0.99,
+            # Numerical stability (default)
+            epsilon=1e-12,
+            # Update control (defaults)
+            clip_threshold=1.0,
+            update_interval=10,
+            # Regularization (default)
             weight_decay=0.1,
-            min_lr_ratio=0,
+            # Learning rate schedule
+            learning_rate=6e-4,
             warmup=2000,
-            beta1=0.9,
-            beta2=0.98,
-            epsilon=1e-20,
-            max_grad_norm=1,
-            nesterov=False,
+            lr_schedule="cosine",
         ),
-        "300m": AdamConfig(
-            learning_rate=0.008,
+        "300m": SophiaHConfig(
+            gamma=0.01,
+            beta1=0.96,
+            beta2=0.99,
+            epsilon=1e-12,
+            clip_threshold=1.0,
+            update_interval=10,
             weight_decay=0.1,
-            min_lr_ratio=0,
+            learning_rate=6e-4,
             warmup=2000,
-            beta1=0.9,
-            beta2=0.98,
-            epsilon=1e-10,
-            max_grad_norm=1,
-            nesterov=False,
+            lr_schedule="cosine",
         ),
-        "520m": AdamConfig(
-            learning_rate=0.004,
-            weight_decay=0.2,
-            min_lr_ratio=0,
-            warmup=1000,
-            beta1=0.9,
-            beta2=0.98,
-            epsilon=1e-10,
-            max_grad_norm=1,
-            nesterov=False,
+        "520m": SophiaHConfig(
+            gamma=0.01,
+            beta1=0.96,
+            beta2=0.99,
+            epsilon=1e-12,
+            clip_threshold=1.0,
+            update_interval=10,
+            weight_decay=0.1,
+            learning_rate=6e-4,
+            warmup=2000,
+            lr_schedule="cosine",
         ),
-        "1_2b": AdamConfig(
-            learning_rate=0.002,
-            weight_decay=0.2,
-            min_lr_ratio=0,
-            warmup=1000,
-            beta1=0.9,
-            beta2=0.98,
-            epsilon=1e-25,
-            max_grad_norm=2,
-            nesterov=False,
+        "1_2b": SophiaHConfig(
+            gamma=0.01,
+            beta1=0.96,
+            beta2=0.99,
+            epsilon=1e-12,
+            clip_threshold=1.0,
+            update_interval=10,
+            weight_decay=0.1,
+            learning_rate=6e-4,
+            warmup=2000,
+            lr_schedule="cosine",
         ),
     }
 
     # Descriptions
     descriptions = {
-        "130m": "130M parameter model trained with the AdamW optimizer.",
-        "300m": "300M parameter model trained with the AdamW optimizer.",
-        "520m": "520M parameter model trained with the AdamW optimizer.",
-        "1_2b": "1.2B parameter model trained with the AdamW optimizer.",
+        "130m": "130M parameter model trained with the Sophia-H optimizer (default hyperparameters).",
+        "300m": "300M parameter model trained with the Sophia-H optimizer (default hyperparameters).",
+        "520m": "520M parameter model trained with the Sophia-H optimizer (default hyperparameters).",
+        "1_2b": "1.2B parameter model trained with the Sophia-H optimizer (default hyperparameters).",
     }
 
     # Names for the runs
     run_names = {
-        "130m": "llama_130m_adamw_4096",
-        "300m": "llama_300m_adamw_4096",
-        "520m": "llama_520m_adamw_4096",
-        "1_2b": "llama_1_2b_adamw_fix_4096",
+        "130m": "llama_130m_sophia_4096",
+        "300m": "llama_300m_sophia_4096",
+        "520m": "llama_520m_sophia_4096",
+        "1_2b": "llama_1_2b_sophia_4096",
     }
 
     # Gather config for the requested size
@@ -146,7 +157,7 @@ def build_config(size: str) -> tuple[str, SpeedrunConfig]:
     model_config = dataclasses.replace(model_cfgs[size], seq_len=4096)
     seq_len = model_config.seq_len
     resource_config = resource_cfgs[size]
-    adam = adam_configs[size]
+    sophia = sophia_configs[size]
     description = descriptions[size]
     run_name = run_names[size]
 
@@ -156,8 +167,8 @@ def build_config(size: str) -> tuple[str, SpeedrunConfig]:
         resource_config,
         train_batch_size=batch_size,
         num_train_steps=num_train_steps,
-        learning_rate=adam.learning_rate,
-        optimizer_config=adam,
+        learning_rate=sophia.learning_rate,
+        optimizer_config=sophia,
     )
     cfg = SpeedrunConfig(
         author=AUTHOR,
@@ -181,4 +192,4 @@ if __name__ == "__main__":
         cfg.print_run_info()
         steps.extend(default_speedrun(name, cfg))
 
-    executor_main(steps=steps, description="AdamW speedruns (Chinchilla optimal)")
+    executor_main(steps=steps, description="Sophia-H speedruns (Half Chinchilla optimal, default hyperparameters)")

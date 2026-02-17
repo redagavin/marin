@@ -1,0 +1,1363 @@
+[0;34m========================================[0m
+[0;34mMarin Direct Training Script Runner[0m
+[0;34m========================================[0m
+[0;34mExperiment: trial_llama_50m_int8[0m
+[0;34mTraining script: /projects/frink/wang.xil/marin/experiments/speedrun/trial_llama_50m_int8/trial_llama_50m_int8.py[0m
+
+[1;33m[1/3] Setting up environment...[0m
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2025 NVIDIA Corporation
+Built on Tue_May_27_02:21:03_PDT_2025
+Cuda compilation tools, release 12.9, V12.9.86
+Build cuda_12.9.r12.9/compiler.36037853_0
+Sun Nov 23 01:18:13 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.86.15              Driver Version: 570.86.15      CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H200                    On  |   00000000:4C:00.0 Off |                    0 |
+| N/A   33C    P0             77W /  700W |       1MiB / 143771MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+[0;32m✓ Environment configured[0m
+
+[1;33m[2/3] Verifying training script...[0m
+[0;32m✓ Training script found[0m
+
+[1;33m[3/3] Running training...[0m
+/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+2025-11-23 01:18:28,653	INFO speedrun.py:126 -- Speedrun Configuration:
+2025-11-23 01:18:28,653	INFO speedrun.py:127 -- {
+    "author": {
+        "name": "Rice",
+        "affiliation": "Rice Factory",
+        "url": "N/A"
+    },
+    "description": "50M param model int 8 trial",
+    "model_config": {
+        "cross_entropy_block_size": null,
+        "seq_len": 1024,
+        "hidden_dim": 192,
+        "intermediate_dim": 448,
+        "num_layers": 4,
+        "num_heads": 2,
+        "head_dim": null,
+        "num_kv_heads": 2,
+        "activation_function": "silu",
+        "initializer_range": 0.02,
+        "layer_norm_epsilon": 1e-05,
+        "tie_word_embeddings": false,
+        "hybrid_norm": false,
+        "use_qk_norm": false,
+        "input_embedding_norm": false,
+        "upcast_attn": false,
+        "attn_backend": null,
+        "flash_attention_block_size": null,
+        "gradient_checkpointing": true,
+        "scan_layers": true,
+        "use_bias": false,
+        "use_layer_norm_weight": true,
+        "rope": {
+            "theta": 10000,
+            "factor": 1.0
+        },
+        "reference_checkpoint": "NousResearch/Llama-2-7b-hf",
+        "tokenizer": null
+    },
+    "train_config": {
+        "train_batch_size": 64,
+        "num_train_steps": 15200,
+        "learning_rate": 0.003,
+        "data_seed": null,
+        "weight_decay": 0.1,
+        "beta1": null,
+        "beta2": null,
+        "epsilon": null,
+        "max_grad_norm": null,
+        "warmup": null,
+        "decay": null,
+        "rewarmup": null,
+        "lr_schedule": null,
+        "min_lr_ratio": null,
+        "cycle_length": null,
+        "z_loss_weight": null,
+        "ema_beta": null,
+        "skip_bad_steps": false,
+        "steps_per_eval": 500,
+        "steps_per_export": 10000,
+        "steps_per_task_eval": null,
+        "steps_per_hf_export": null,
+        "per_device_eval_parallelism": null,
+        "max_eval_batches": null,
+        "initialize_from_checkpoint_path": null,
+        "initialize_from_hf": null,
+        "reset_data_loader_on_init": true,
+        "allow_partial_checkpoint": false,
+        "int8": true,
+        "optimizer_config": null,
+        "watch": {
+            "watch_targets": [
+                "grads",
+                "params"
+            ],
+            "include_norms": true,
+            "include_per_parameter_norms": true,
+            "include_histograms": false,
+            "split_scan_layers": true,
+            "interval": 10
+        }
+    },
+    "tokenized_dataset": "ExecutorStep(name='tokenized/subcache/fineweb-edu-10B', fn=<function _actually_download_pretokenized_cache at 0x14a9acf02ca0>, config=PretokenizedCacheDownloadConfig(cache_path=OutputName(name=None), tokenizer=VersionedValue(value='stanford-crfm/marin-tokenizer'), hf_repo_id=VersionedValue(value='marin-community/fineweb-edu-pretokenized-10B'), hf_revision=VersionedValue(value=None), hf_repo_type_prefix='datasets', hf_token=None, format=TextLmDatasetFormat(text_key='text'), cache_options=None, tags=[]), description=None, override_output_path=None, pip_dependency_groups=None)",
+    "resources": {
+        "gpu_count": 1,
+        "accelerator_type": "H200",
+        "device_flops_override": null
+    }
+}
+2025-11-23 01:18:28,653	INFO speedrun.py:163 -- The rough estimated compute (calculated as (total model FLOPs / Assumed MFU)) for your run is probably between:
+      * 3.33e+17 FLOPs assuming an MFU of 0.5, and
+      * 8.32e+17 FLOPs assuming an MFU of 0.2.
+
+This is calculated based on assumed MFU values and can be used as a rough estimate to guide your config/training setup.
+2025-11-23 01:18:28,653	INFO speedrun.py:131 -- Hardware and Model FLOPS Information:
+2025-11-23 01:18:28,654	INFO speedrun.py:132 -- Number of devices: 1
+2025-11-23 01:18:28,654	INFO speedrun.py:133 -- Number of chips: 1
+2025-11-23 01:18:28,654	INFO speedrun.py:134 -- Device FLOPs: 9.90e+14 FLOP/s
+2025-11-23 01:18:28,654	INFO speedrun.py:135 -- Total peak hardware FLOPs: 9.90e+14 FLOP/s
+2025-11-23 01:18:28,654	INFO speedrun.py:136 -- Model FLOPs: 1.66e+17 FLOP
+2025-11-23 01:18:28,654	INFO speedrun.py:140 -- Model size: 50.87 million parameters
+2025-11-23 01:18:28,654	INFO speedrun.py:336 -- Running speedrun trial_llama_50m_int8
+2025-11-23 01:18:28,654	INFO speedrun.py:126 -- Speedrun Configuration:
+2025-11-23 01:18:28,654	INFO speedrun.py:127 -- {
+    "author": {
+        "name": "Rice",
+        "affiliation": "Rice Factory",
+        "url": "N/A"
+    },
+    "description": "50M param model int 8 trial",
+    "model_config": {
+        "cross_entropy_block_size": null,
+        "seq_len": 1024,
+        "hidden_dim": 192,
+        "intermediate_dim": 448,
+        "num_layers": 4,
+        "num_heads": 2,
+        "head_dim": null,
+        "num_kv_heads": 2,
+        "activation_function": "silu",
+        "initializer_range": 0.02,
+        "layer_norm_epsilon": 1e-05,
+        "tie_word_embeddings": false,
+        "hybrid_norm": false,
+        "use_qk_norm": false,
+        "input_embedding_norm": false,
+        "upcast_attn": false,
+        "attn_backend": null,
+        "flash_attention_block_size": null,
+        "gradient_checkpointing": true,
+        "scan_layers": true,
+        "use_bias": false,
+        "use_layer_norm_weight": true,
+        "rope": {
+            "theta": 10000,
+            "factor": 1.0
+        },
+        "reference_checkpoint": "NousResearch/Llama-2-7b-hf",
+        "tokenizer": null
+    },
+    "train_config": {
+        "train_batch_size": 64,
+        "num_train_steps": 15200,
+        "learning_rate": 0.003,
+        "data_seed": null,
+        "weight_decay": 0.1,
+        "beta1": null,
+        "beta2": null,
+        "epsilon": null,
+        "max_grad_norm": null,
+        "warmup": null,
+        "decay": null,
+        "rewarmup": null,
+        "lr_schedule": null,
+        "min_lr_ratio": null,
+        "cycle_length": null,
+        "z_loss_weight": null,
+        "ema_beta": null,
+        "skip_bad_steps": false,
+        "steps_per_eval": 500,
+        "steps_per_export": 10000,
+        "steps_per_task_eval": null,
+        "steps_per_hf_export": null,
+        "per_device_eval_parallelism": null,
+        "max_eval_batches": null,
+        "initialize_from_checkpoint_path": null,
+        "initialize_from_hf": null,
+        "reset_data_loader_on_init": true,
+        "allow_partial_checkpoint": false,
+        "int8": true,
+        "optimizer_config": null,
+        "watch": {
+            "watch_targets": [
+                "grads",
+                "params"
+            ],
+            "include_norms": true,
+            "include_per_parameter_norms": true,
+            "include_histograms": false,
+            "split_scan_layers": true,
+            "interval": 10
+        }
+    },
+    "tokenized_dataset": "ExecutorStep(name='tokenized/subcache/fineweb-edu-10B', fn=<function _actually_download_pretokenized_cache at 0x14a9acf02ca0>, config=PretokenizedCacheDownloadConfig(cache_path=OutputName(name=None), tokenizer=VersionedValue(value='stanford-crfm/marin-tokenizer'), hf_repo_id=VersionedValue(value='marin-community/fineweb-edu-pretokenized-10B'), hf_revision=VersionedValue(value=None), hf_repo_type_prefix='datasets', hf_token=None, format=TextLmDatasetFormat(text_key='text'), cache_options=None, tags=[]), description=None, override_output_path=None, pip_dependency_groups=None)",
+    "resources": {
+        "gpu_count": 1,
+        "accelerator_type": "H200",
+        "device_flops_override": null
+    }
+}
+2025-11-23 01:18:28,654	INFO speedrun.py:163 -- The rough estimated compute (calculated as (total model FLOPs / Assumed MFU)) for your run is probably between:
+      * 3.33e+17 FLOPs assuming an MFU of 0.5, and
+      * 8.32e+17 FLOPs assuming an MFU of 0.2.
+
+This is calculated based on assumed MFU values and can be used as a rough estimate to guide your config/training setup.
+2025-11-23 01:18:28,654	INFO speedrun.py:131 -- Hardware and Model FLOPS Information:
+2025-11-23 01:18:28,654	INFO speedrun.py:132 -- Number of devices: 1
+2025-11-23 01:18:28,654	INFO speedrun.py:133 -- Number of chips: 1
+2025-11-23 01:18:28,654	INFO speedrun.py:134 -- Device FLOPs: 9.90e+14 FLOP/s
+2025-11-23 01:18:28,654	INFO speedrun.py:135 -- Total peak hardware FLOPs: 9.90e+14 FLOP/s
+2025-11-23 01:18:28,654	INFO speedrun.py:136 -- Model FLOPs: 1.66e+17 FLOP
+2025-11-23 01:18:28,654	INFO speedrun.py:140 -- Model size: 50.87 million parameters
+2025-11-23 01:18:32,244	INFO worker.py:1879 -- Started a local Ray instance. View the dashboard at [1m[32mhttp://127.0.0.1:8265 [39m[22m
+2025-11-23 01:18:47,289	INFO executor.py:1115 -- Ray init took 18.20s
+2025-11-23 01:18:47,302	INFO executor.py:576 -- ### Inspecting the 2 provided steps ###
+2025-11-23 01:18:47,336	INFO executor.py:584 -- ### Reading 20 statuses ###
+2025-11-23 01:18:47,336	INFO executor.py:594 -- ### Writing metadata ###
+2025-11-23 01:18:47,340	INFO executor.py:915 -- Writing executor info to /projects/frink/wang.xil/marin/output/experiments/trial_llama_50m_int8-c3c8f3.json
+2025-11-23 01:18:47,340	INFO executor.py:916 -- To view the experiment page, go to:
+2025-11-23 01:18:47,340	INFO executor.py:917 -- 
+2025-11-23 01:18:47,340	INFO executor.py:918 -- http://localhost:5000/experiment?path=/projects/frink/wang.xil/marin/output/experiments/trial_llama_50m_int8-c3c8f3.json
+2025-11-23 01:18:47,340	INFO executor.py:919 -- 
+2025-11-23 01:18:47,658	INFO executor.py:597 -- ### Launching 20 steps ###
+2025-11-23 01:18:47,658	INFO executor.py:669 -- raw/paloma-speedrun: marin.download.huggingface.download_hf.download_hf
+2025-11-23 01:18:47,658	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:47,659	INFO executor.py:671 --   config = {"hf_dataset_id": "allenai/paloma", "revision": "65cd6fc"}
+2025-11-23 01:18:47,659	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-11-23 01:18:47,896	INFO executor.py:1023 -- Status raw/paloma-speedrun: marin.download.huggingface.download_hf.download_hf : SUCCESS.
+2025-11-23 01:18:47,897	INFO executor.py:1047 -- Step raw/paloma-speedrun: marin.download.huggingface.download_hf.download_hf has already succeeded. Status: SUCCESS
+2025-11-23 01:18:47,908	INFO executor.py:669 -- tokenized/subcache/fineweb-edu-10B: marin.processing.tokenize.download_pretokenized._actually_download_pretokenized_cache
+2025-11-23 01:18:47,908	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/subcache/fineweb-edu-10B-6fbcbb
+2025-11-23 01:18:47,908	INFO executor.py:671 --   config = {"tokenizer": "stanford-crfm/marin-tokenizer", "hf_repo_id": "marin-community/fineweb-edu-pretokenized-10B", "hf_revision": null}
+2025-11-23 01:18:47,908	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-11-23 01:18:47,914	INFO executor.py:1023 -- Status tokenized/subcache/fineweb-edu-10B: marin.processing.tokenize.download_pretokenized._actually_download_pretokenized_cache : SUCCESS.
+2025-11-23 01:18:47,916	INFO executor.py:1047 -- Step tokenized/subcache/fineweb-edu-10B: marin.processing.tokenize.download_pretokenized._actually_download_pretokenized_cache has already succeeded. Status: SUCCESS
+2025-11-23 01:18:47,924	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step raw/paloma-speedrun
+2025-11-23 01:18:47,925	INFO executor.py:669 -- tokenized/paloma/wikitext_103: marin.processing.tokenize.tokenize.tokenize
+2025-11-23 01:18:47,925	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/wikitext_103-70e03f
+2025-11-23 01:18:47,925	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/wikitext_103/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-11-23 01:18:47,925	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:47,925	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-11-23 01:18:47,931	INFO executor.py:1023 -- Status tokenized/paloma/wikitext_103: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-11-23 01:18:47,932	INFO executor.py:1047 -- Step tokenized/paloma/wikitext_103: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-11-23 01:18:47,946	INFO executor.py:669 -- tokenized/paloma/twitterAAE_HELM_fixed: marin.processing.tokenize.tokenize.tokenize
+2025-11-23 01:18:47,946	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/twitterAAE_HELM_fixed-8681d4
+2025-11-23 01:18:47,947	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/twitterAAE_HELM_fixed/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-11-23 01:18:47,947	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:47,947	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-11-23 01:18:47,954	INFO executor.py:1023 -- Status tokenized/paloma/twitterAAE_HELM_fixed: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-11-23 01:18:47,955	INFO executor.py:1047 -- Step tokenized/paloma/twitterAAE_HELM_fixed: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-11-23 01:18:47,968	INFO executor.py:669 -- tokenized/paloma/redpajama: marin.processing.tokenize.tokenize.tokenize
+2025-11-23 01:18:47,968	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/redpajama-c4c2cd
+2025-11-23 01:18:47,968	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/redpajama/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-11-23 01:18:47,968	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:47,968	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-11-23 01:18:47,976	INFO executor.py:1023 -- Status tokenized/paloma/redpajama: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-11-23 01:18:47,976	INFO executor.py:1047 -- Step tokenized/paloma/redpajama: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-11-23 01:18:47,981	INFO executor.py:669 -- tokenized/paloma/ptb: marin.processing.tokenize.tokenize.tokenize
+2025-11-23 01:18:47,982	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/ptb-34ecda
+2025-11-23 01:18:47,982	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/ptb/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-11-23 01:18:47,982	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:47,982	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-11-23 01:18:47,987	INFO executor.py:1023 -- Status tokenized/paloma/ptb: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-11-23 01:18:47,987	INFO executor.py:1047 -- Step tokenized/paloma/ptb: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-11-23 01:18:47,995	INFO executor.py:669 -- tokenized/paloma/mc4: marin.processing.tokenize.tokenize.tokenize
+2025-11-23 01:18:47,995	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/mc4-170a00
+2025-11-23 01:18:47,995	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/mc4/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-11-23 01:18:47,995	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:47,995	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-11-23 01:18:47,999	INFO executor.py:1023 -- Status tokenized/paloma/mc4: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-11-23 01:18:48,000	INFO executor.py:1047 -- Step tokenized/paloma/mc4: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-11-23 01:18:48,006	INFO executor.py:669 -- tokenized/paloma/manosphere_meta_sep: marin.processing.tokenize.tokenize.tokenize
+2025-11-23 01:18:48,006	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/manosphere_meta_sep-0d11c3
+2025-11-23 01:18:48,006	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/manosphere_meta_sep/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-11-23 01:18:48,006	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,006	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-11-23 01:18:48,010	INFO executor.py:1023 -- Status tokenized/paloma/manosphere_meta_sep: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-11-23 01:18:48,011	INFO executor.py:1047 -- Step tokenized/paloma/manosphere_meta_sep: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-11-23 01:18:48,017	INFO executor.py:669 -- tokenized/paloma/m2d2_wikipedia_unsplit: marin.processing.tokenize.tokenize.tokenize
+2025-11-23 01:18:48,017	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43
+2025-11-23 01:18:48,017	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/m2d2_wikipedia_unsplit/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-11-23 01:18:48,017	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,017	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-11-23 01:18:48,021	INFO executor.py:1023 -- Status tokenized/paloma/m2d2_wikipedia_unsplit: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-11-23 01:18:48,022	INFO executor.py:1047 -- Step tokenized/paloma/m2d2_wikipedia_unsplit: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-11-23 01:18:48,029	INFO executor.py:669 -- tokenized/paloma/m2d2_s2orc_unsplit: marin.processing.tokenize.tokenize.tokenize
+2025-11-23 01:18:48,029	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc
+2025-11-23 01:18:48,029	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/m2d2_s2orc_unsplit/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-11-23 01:18:48,029	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,029	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-11-23 01:18:48,033	INFO executor.py:1023 -- Status tokenized/paloma/m2d2_s2orc_unsplit: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-11-23 01:18:48,034	INFO executor.py:1047 -- Step tokenized/paloma/m2d2_s2orc_unsplit: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-11-23 01:18:48,040	INFO executor.py:669 -- tokenized/paloma/gab: marin.processing.tokenize.tokenize.tokenize
+2025-11-23 01:18:48,040	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/gab-d3f648
+2025-11-23 01:18:48,040	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/gab/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-11-23 01:18:48,040	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,040	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-11-23 01:18:48,045	INFO executor.py:1023 -- Status tokenized/paloma/gab: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-11-23 01:18:48,046	INFO executor.py:1047 -- Step tokenized/paloma/gab: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-11-23 01:18:48,052	INFO executor.py:669 -- tokenized/paloma/falcon-refinedweb: marin.processing.tokenize.tokenize.tokenize
+2025-11-23 01:18:48,052	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/falcon-refinedweb-09af65
+2025-11-23 01:18:48,052	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/falcon-refinedweb/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-11-23 01:18:48,052	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,052	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-11-23 01:18:48,061	INFO executor.py:1023 -- Status tokenized/paloma/falcon-refinedweb: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-11-23 01:18:48,062	INFO executor.py:1047 -- Step tokenized/paloma/falcon-refinedweb: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-11-23 01:18:48,068	INFO executor.py:669 -- tokenized/paloma/dolma_100_subreddits: marin.processing.tokenize.tokenize.tokenize
+2025-11-23 01:18:48,068	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma_100_subreddits-6fdd4c
+2025-11-23 01:18:48,068	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/dolma_100_subreddits/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-11-23 01:18:48,068	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,068	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-11-23 01:18:48,074	INFO executor.py:1023 -- Status tokenized/paloma/dolma_100_subreddits: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-11-23 01:18:48,075	INFO executor.py:1047 -- Step tokenized/paloma/dolma_100_subreddits: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-11-23 01:18:48,080	INFO executor.py:669 -- tokenized/paloma/dolma_100_programing_languages: marin.processing.tokenize.tokenize.tokenize
+2025-11-23 01:18:48,080	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma_100_programing_languages-9ef134
+2025-11-23 01:18:48,080	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/dolma_100_programing_languages/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-11-23 01:18:48,080	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,080	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-11-23 01:18:48,083	INFO executor.py:1023 -- Status tokenized/paloma/dolma_100_programing_languages: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-11-23 01:18:48,084	INFO executor.py:1047 -- Step tokenized/paloma/dolma_100_programing_languages: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-11-23 01:18:48,089	INFO executor.py:669 -- tokenized/paloma/dolma-v1_5: marin.processing.tokenize.tokenize.tokenize
+2025-11-23 01:18:48,089	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma-v1_5-591cb4
+2025-11-23 01:18:48,089	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/dolma-v1_5/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-11-23 01:18:48,090	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,090	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-11-23 01:18:48,095	INFO executor.py:1023 -- Status tokenized/paloma/dolma-v1_5: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-11-23 01:18:48,096	INFO executor.py:1047 -- Step tokenized/paloma/dolma-v1_5: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-11-23 01:18:48,104	INFO executor.py:669 -- tokenized/paloma/c4_en: marin.processing.tokenize.tokenize.tokenize
+2025-11-23 01:18:48,104	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/c4_en-a852aa
+2025-11-23 01:18:48,104	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/c4_en/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-11-23 01:18:48,104	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,104	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-11-23 01:18:48,109	INFO executor.py:1023 -- Status tokenized/paloma/c4_en: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-11-23 01:18:48,110	INFO executor.py:1047 -- Step tokenized/paloma/c4_en: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-11-23 01:18:48,116	INFO executor.py:669 -- tokenized/paloma/c4_100_domains: marin.processing.tokenize.tokenize.tokenize
+2025-11-23 01:18:48,116	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/c4_100_domains-a0a5bf
+2025-11-23 01:18:48,116	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/c4_100_domains/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-11-23 01:18:48,116	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,116	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-11-23 01:18:48,120	INFO executor.py:1023 -- Status tokenized/paloma/c4_100_domains: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-11-23 01:18:48,121	INFO executor.py:1047 -- Step tokenized/paloma/c4_100_domains: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-11-23 01:18:48,127	INFO executor.py:669 -- tokenized/paloma/4chan: marin.processing.tokenize.tokenize.tokenize
+2025-11-23 01:18:48,127	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/4chan-6aff8f
+2025-11-23 01:18:48,127	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/4chan_meta_sep/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-11-23 01:18:48,127	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,127	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-11-23 01:18:48,131	INFO executor.py:1023 -- Status tokenized/paloma/4chan: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-11-23 01:18:48,131	INFO executor.py:1047 -- Step tokenized/paloma/4chan: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-11-23 01:18:48,137	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/subcache/fineweb-edu-10B
+2025-11-23 01:18:48,137	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/wikitext_103
+2025-11-23 01:18:48,138	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/twitterAAE_HELM_fixed
+2025-11-23 01:18:48,139	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/redpajama
+2025-11-23 01:18:48,139	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/ptb
+2025-11-23 01:18:48,140	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/mc4
+2025-11-23 01:18:48,141	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/manosphere_meta_sep
+2025-11-23 01:18:48,141	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/m2d2_wikipedia_unsplit
+2025-11-23 01:18:48,142	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/m2d2_s2orc_unsplit
+2025-11-23 01:18:48,143	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/gab
+2025-11-23 01:18:48,143	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/falcon-refinedweb
+2025-11-23 01:18:48,144	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/dolma_100_subreddits
+2025-11-23 01:18:48,144	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/dolma_100_programing_languages
+2025-11-23 01:18:48,145	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/dolma-v1_5
+2025-11-23 01:18:48,145	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/c4_en
+2025-11-23 01:18:48,146	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/c4_100_domains
+2025-11-23 01:18:48,146	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/4chan
+2025-11-23 01:18:48,147	INFO executor.py:669 -- checkpoints/speedrun/trial_llama_50m_int8: marin.training.training.run_levanter_train_lm
+2025-11-23 01:18:48,147	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25
+2025-11-23 01:18:48,147	INFO executor.py:671 --   config = {"train_config.data.tokenizer": "stanford-crfm/marin-tokenizer", "train_config.data.configs.fineweb-edu-10B.cache_dir": "DEP[0]", "train_config.data.configs.paloma/4chan.cache_dir": "DEP[1]", "train_config.data.configs.paloma/4chan.validation_urls.[0]": "DEP[2]/4chan_meta_sep/val/val*.jsonl.gz", "train_config.data.configs.paloma/c4_100_domains.cache_dir": "DEP[3]", "train_config.data.configs.paloma/c4_100_domains.validation_urls.[0]": "DEP[4]/c4_100_domains/val/val*.jsonl.gz", "train_config.data.configs.paloma/c4_en.cache_dir": "DEP[5]", "train_config.data.configs.paloma/c4_en.validation_urls.[0]": "DEP[6]/c4_en/val/val*.jsonl.gz", "train_config.data.configs.paloma/dolma-v1_5.cache_dir": "DEP[7]", "train_config.data.configs.paloma/dolma-v1_5.validation_urls.[0]": "DEP[8]/dolma-v1_5/val/val*.jsonl.gz", "train_config.data.configs.paloma/dolma_100_programing_languages.cache_dir": "DEP[9]", "train_config.data.configs.paloma/dolma_100_programing_languages.validation_urls.[0]": "DEP[10]/dolma_100_programing_languages/val/val*.jsonl.gz", "train_config.data.configs.paloma/dolma_100_subreddits.cache_dir": "DEP[11]", "train_config.data.configs.paloma/dolma_100_subreddits.validation_urls.[0]": "DEP[12]/dolma_100_subreddits/val/val*.jsonl.gz", "train_config.data.configs.paloma/falcon-refinedweb.cache_dir": "DEP[13]", "train_config.data.configs.paloma/falcon-refinedweb.validation_urls.[0]": "DEP[14]/falcon-refinedweb/val/val*.jsonl.gz", "train_config.data.configs.paloma/gab.cache_dir": "DEP[15]", "train_config.data.configs.paloma/gab.validation_urls.[0]": "DEP[16]/gab/val/val*.jsonl.gz", "train_config.data.configs.paloma/m2d2_s2orc_unsplit.cache_dir": "DEP[17]", "train_config.data.configs.paloma/m2d2_s2orc_unsplit.validation_urls.[0]": "DEP[18]/m2d2_s2orc_unsplit/val/val*.jsonl.gz", "train_config.data.configs.paloma/m2d2_wikipedia_unsplit.cache_dir": "DEP[19]", "train_config.data.configs.paloma/m2d2_wikipedia_unsplit.validation_urls.[0]": "DEP[20]/m2d2_wikipedia_unsplit/val/val*.jsonl.gz", "train_config.data.configs.paloma/manosphere_meta_sep.cache_dir": "DEP[21]", "train_config.data.configs.paloma/manosphere_meta_sep.validation_urls.[0]": "DEP[22]/manosphere_meta_sep/val/val*.jsonl.gz", "train_config.data.configs.paloma/mc4.cache_dir": "DEP[23]", "train_config.data.configs.paloma/mc4.validation_urls.[0]": "DEP[24]/mc4/val/val*.jsonl.gz", "train_config.data.configs.paloma/ptb.cache_dir": "DEP[25]", "train_config.data.configs.paloma/ptb.validation_urls.[0]": "DEP[26]/ptb/val/val*.jsonl.gz", "train_config.data.configs.paloma/redpajama.cache_dir": "DEP[27]", "train_config.data.configs.paloma/redpajama.validation_urls.[0]": "DEP[28]/redpajama/val/val*.jsonl.gz", "train_config.data.configs.paloma/twitterAAE_HELM_fixed.cache_dir": "DEP[29]", "train_config.data.configs.paloma/twitterAAE_HELM_fixed.validation_urls.[0]": "DEP[30]/twitterAAE_HELM_fixed/val/val*.jsonl.gz", "train_config.data.configs.paloma/wikitext_103.cache_dir": "DEP[31]", "train_config.data.configs.paloma/wikitext_103.validation_urls.[0]": "DEP[32]/wikitext_103/val/val*.jsonl.gz"}
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/tokenized/subcache/fineweb-edu-10B-6fbcbb
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[1] = /projects/frink/wang.xil/marin/output/tokenized/paloma/4chan-6aff8f
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[2] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[3] = /projects/frink/wang.xil/marin/output/tokenized/paloma/c4_100_domains-a0a5bf
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[4] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[5] = /projects/frink/wang.xil/marin/output/tokenized/paloma/c4_en-a852aa
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[6] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[7] = /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma-v1_5-591cb4
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[8] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[9] = /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma_100_programing_languages-9ef134
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[10] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[11] = /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma_100_subreddits-6fdd4c
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[12] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[13] = /projects/frink/wang.xil/marin/output/tokenized/paloma/falcon-refinedweb-09af65
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[14] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[15] = /projects/frink/wang.xil/marin/output/tokenized/paloma/gab-d3f648
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[16] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[17] = /projects/frink/wang.xil/marin/output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[18] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[19] = /projects/frink/wang.xil/marin/output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[20] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[21] = /projects/frink/wang.xil/marin/output/tokenized/paloma/manosphere_meta_sep-0d11c3
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[22] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[23] = /projects/frink/wang.xil/marin/output/tokenized/paloma/mc4-170a00
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[24] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[25] = /projects/frink/wang.xil/marin/output/tokenized/paloma/ptb-34ecda
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[26] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[27] = /projects/frink/wang.xil/marin/output/tokenized/paloma/redpajama-c4c2cd
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[28] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[29] = /projects/frink/wang.xil/marin/output/tokenized/paloma/twitterAAE_HELM_fixed-8681d4
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[30] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[31] = /projects/frink/wang.xil/marin/output/tokenized/paloma/wikitext_103-70e03f
+2025-11-23 01:18:48,147	INFO executor.py:673 --   DEP[32] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-11-23 01:18:48,147	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-11-23 01:18:48,149	INFO executor.py:1023 -- Status checkpoints/speedrun/trial_llama_50m_int8: marin.training.training.run_levanter_train_lm : None.
+[36m(_doublecheck_paths pid=1572028)[0m Could not determine the region of the VM. This is fine if you're running locally.
+[36m(train_lm_task pid=1573064)[0m WARNING:levanter.distributed:SLURM_STEP_TASKS_PER_NODE not set in environment, assuming a single task per node
+[36m(train_lm_task pid=1573064)[0m WARNING:2025-11-23 01:19:12,392:jax._src.distributed:127: JAX detected proxy variable(s) in the environment as distributed setup: VSCODE_PROXY_URI. On some systems, this may cause a hang of distributed.initialize and you may need to unset these ENV variable(s)
+[36m(train_lm_task pid=1573064)[0m WARNING:jax._src.distributed:JAX detected proxy variable(s) in the environment as distributed setup: VSCODE_PROXY_URI. On some systems, this may cause a hang of distributed.initialize and you may need to unset these ENV variable(s)
+[36m(train_lm_task pid=1573064)[0m /projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+[36m(train_lm_task pid=1573064)[0m   warnings.warn(
+[36m(train_lm_task pid=1573064)[0m /projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+[36m(train_lm_task pid=1573064)[0m   warnings.warn(
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:15 - 0 - levanter.tracker.wandb - wandb.py:254 - INFO :: Setting wandb code_dir to /projects/frink/wang.xil/marin
+[36m(train_lm_task pid=1573064)[0m wandb: WARNING `resume` will be ignored since W&B syncing is set to `offline`. Starting a new run with run id trial_llama_50m_int8-a69f25.
+[36m(train_lm_task pid=1573064)[0m wandb: Tracking run with wandb version 0.22.2
+[36m(train_lm_task pid=1573064)[0m wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+[36m(train_lm_task pid=1573064)[0m wandb: Run data is saved locally in /projects/frink/wang.xil/marin/wandb/offline-run-20251123_011915-trial_llama_50m_int8-a69f25
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:16 - 0 - levanter.tracker.wandb - wandb.py:254 - INFO :: Setting wandb code_dir to /projects/frink/wang.xil/marin
+[36m(train_lm_task pid=1573064)[0m wandb: wandb.init() called while a run is active and reinit is set to 'default', so returning the previous run.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.checkpoint - checkpoint.py:602 - WARNING :: No checkpoints found in /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.main.train_lm - train_lm.py:119 - INFO :: Overriding data seed with 42
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/subcache/fineweb-edu-10B-6fbcbb/train
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.store.cache - cache.py:515 - WARNING :: Metadata mismatch: { 'type_changes': { 'root.preprocessor_metadata': { 'new_type': <class 'dict'>,
+[36m(train_lm_task pid=1573064)[0m                                                     'new_value': { 'append_bos': False,
+[36m(train_lm_task pid=1573064)[0m                                                                    'append_eos': True,
+[36m(train_lm_task pid=1573064)[0m                                                                    'max_length': 131072,
+[36m(train_lm_task pid=1573064)[0m                                                                    'padding': False,
+[36m(train_lm_task pid=1573064)[0m                                                                    'return_attention_mask': False,
+[36m(train_lm_task pid=1573064)[0m                                                                    'tokenizer': 'stanford-crfm/marin-tokenizer',
+[36m(train_lm_task pid=1573064)[0m                                                                    'vocab_size': 128256},
+[36m(train_lm_task pid=1573064)[0m                                                     'old_type': <class 'NoneType'>,
+[36m(train_lm_task pid=1573064)[0m                                                     'old_value': None}}}
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.data.text - text.py:1385 - INFO :: Not waiting for train caches to finish building
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/subcache/fineweb-edu-10B-6fbcbb/validation
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.data.text - text.py:1367 - WARNING :: No source for fineweb-edu-10B in validation split and no cache either, skipping
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/4chan-6aff8f/validation
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/c4_100_domains-a0a5bf/validation
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/c4_en-a852aa/validation
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma-v1_5-591cb4/validation
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma_100_programing_languages-9ef134/validation
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma_100_subreddits-6fdd4c/validation
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/falcon-refinedweb-09af65/validation
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/gab-d3f648/validation
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc/validation
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43/validation
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/manosphere_meta_sep-0d11c3/validation
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/mc4-170a00/validation
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/ptb-34ecda/validation
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/redpajama-c4c2cd/validation
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:17 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/twitterAAE_HELM_fixed-8681d4/validation
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:18 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/wikitext_103-70e03f/validation
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:18 - 0 - levanter.main.train_lm - train_lm.py:175 - INFO :: No checkpoint found. Starting from scratch.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:26 - 0 - levanter.data.loader - loader.py:261 - INFO :: Prefetch wasn't fast enough: 1.923.
+[36m(train_lm_task pid=1573064)[0m /projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/levanter/layers/attention.py:473: UserWarning: transformer_engine is not installed. Please install it to use NVIDIA's optimized fused attention.. Falling back to the reference implementation.
+[36m(train_lm_task pid=1573064)[0m   warnings.warn(f"{msg}. Falling back to the reference implementation.")
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.270702 1573064 buffer_comparator.cc:147] Difference at 0: 94, expected 47
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.270756 1573064 buffer_comparator.cc:147] Difference at 1: 114, expected 57
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.270760 1573064 buffer_comparator.cc:147] Difference at 2: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.270767 1573064 buffer_comparator.cc:147] Difference at 3: 114, expected 57
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.270769 1573064 buffer_comparator.cc:147] Difference at 4: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.270771 1573064 buffer_comparator.cc:147] Difference at 5: 116, expected 58
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.270773 1573064 buffer_comparator.cc:147] Difference at 6: 112, expected 56
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.270774 1573064 buffer_comparator.cc:147] Difference at 7: 112, expected 56
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.270776 1573064 buffer_comparator.cc:147] Difference at 8: 94, expected 47
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.270778 1573064 buffer_comparator.cc:147] Difference at 9: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m 2025-11-23 01:19:42.270786: E external/xla/xla/service/gpu/autotuning/gemm_fusion_autotuner.cc:1203] Results do not match the reference. This is likely a bug/unexpected loss of precision.
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.295259 1573064 buffer_comparator.cc:147] Difference at 0: 118, expected 59
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.295289 1573064 buffer_comparator.cc:147] Difference at 1: 112, expected 56
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.295291 1573064 buffer_comparator.cc:147] Difference at 2: 100, expected 50
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.295293 1573064 buffer_comparator.cc:147] Difference at 3: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.295295 1573064 buffer_comparator.cc:147] Difference at 4: 104, expected 52
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.295297 1573064 buffer_comparator.cc:147] Difference at 5: 120, expected 60
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.295299 1573064 buffer_comparator.cc:147] Difference at 6: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.295300 1573064 buffer_comparator.cc:147] Difference at 7: 98, expected 49
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.295302 1573064 buffer_comparator.cc:147] Difference at 8: 112, expected 56
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.295304 1573064 buffer_comparator.cc:147] Difference at 9: 104, expected 52
+[36m(train_lm_task pid=1573064)[0m 2025-11-23 01:19:42.295308: E external/xla/xla/service/gpu/autotuning/gemm_fusion_autotuner.cc:1203] Results do not match the reference. This is likely a bug/unexpected loss of precision.
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.322606 1573064 buffer_comparator.cc:147] Difference at 0: 94, expected 47
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.322635 1573064 buffer_comparator.cc:147] Difference at 1: 114, expected 57
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.322638 1573064 buffer_comparator.cc:147] Difference at 2: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.322640 1573064 buffer_comparator.cc:147] Difference at 3: 114, expected 57
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.322641 1573064 buffer_comparator.cc:147] Difference at 4: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.322643 1573064 buffer_comparator.cc:147] Difference at 5: 116, expected 58
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.322645 1573064 buffer_comparator.cc:147] Difference at 6: 112, expected 56
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.322647 1573064 buffer_comparator.cc:147] Difference at 7: 112, expected 56
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.322649 1573064 buffer_comparator.cc:147] Difference at 8: 94, expected 47
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.322650 1573064 buffer_comparator.cc:147] Difference at 9: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m 2025-11-23 01:19:42.322655: E external/xla/xla/service/gpu/autotuning/gemm_fusion_autotuner.cc:1203] Results do not match the reference. This is likely a bug/unexpected loss of precision.
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.346169 1573064 buffer_comparator.cc:147] Difference at 0: 216, expected 108
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.346199 1573064 buffer_comparator.cc:147] Difference at 1: 220, expected 110
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.346201 1573064 buffer_comparator.cc:147] Difference at 2: 238, expected 119
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.346203 1573064 buffer_comparator.cc:147] Difference at 3: 192, expected 96
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.346205 1573064 buffer_comparator.cc:147] Difference at 4: 206, expected 103
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.346207 1573064 buffer_comparator.cc:147] Difference at 5: 198, expected 99
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.346209 1573064 buffer_comparator.cc:147] Difference at 6: 214, expected 107
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.346211 1573064 buffer_comparator.cc:147] Difference at 7: 236, expected 118
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.346213 1573064 buffer_comparator.cc:147] Difference at 8: 212, expected 106
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.346214 1573064 buffer_comparator.cc:147] Difference at 9: 200, expected 100
+[36m(train_lm_task pid=1573064)[0m 2025-11-23 01:19:42.346219: E external/xla/xla/service/gpu/autotuning/gemm_fusion_autotuner.cc:1203] Results do not match the reference. This is likely a bug/unexpected loss of precision.
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.427103 1573064 buffer_comparator.cc:147] Difference at 0: 94, expected 47
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.427145 1573064 buffer_comparator.cc:147] Difference at 1: 114, expected 57
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.427149 1573064 buffer_comparator.cc:147] Difference at 2: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.427151 1573064 buffer_comparator.cc:147] Difference at 3: 114, expected 57
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.427153 1573064 buffer_comparator.cc:147] Difference at 4: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.427154 1573064 buffer_comparator.cc:147] Difference at 5: 116, expected 58
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.427156 1573064 buffer_comparator.cc:147] Difference at 6: 112, expected 56
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.427158 1573064 buffer_comparator.cc:147] Difference at 7: 112, expected 56
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.427159 1573064 buffer_comparator.cc:147] Difference at 8: 94, expected 47
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.427161 1573064 buffer_comparator.cc:147] Difference at 9: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m 2025-11-23 01:19:42.427434: E external/xla/xla/service/gpu/autotuning/gemm_fusion_autotuner.cc:1203] Results do not match the reference. This is likely a bug/unexpected loss of precision.
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.449671 1573064 buffer_comparator.cc:147] Difference at 0: 94, expected 47
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.449698 1573064 buffer_comparator.cc:147] Difference at 1: 114, expected 57
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.449701 1573064 buffer_comparator.cc:147] Difference at 2: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.449703 1573064 buffer_comparator.cc:147] Difference at 3: 114, expected 57
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.449705 1573064 buffer_comparator.cc:147] Difference at 4: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.449707 1573064 buffer_comparator.cc:147] Difference at 5: 116, expected 58
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.449709 1573064 buffer_comparator.cc:147] Difference at 6: 112, expected 56
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.449710 1573064 buffer_comparator.cc:147] Difference at 7: 112, expected 56
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.449712 1573064 buffer_comparator.cc:147] Difference at 8: 94, expected 47
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.449714 1573064 buffer_comparator.cc:147] Difference at 9: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m 2025-11-23 01:19:42.449718: E external/xla/xla/service/gpu/autotuning/gemm_fusion_autotuner.cc:1203] Results do not match the reference. This is likely a bug/unexpected loss of precision.
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.471566 1573064 buffer_comparator.cc:147] Difference at 0: 118, expected 59
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.471595 1573064 buffer_comparator.cc:147] Difference at 1: 112, expected 56
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.471598 1573064 buffer_comparator.cc:147] Difference at 2: 100, expected 50
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.471600 1573064 buffer_comparator.cc:147] Difference at 3: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.471601 1573064 buffer_comparator.cc:147] Difference at 4: 104, expected 52
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.471603 1573064 buffer_comparator.cc:147] Difference at 5: 120, expected 60
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.471605 1573064 buffer_comparator.cc:147] Difference at 6: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.471607 1573064 buffer_comparator.cc:147] Difference at 7: 98, expected 49
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.471609 1573064 buffer_comparator.cc:147] Difference at 8: 112, expected 56
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.471610 1573064 buffer_comparator.cc:147] Difference at 9: 104, expected 52
+[36m(train_lm_task pid=1573064)[0m 2025-11-23 01:19:42.471615: E external/xla/xla/service/gpu/autotuning/gemm_fusion_autotuner.cc:1203] Results do not match the reference. This is likely a bug/unexpected loss of precision.
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.516158 1573064 buffer_comparator.cc:147] Difference at 0: 94, expected 47
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.516188 1573064 buffer_comparator.cc:147] Difference at 1: 114, expected 57
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.516191 1573064 buffer_comparator.cc:147] Difference at 2: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.516193 1573064 buffer_comparator.cc:147] Difference at 3: 114, expected 57
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.516195 1573064 buffer_comparator.cc:147] Difference at 4: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.516196 1573064 buffer_comparator.cc:147] Difference at 5: 116, expected 58
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.516198 1573064 buffer_comparator.cc:147] Difference at 6: 112, expected 56
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.516200 1573064 buffer_comparator.cc:147] Difference at 7: 112, expected 56
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.516201 1573064 buffer_comparator.cc:147] Difference at 8: 94, expected 47
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.516203 1573064 buffer_comparator.cc:147] Difference at 9: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m 2025-11-23 01:19:42.516434: E external/xla/xla/service/gpu/autotuning/gemm_fusion_autotuner.cc:1203] Results do not match the reference. This is likely a bug/unexpected loss of precision.
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.537656 1573064 buffer_comparator.cc:147] Difference at 0: 94, expected 47
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.537695 1573064 buffer_comparator.cc:147] Difference at 1: 114, expected 57
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.537699 1573064 buffer_comparator.cc:147] Difference at 2: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.537701 1573064 buffer_comparator.cc:147] Difference at 3: 114, expected 57
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.537702 1573064 buffer_comparator.cc:147] Difference at 4: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.537704 1573064 buffer_comparator.cc:147] Difference at 5: 116, expected 58
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.537706 1573064 buffer_comparator.cc:147] Difference at 6: 112, expected 56
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.537708 1573064 buffer_comparator.cc:147] Difference at 7: 112, expected 56
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.537709 1573064 buffer_comparator.cc:147] Difference at 8: 94, expected 47
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.537711 1573064 buffer_comparator.cc:147] Difference at 9: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m 2025-11-23 01:19:42.537715: E external/xla/xla/service/gpu/autotuning/gemm_fusion_autotuner.cc:1203] Results do not match the reference. This is likely a bug/unexpected loss of precision.
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.564636 1573064 buffer_comparator.cc:147] Difference at 0: 232, expected 116
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.564663 1573064 buffer_comparator.cc:147] Difference at 1: 220, expected 110
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.564665 1573064 buffer_comparator.cc:147] Difference at 2: 240, expected 120
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.564667 1573064 buffer_comparator.cc:147] Difference at 3: 232, expected 116
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.564669 1573064 buffer_comparator.cc:147] Difference at 4: 214, expected 107
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.564671 1573064 buffer_comparator.cc:147] Difference at 5: 228, expected 114
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.564673 1573064 buffer_comparator.cc:147] Difference at 6: 212, expected 106
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.564674 1573064 buffer_comparator.cc:147] Difference at 7: 218, expected 109
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.564676 1573064 buffer_comparator.cc:147] Difference at 8: 230, expected 115
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.564678 1573064 buffer_comparator.cc:147] Difference at 9: 244, expected 122
+[36m(train_lm_task pid=1573064)[0m 2025-11-23 01:19:42.564682: E external/xla/xla/service/gpu/autotuning/gemm_fusion_autotuner.cc:1203] Results do not match the reference. This is likely a bug/unexpected loss of precision.
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.593381 1573064 buffer_comparator.cc:147] Difference at 0: 118, expected 59
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.593408 1573064 buffer_comparator.cc:147] Difference at 1: 112, expected 56
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.593411 1573064 buffer_comparator.cc:147] Difference at 2: 100, expected 50
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.593413 1573064 buffer_comparator.cc:147] Difference at 3: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.593415 1573064 buffer_comparator.cc:147] Difference at 4: 104, expected 52
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.593417 1573064 buffer_comparator.cc:147] Difference at 5: 120, expected 60
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.593419 1573064 buffer_comparator.cc:147] Difference at 6: 106, expected 53
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.593421 1573064 buffer_comparator.cc:147] Difference at 7: 98, expected 49
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.593422 1573064 buffer_comparator.cc:147] Difference at 8: 112, expected 56
+[36m(train_lm_task pid=1573064)[0m E1123 01:19:42.593424 1573064 buffer_comparator.cc:147] Difference at 9: 104, expected 52
+[36m(train_lm_task pid=1573064)[0m 2025-11-23 01:19:42.593428: E external/xla/xla/service/gpu/autotuning/gemm_fusion_autotuner.cc:1203] Results do not match the reference. This is likely a bug/unexpected loss of precision.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:19:52 - 0 - levanter.data.loader - loader.py:261 - INFO :: Prefetch wasn't fast enough: 1.162.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:20:33 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 12.250
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:20:33 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 12.259
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:20:33 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 12.259
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:20:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 12.279
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:20:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 12.251
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:20:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 12.256
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:20:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 12.251
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:20:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 12.254
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:20:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 12.256
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:20:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 12.259
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:20:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 12.289
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:20:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 12.235
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:20:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 12.254
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:20:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 12.275
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:20:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 12.246
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:20:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 12.255
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:20:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 12.251
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:20:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 12.298
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:20:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 12.237
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:22:44 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 6.331
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:22:44 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 6.506
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:22:44 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 6.644
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:22:44 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 6.641
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:22:44 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 5.677
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:22:44 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 5.623
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:22:44 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 6.271
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:22:44 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 9.268
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:22:44 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.813
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:22:44 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 5.755
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:22:44 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.918
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:22:44 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 5.674
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:22:44 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 5.612
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:22:44 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 6.065
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:22:44 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 6.331
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:22:44 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 7.587
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:22:44 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 7.384
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:22:44 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 7.117
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:22:44 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 6.355
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:24:43 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.784
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:24:43 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.956
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:24:43 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 6.075
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:24:43 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 5.644
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:24:43 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 5.251
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:24:43 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 5.219
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:24:43 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.752
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:24:43 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 8.202
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:24:43 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.553
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:24:43 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 5.347
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:24:43 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.738
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:24:43 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 5.116
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:24:43 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 5.079
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:24:43 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.737
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:24:43 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 5.605
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:24:43 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 6.458
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:24:43 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 6.783
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:24:43 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 7.119
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:24:43 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 5.691
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:26:03 - 0 - levanter.data.loader - loader.py:261 - INFO :: Prefetch wasn't fast enough: 0.993.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:26:41 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.586
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:26:41 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.742
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:26:41 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.852
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:26:41 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 5.305
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:26:41 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 5.086
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:26:41 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 5.059
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:26:41 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.558
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:26:41 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 7.788
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:26:41 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.455
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:26:41 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 5.193
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:26:41 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.565
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:26:41 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.948
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:26:41 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.912
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:26:41 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.623
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:26:41 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 5.355
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:26:41 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 6.089
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:26:41 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 6.570
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:26:41 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.903
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:26:41 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 5.469
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:28:40 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.501
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:28:40 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.671
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:28:40 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.782
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:28:40 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 5.192
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:28:40 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 5.016
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:28:40 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.991
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:28:40 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.471
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:28:40 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 7.618
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:28:40 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.419
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:28:40 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 5.120
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:28:40 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.560
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:28:40 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.859
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:28:40 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.836
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:28:40 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.564
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:28:40 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 5.240
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:28:40 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 6.056
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:28:40 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 6.420
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:28:40 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.950
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:28:40 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 5.430
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:29:50 - 0 - levanter.checkpoint - checkpoint.py:213 - INFO :: Saving temporary checkpoint at step 2447.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:29:50 - 0 - levanter.checkpoint - checkpoint.py:288 - INFO :: Saving checkpoint at step 2447 to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-2447
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:29:50 - 0 - levanter.checkpoint - checkpoint.py:376 - INFO :: Saving checkpoint to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-2447 for step 2447
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:29:51 - 0 - levanter.checkpoint - checkpoint.py:384 - INFO :: Saved checkpoint to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-2447 for step 2447
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:30:38 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.430
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:30:38 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.596
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:30:38 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.703
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:30:38 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 5.120
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:30:38 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.964
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:30:38 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.941
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:30:38 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.402
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:30:38 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 7.435
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:30:38 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.380
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:30:38 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 5.071
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:30:38 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.537
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:30:38 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.807
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:30:38 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.773
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:30:38 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.512
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:30:38 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 5.164
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:30:38 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.887
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:30:38 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 6.352
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:30:38 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.885
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:30:38 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 5.304
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:32:35 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.402
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:32:35 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.568
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:32:35 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.677
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:32:35 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 5.051
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:32:35 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.926
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:32:35 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.908
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:32:35 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.370
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:32:35 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 7.418
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:32:35 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.356
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:32:35 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 5.034
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:32:35 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.476
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:32:35 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.786
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:32:35 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.741
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:32:35 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.500
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:32:35 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 5.133
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:32:35 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 6.038
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:32:35 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 6.295
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:32:35 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.823
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:32:35 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 5.240
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:33:55 - 0 - levanter.data.loader - loader.py:261 - INFO :: Prefetch wasn't fast enough: 0.931.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:34:03 - 0 - levanter.data.loader - loader.py:261 - INFO :: Prefetch wasn't fast enough: 0.564.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:34:33 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.337
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:34:33 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.518
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:34:33 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.618
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:34:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 5.091
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:34:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.897
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:34:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.881
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:34:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.315
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:34:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 7.176
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:34:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.326
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:34:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 5.014
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:34:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.444
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:34:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.739
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:34:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.709
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:34:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.487
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:34:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 5.067
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:34:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.900
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:34:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 6.216
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:34:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.832
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:34:33 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 5.199
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:35:53 - 0 - levanter.data.loader - loader.py:261 - INFO :: Prefetch wasn't fast enough: 1.461.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:36:31 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.366
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:36:31 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.525
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:36:31 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.638
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:36:31 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 5.005
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:36:31 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.877
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:36:31 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.863
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:36:31 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.330
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:36:31 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 7.442
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:36:31 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.321
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:36:31 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.990
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:36:31 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.489
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:36:31 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.729
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:36:31 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.689
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:36:31 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.471
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:36:31 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 5.085
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:36:31 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.787
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:36:31 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 6.267
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:36:31 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.836
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:36:31 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 5.213
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:38:28 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.320
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:38:28 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.480
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:38:28 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.589
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:38:28 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.893
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:38:28 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.849
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:38:28 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.840
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:38:28 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.293
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:38:28 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 7.277
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:38:28 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.296
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:38:28 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.967
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:38:28 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.422
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:38:28 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.715
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:38:28 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.654
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:38:28 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.435
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:38:28 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 5.026
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:38:28 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.808
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:38:28 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 6.227
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:38:28 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.806
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:38:28 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 5.166
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.297
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.453
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.559
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.918
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.830
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.818
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.274
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 7.237
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.277
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.946
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.371
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.692
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.640
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.417
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 5.013
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.720
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 6.206
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.745
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 5.135
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.checkpoint - checkpoint.py:213 - INFO :: Saving temporary checkpoint at step 5001.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.checkpoint - checkpoint.py:288 - INFO :: Saving checkpoint at step 5001 to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-5001
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:25 - 0 - levanter.checkpoint - checkpoint.py:376 - INFO :: Saving checkpoint to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-5001 for step 5001
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:27 - 0 - levanter.checkpoint - checkpoint.py:384 - INFO :: Saved checkpoint to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-5001 for step 5001
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:27 - 0 - levanter.checkpoint - checkpoint.py:231 - INFO :: Deleting old temporary checkpoint /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-2447 after saving new checkpoint.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:27 - 0 - levanter.checkpoint - checkpoint.py:263 - INFO :: Removing checkpoint /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-2447
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:27 - 0 - levanter.checkpoint - checkpoint.py:271 - INFO :: Deleting old checkpoint /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-2447 from /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-2447
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:40:28 - 0 - levanter.checkpoint - checkpoint.py:275 - INFO :: Deleted old checkpoint /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-2447 from /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-2447 in 0.88 seconds
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:41:45 - 0 - levanter.data.loader - loader.py:261 - INFO :: Prefetch wasn't fast enough: 0.999.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:42:23 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.277
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:42:23 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.442
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:42:23 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.550
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:42:23 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.907
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:42:23 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.812
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:42:23 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.799
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:42:23 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.254
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:42:23 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 7.222
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:42:23 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.263
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:42:23 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.929
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:42:23 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.367
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:42:23 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.665
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:42:23 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.620
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:42:23 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.399
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:42:23 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 4.973
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:42:23 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.842
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:42:23 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 6.140
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:42:23 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.752
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:42:23 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 5.135
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:43:43 - 0 - levanter.data.loader - loader.py:261 - INFO :: Prefetch wasn't fast enough: 0.565.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:44:21 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.244
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:44:21 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.406
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:44:21 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.509
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:44:21 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.888
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:44:21 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.798
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:44:21 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.792
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:44:21 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.223
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:44:21 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 7.103
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:44:21 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.249
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:44:21 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.915
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:44:21 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.326
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:44:21 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.644
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:44:21 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.608
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:44:21 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.387
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:44:21 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 4.951
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:44:21 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.661
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:44:21 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 6.123
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:44:21 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.726
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:44:21 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 5.107
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:46:19 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.254
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:46:19 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.411
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:46:19 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.517
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:46:19 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.944
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:46:19 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.783
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:46:19 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.773
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:46:19 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.225
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:46:19 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 7.201
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:46:19 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.256
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:46:19 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.899
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:46:19 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.315
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:46:19 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.644
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:46:19 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.587
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:46:19 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.381
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:46:19 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 4.948
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:46:19 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.711
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:46:19 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 6.140
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:46:19 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.678
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:46:19 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 5.084
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:47:38 - 0 - levanter.data.loader - loader.py:261 - INFO :: Prefetch wasn't fast enough: 1.136.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:48:17 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.247
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:48:17 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.409
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:48:17 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.518
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:48:17 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.932
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:48:17 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.773
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:48:17 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.763
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:48:17 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.216
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:48:17 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 7.162
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:48:17 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.256
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:48:17 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.891
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:48:17 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.353
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:48:17 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.639
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:48:17 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.585
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:48:17 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.389
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:48:17 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 4.959
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:48:17 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.688
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:48:17 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 6.104
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:48:17 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.780
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:48:17 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 5.062
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:16 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.233
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:16 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.394
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:16 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.504
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:16 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.917
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:16 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.755
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:16 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.749
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:16 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.205
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:16 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 7.178
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:16 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.238
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:16 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.880
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:16 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.349
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:16 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.621
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:16 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.563
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:16 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.377
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:16 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 4.910
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:16 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.664
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:16 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 6.116
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:16 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.720
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:16 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 5.069
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:26 - 0 - levanter.checkpoint - checkpoint.py:213 - INFO :: Saving temporary checkpoint at step 7559.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:26 - 0 - levanter.checkpoint - checkpoint.py:288 - INFO :: Saving checkpoint at step 7559 to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-7559
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:26 - 0 - levanter.checkpoint - checkpoint.py:376 - INFO :: Saving checkpoint to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-7559 for step 7559
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:27 - 0 - levanter.checkpoint - checkpoint.py:384 - INFO :: Saved checkpoint to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-7559 for step 7559
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:27 - 0 - levanter.checkpoint - checkpoint.py:231 - INFO :: Deleting old temporary checkpoint /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-5001 after saving new checkpoint.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:27 - 0 - levanter.checkpoint - checkpoint.py:263 - INFO :: Removing checkpoint /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-5001
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:27 - 0 - levanter.checkpoint - checkpoint.py:271 - INFO :: Deleting old checkpoint /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-5001 from /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-5001
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:50:27 - 0 - levanter.checkpoint - checkpoint.py:275 - INFO :: Deleted old checkpoint /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-5001 from /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-5001 in 0.63 seconds
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:51:37 - 0 - levanter.data.loader - loader.py:261 - INFO :: Prefetch wasn't fast enough: 1.312.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:52:14 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.214
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:52:14 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.382
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:52:14 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.490
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:52:14 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.907
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:52:14 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.746
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:52:14 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.742
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:52:14 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.176
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:52:14 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 7.097
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:52:14 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.228
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:52:14 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.868
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:52:14 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.336
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:52:14 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.616
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:52:14 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.552
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:52:14 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.358
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:52:14 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 4.899
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:52:14 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.708
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:52:14 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 6.065
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:52:14 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.747
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:52:14 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 5.073
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:54:12 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.180
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:54:12 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.353
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:54:12 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.459
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:54:12 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.819
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:54:12 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.730
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:54:12 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.728
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:54:12 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.155
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:54:12 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 7.022
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:54:12 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.218
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:54:12 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.854
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:54:12 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.302
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:54:12 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.574
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:54:12 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.527
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:54:12 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.345
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:54:12 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 4.880
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:54:12 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.739
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:54:12 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 6.017
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:54:12 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.696
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:54:12 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 5.041
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:56:10 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.152
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:56:10 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.324
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:56:10 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.425
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:56:10 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.837
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:56:10 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.711
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:56:10 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.709
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:56:10 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.130
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:56:10 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 6.933
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:56:10 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.187
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:56:10 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.835
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:56:10 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.262
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:56:10 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.566
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:56:10 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.509
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:56:10 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.328
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:56:10 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 4.864
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:56:10 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.681
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:56:10 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 5.985
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:56:10 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.641
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:56:10 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 5.007
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:58:08 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.124
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:58:08 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.296
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:58:08 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.396
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:58:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.770
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:58:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.698
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:58:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.693
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:58:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.104
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:58:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 6.836
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:58:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.184
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:58:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.821
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:58:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.247
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:58:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.546
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:58:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.496
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:58:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.301
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:58:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 4.835
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:58:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.617
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:58:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 5.958
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:58:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.653
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:58:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 4.976
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:59:28 - 0 - levanter.checkpoint - checkpoint.py:211 - INFO :: Saving checkpoint at step 10000.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:59:28 - 0 - levanter.checkpoint - checkpoint.py:288 - INFO :: Saving checkpoint at step 10000 to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-10000
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:59:28 - 0 - levanter.checkpoint - checkpoint.py:376 - INFO :: Saving checkpoint to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-10000 for step 10000
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:59:30 - 0 - levanter.checkpoint - checkpoint.py:384 - INFO :: Saved checkpoint to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-10000 for step 10000
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:59:30 - 0 - levanter.checkpoint - checkpoint.py:231 - INFO :: Deleting old temporary checkpoint /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-7559 after saving new checkpoint.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:59:30 - 0 - levanter.checkpoint - checkpoint.py:263 - INFO :: Removing checkpoint /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-7559
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:59:30 - 0 - levanter.checkpoint - checkpoint.py:271 - INFO :: Deleting old checkpoint /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-7559 from /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-7559
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:59:30 - 0 - levanter.data.loader - loader.py:261 - INFO :: Prefetch wasn't fast enough: 1.584.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T01:59:31 - 0 - levanter.checkpoint - checkpoint.py:275 - INFO :: Deleted old checkpoint /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-7559 from /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-7559 in 1.05 seconds
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.115
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.288
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.389
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.779
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.687
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.683
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.095
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 6.824
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.181
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.809
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.239
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.533
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.484
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.305
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 4.815
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.565
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 5.953
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.695
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 4.955
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.compat.hf_checkpoints - hf_checkpoints.py:808 - INFO :: Saving HF-compatible checkpoint to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/hf/step-10000
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.compat.hf_checkpoints - hf_checkpoints.py:830 - INFO :: Saving checkpoint to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/hf/step-10000
+[36m(train_lm_task pid=1573064)[0m /projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/haliax/quantization.py:214: UserWarning: Ignore all int8 states (if any) for now.
+[36m(train_lm_task pid=1573064)[0m   warnings.warn("Ignore all int8 states (if any) for now.")
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.compat.hf_checkpoints - hf_checkpoints.py:849 - INFO :: Will save 1 shards with max size 203.5 MB
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:07 - 0 - levanter.compat.hf_checkpoints - hf_checkpoints.py:918 - INFO :: Saving shard model.safetensors (203.5 MB, 100.00% of model)
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:08 - 0 - levanter.compat.hf_checkpoints - hf_checkpoints.py:952 - INFO :: Saving tokenizer
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:00:08 - 0 - levanter.compat.hf_checkpoints - hf_checkpoints.py:976 - INFO :: Finished saving HF-compatible checkpoint to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/hf/step-10000
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:02:08 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.115
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:02:08 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.282
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:02:08 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.386
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:02:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.767
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:02:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.674
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:02:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.667
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:02:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.088
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:02:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 6.889
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:02:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.164
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:02:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.795
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:02:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.244
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:02:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.528
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:02:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.468
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:02:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.282
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:02:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 4.812
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:02:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.609
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:02:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 5.951
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:02:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.644
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:02:08 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 4.930
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:04:06 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.102
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:04:06 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.275
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:04:06 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.381
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:04:06 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.753
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:04:06 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.659
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:04:06 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.658
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:04:06 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.080
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:04:06 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 6.885
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:04:06 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.158
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:04:06 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.785
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:04:06 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.219
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:04:06 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.508
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:04:06 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.455
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:04:06 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.271
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:04:06 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 4.798
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:04:06 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.657
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:04:06 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 5.943
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:04:06 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.645
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:04:06 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 4.930
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:06:04 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.108
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:06:04 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.273
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:06:04 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.380
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:06:04 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.739
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:06:04 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.650
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:06:04 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.648
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:06:04 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.077
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:06:04 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 6.916
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:06:04 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.156
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:06:04 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.773
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:06:04 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.207
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:06:04 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.523
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:06:04 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.451
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:06:04 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.279
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:06:04 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 4.801
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:06:04 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.633
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:06:04 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 5.956
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:06:04 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.637
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:06:04 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 4.927
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:07:26 - 0 - levanter.data.loader - loader.py:261 - INFO :: Prefetch wasn't fast enough: 1.379.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:08:03 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.087
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:08:03 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.253
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:08:03 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.359
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:08:03 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.685
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:08:03 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.635
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:08:03 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.634
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:08:03 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.061
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:08:03 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 6.871
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:08:03 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.140
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:08:03 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.760
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:08:03 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.204
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:08:03 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.503
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:08:03 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.436
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:08:03 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.267
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:08:03 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 4.782
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:08:03 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.579
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:08:03 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 5.927
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:08:03 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.632
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:08:03 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 4.924
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.071
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.238
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.344
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.660
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.629
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.626
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.044
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 6.828
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.130
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.754
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.202
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.489
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.424
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.259
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 4.767
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.570
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 5.897
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.623
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 4.908
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.checkpoint - checkpoint.py:213 - INFO :: Saving temporary checkpoint at step 12501.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.checkpoint - checkpoint.py:288 - INFO :: Saving checkpoint at step 12501 to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-12501
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:01 - 0 - levanter.checkpoint - checkpoint.py:376 - INFO :: Saving checkpoint to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-12501 for step 12501
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:10:02 - 0 - levanter.checkpoint - checkpoint.py:384 - INFO :: Saved checkpoint to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-12501 for step 12501
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:12:00 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.053
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:12:00 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.222
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:12:00 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.327
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:12:00 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.635
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:12:00 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.622
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:12:00 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.620
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:12:00 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.027
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:12:00 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 6.776
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:12:00 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.115
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:12:00 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.745
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:12:00 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.188
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:12:00 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.477
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:12:00 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.415
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:12:00 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.237
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:12:00 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 4.751
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:12:00 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.537
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:12:00 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 5.871
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:12:00 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.646
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:12:00 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 4.891
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:13:19 - 0 - levanter.data.loader - loader.py:261 - INFO :: Prefetch wasn't fast enough: 0.938.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:13:48 - 0 - levanter.data.loader - loader.py:261 - INFO :: Prefetch wasn't fast enough: 0.531.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:13:56 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.049
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:13:56 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.221
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:13:56 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.326
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:13:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.633
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:13:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.613
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:13:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.613
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:13:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.022
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:13:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 6.769
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:13:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.112
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:13:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.741
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:13:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.186
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:13:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.476
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:13:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.408
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:13:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.237
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:13:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 4.750
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:13:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.559
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:13:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 5.875
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:13:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.643
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:13:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 4.890
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:15:56 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.055
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:15:56 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.219
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:15:56 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.328
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:15:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.615
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:15:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.605
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:15:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.604
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:15:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 5.024
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:15:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 6.837
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:15:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.109
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:15:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.732
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:15:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.177
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:15:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.473
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:15:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.399
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:15:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.234
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:15:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 4.736
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:15:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.549
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:15:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 5.894
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:15:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.635
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:15:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 4.886
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:17:56 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.027
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:17:56 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.196
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:17:56 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.300
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:17:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.595
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:17:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.600
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:17:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.600
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:17:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 4.996
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:17:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 6.721
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:17:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.095
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:17:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.726
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:17:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.161
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:17:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.461
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:17:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.390
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:17:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.219
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:17:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 4.717
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:17:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.544
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:17:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 5.848
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:17:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.603
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:17:56 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 4.862
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:19:55 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.012
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:19:55 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.186
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:19:55 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.286
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:19:55 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.637
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:19:55 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.595
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:19:55 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.596
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:19:55 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 4.989
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:19:55 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 6.673
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:19:55 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.090
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:19:55 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.723
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:19:55 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.130
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:19:55 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.442
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:19:55 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.391
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:19:55 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.220
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:19:55 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 4.720
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:19:55 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.539
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:19:55 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 5.813
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:19:55 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.562
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:19:55 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 4.854
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:20:02 - 0 - levanter.checkpoint - checkpoint.py:213 - INFO :: Saving temporary checkpoint at step 15039.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:20:02 - 0 - levanter.checkpoint - checkpoint.py:288 - INFO :: Saving checkpoint at step 15039 to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-15039
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:20:02 - 0 - levanter.checkpoint - checkpoint.py:376 - INFO :: Saving checkpoint to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-15039 for step 15039
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:20:03 - 0 - levanter.checkpoint - checkpoint.py:384 - INFO :: Saved checkpoint to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-15039 for step 15039
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:20:03 - 0 - levanter.checkpoint - checkpoint.py:231 - INFO :: Deleting old temporary checkpoint /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-12501 after saving new checkpoint.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:20:03 - 0 - levanter.checkpoint - checkpoint.py:263 - INFO :: Removing checkpoint /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-12501
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:20:03 - 0 - levanter.checkpoint - checkpoint.py:271 - INFO :: Deleting old checkpoint /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-12501 from /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-12501
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:20:04 - 0 - levanter.checkpoint - checkpoint.py:275 - INFO :: Deleted old checkpoint /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-12501 from /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/checkpoints/step-12501 in 1.12 seconds
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:20:28 - 0 - levanter.data.loader - loader.py:261 - INFO :: Prefetch wasn't fast enough: 0.941.
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.eval - eval.py:242 - INFO :: eval loss: 5.021
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.eval - eval.py:254 - INFO :: paloma macro loss: 5.191
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.eval - eval.py:263 - INFO :: paloma micro loss: 5.294
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/4chan loss: 4.596
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_100_domains loss: 4.596
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/c4_en loss: 4.598
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma-v1_5 loss: 4.994
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_programing_languages loss: 6.714
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/dolma_100_subreddits loss: 5.095
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/falcon-refinedweb loss: 4.724
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/gab loss: 6.141
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_s2orc_unsplit loss: 4.448
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/m2d2_wikipedia_unsplit loss: 4.387
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/manosphere_meta_sep loss: 5.220
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/mc4 loss: 4.714
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/ptb loss: 5.541
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/redpajama loss: 5.832
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/twitterAAE_HELM_fixed loss: 6.591
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.eval - eval.py:260 - INFO :: paloma/wikitext_103 loss: 4.865
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.compat.hf_checkpoints - hf_checkpoints.py:808 - INFO :: Saving HF-compatible checkpoint to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/hf/step-15199
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.compat.hf_checkpoints - hf_checkpoints.py:830 - INFO :: Saving checkpoint to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/hf/step-15199
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.compat.hf_checkpoints - hf_checkpoints.py:849 - INFO :: Will save 1 shards with max size 203.5 MB
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.compat.hf_checkpoints - hf_checkpoints.py:918 - INFO :: Saving shard model.safetensors (203.5 MB, 100.00% of model)
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.compat.hf_checkpoints - hf_checkpoints.py:952 - INFO :: Saving tokenizer
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.compat.hf_checkpoints - hf_checkpoints.py:976 - INFO :: Finished saving HF-compatible checkpoint to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25/hf/step-15199
+[36m(train_lm_task pid=1573064)[0m 2025-11-23T02:21:07 - 0 - levanter.tracker.wandb - wandb.py:102 - INFO :: Finishing wandb run...
+[36m(train_lm_task pid=1573064)[0m wandb: 
+[36m(train_lm_task pid=1573064)[0m wandb: Run history:
+[36m(train_lm_task pid=1573064)[0m wandb:                        eval/bpb █▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+[36m(train_lm_task pid=1573064)[0m wandb:               eval/loading_time ▁▂▃▃▃▂▂▇▃▃▂▅▅▁▅▃▄▄▂▁▄▄▆▅▇▅▄█▃▄▅▄
+[36m(train_lm_task pid=1573064)[0m wandb:                       eval/loss █▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+[36m(train_lm_task pid=1573064)[0m wandb:                  eval/macro_bpb █▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+[36m(train_lm_task pid=1573064)[0m wandb:                 eval/macro_loss █▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+[36m(train_lm_task pid=1573064)[0m wandb:           eval/paloma/4chan/bpb █▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+[36m(train_lm_task pid=1573064)[0m wandb:          eval/paloma/4chan/loss █▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+[36m(train_lm_task pid=1573064)[0m wandb:                 eval/paloma/bpb █▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+[36m(train_lm_task pid=1573064)[0m wandb:  eval/paloma/c4_100_domains/bpb █▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+[36m(train_lm_task pid=1573064)[0m wandb: eval/paloma/c4_100_domains/loss █▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+[36m(train_lm_task pid=1573064)[0m wandb:                            +124 ...
+[36m(train_lm_task pid=1573064)[0m wandb: 
+[36m(train_lm_task pid=1573064)[0m wandb: Run summary:
+[36m(train_lm_task pid=1573064)[0m wandb:                        backend gpu
+[36m(train_lm_task pid=1573064)[0m wandb:                       eval/bpb 1.77685
+[36m(train_lm_task pid=1573064)[0m wandb:              eval/loading_time 2.3943
+[36m(train_lm_task pid=1573064)[0m wandb:                      eval/loss 5.02093
+[36m(train_lm_task pid=1573064)[0m wandb:                 eval/macro_bpb 1.8811
+[36m(train_lm_task pid=1573064)[0m wandb:                eval/macro_loss 5.19098
+[36m(train_lm_task pid=1573064)[0m wandb:          eval/paloma/4chan/bpb 1.97482
+[36m(train_lm_task pid=1573064)[0m wandb:         eval/paloma/4chan/loss 4.59599
+[36m(train_lm_task pid=1573064)[0m wandb:                eval/paloma/bpb 2.03415
+[36m(train_lm_task pid=1573064)[0m wandb: eval/paloma/c4_100_domains/bpb 1.43477
+[36m(train_lm_task pid=1573064)[0m wandb:                           +130 ...
+[36m(train_lm_task pid=1573064)[0m wandb: 
+[36m(train_lm_task pid=1573064)[0m wandb: You can sync this run to the cloud by running:
+[36m(train_lm_task pid=1573064)[0m wandb: wandb sync /projects/frink/wang.xil/marin/wandb/offline-run-20251123_011915-trial_llama_50m_int8-a69f25
+[36m(train_lm_task pid=1573064)[0m wandb: Find logs at: ./wandb/offline-run-20251123_011915-trial_llama_50m_int8-a69f25/logs
+2025-11-23 02:21:08,019	INFO executor.py:637 -- Waiting for ObjectRef(6efb86ef2d286c40ffffffffffffffffffffffff0100000001000000) to finish for step checkpoints/speedrun/trial_llama_50m_int8
+2025-11-23 02:21:08,028	INFO executor.py:669 -- speedrun/trial_llama_50m_int8-speedrun_results: marin.speedrun.speedrun.speedrun_results
+2025-11-23 02:21:08,028	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/speedrun/trial_llama_50m_int8-speedrun_results-d6708c
+2025-11-23 02:21:08,028	INFO executor.py:671 --   config = {"wandb_run_id": "DEP[0]", "speedrun_config.tokenized_dataset": "DEP[1]", "output_path": "DEP[2]/speedrun_results.json"}
+2025-11-23 02:21:08,028	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25
+2025-11-23 02:21:08,028	INFO executor.py:673 --   DEP[1] = /projects/frink/wang.xil/marin/output/tokenized/subcache/fineweb-edu-10B-6fbcbb
+2025-11-23 02:21:08,028	INFO executor.py:673 --   DEP[2] = /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m_int8-a69f25
+2025-11-23 02:21:08,028	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-11-23 02:21:08,033	INFO executor.py:1023 -- Status speedrun/trial_llama_50m_int8-speedrun_results: marin.speedrun.speedrun.speedrun_results : None.
+[36m(train_lm_task pid=1573064)[0m Exception ignored in atexit callback: <function _start_and_connect_service.<locals>.teardown_atexit at 0x147e7378b920>
+[36m(train_lm_task pid=1573064)[0m Traceback (most recent call last):
+[36m(train_lm_task pid=1573064)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/wandb/sdk/lib/service/service_connection.py", line 61, in teardown_atexit
+[36m(train_lm_task pid=1573064)[0m     conn.teardown(hooks.exit_code)
+[36m(train_lm_task pid=1573064)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/wandb/sdk/lib/service/service_connection.py", line 236, in teardown
+[36m(train_lm_task pid=1573064)[0m     self._asyncer.run(publish_teardown_and_close)
+[36m(train_lm_task pid=1573064)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/wandb/sdk/lib/asyncio_manager.py", line 136, in run
+[36m(train_lm_task pid=1573064)[0m     return future.result()
+[36m(train_lm_task pid=1573064)[0m            ^^^^^^^^^^^^^^^
+[36m(train_lm_task pid=1573064)[0m   File "/home/wang.xil/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/lib/python3.11/concurrent/futures/_base.py", line 456, in result
+[36m(train_lm_task pid=1573064)[0m     return self.__get_result()
+[36m(train_lm_task pid=1573064)[0m            ^^^^^^^^^^^^^^^^^^^
+[36m(train_lm_task pid=1573064)[0m   File "/home/wang.xil/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/lib/python3.11/concurrent/futures/_base.py", line 401, in __get_result
+[36m(train_lm_task pid=1573064)[0m     raise self._exception
+[36m(train_lm_task pid=1573064)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/wandb/sdk/lib/asyncio_manager.py", line 219, in _wrap
+[36m(train_lm_task pid=1573064)[0m     return await fn()
+[36m(train_lm_task pid=1573064)[0m            ^^^^^^^^^^
+[36m(train_lm_task pid=1573064)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/wandb/sdk/lib/service/service_connection.py", line 234, in publish_teardown_and_close
+[36m(train_lm_task pid=1573064)[0m     await self._client.close()
+[36m(train_lm_task pid=1573064)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/wandb/sdk/lib/service/service_client.py", line 69, in close
+[36m(train_lm_task pid=1573064)[0m     await self._writer.wait_closed()
+[36m(train_lm_task pid=1573064)[0m   File "/home/wang.xil/.local/share/uv/python/cpython-3.11.14-linux-x86_64-gnu/lib/python3.11/asyncio/streams.py", line 364, in wait_closed
+[36m(train_lm_task pid=1573064)[0m     await self._protocol._get_close_waiter(self)
+[36m(train_lm_task pid=1573064)[0m BrokenPipeError: [Errno 32] Broken pipe
+[36m(run_levanter_train_lm:checkpoints/speedrun/trial_llama_50m_int8 pid=1571847)[0m /projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+[36m(run_levanter_train_lm:checkpoints/speedrun/trial_llama_50m_int8 pid=1571847)[0m   warnings.warn(
+[36m(run_levanter_train_lm:checkpoints/speedrun/trial_llama_50m_int8 pid=1571847)[0m /projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+[36m(run_levanter_train_lm:checkpoints/speedrun/trial_llama_50m_int8 pid=1571847)[0m   warnings.warn(
+2025-11-23 02:21:30,260	INFO executor.py:637 -- Waiting for ObjectRef(3e43f22e6ab31cdcffffffffffffffffffffffff0100000001000000) to finish for step speedrun/trial_llama_50m_int8-speedrun_results
+2025-11-23 02:21:30,266	INFO executor.py:600 -- ### Waiting for all steps to finish ###
+2025-11-23 02:21:30,267	INFO executor.py:1145 -- Executor run took 3762.98s
+2025-11-23 02:21:30,267	INFO executor.py:1147 -- Executor info written to /projects/frink/wang.xil/marin/output/experiments/trial_llama_50m_int8-c3c8f3.json
+2025-11-23 02:21:30,267	INFO executor.py:1148 -- View the experiment at http://localhost:5000/experiment?path=/projects/frink/wang.xil/marin/output/experiments/trial_llama_50m_int8-c3c8f3.json
+[36m(StatusActor pid=1561195)[0m StatusActor initialized
+[36m(speedrun_results:speedrun/trial_llama_50m_int8-speedrun_results pid=1571847)[0m Failed to fetch step times: Unable to connect to server to verify API token.
+[36m(speedrun_results:speedrun/trial_llama_50m_int8-speedrun_results pid=1571847)[0m No step times available; analysis aborted.
+[0;32m✓ Training completed successfully[0m
+
+[0;34m========================================[0m
+[0;32mPipeline completed successfully![0m
+[0;34m========================================[0m

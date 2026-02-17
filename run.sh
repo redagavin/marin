@@ -1,14 +1,15 @@
 #!/bin/bash
-#SBATCH -p gpu                            # Number of tasks
-#SBATCH --time=2:00:00
+#SBATCH -p gpu                      # GPU partition
+#SBATCH --time=8:00:00
 #SBATCH --mem=100G
-#SBATCH --gres=gpu:a100:1  
+#SBATCH --gres=gpu:h200:1
 #SBATCH --cpus-per-task=4                  # Number of GPUs
 #SBATCH -N 1                                # Number of nodes
 #SBATCH -n 1                               # Number of tasks
-#SBATCH -o marin_helloworld%j.txt                    # Standard output file
-#SBATCH -e marin_helloworld%j.txt                     # Standard error file
-#SBATCH -J marin_helloworld                           # Job name
+#SBATCH -o marin_llama75m_adamax_%j.txt                    # Standard output file (jobid will be appended)
+#SBATCH -e marin_llama75m_adamax_%j.txt                     # Standard error file (jobid will be appended)
+#SBATCH -J marin_llama75m_adamax                         # Job name
+
 
 
 # Your program/command here
@@ -19,6 +20,16 @@ conda activate /projects/frink/wang.xil/marin/marin_conda
 nvcc --version
 nvidia-smi
 
-# python experiments/speedrun/hello_world_gpu_speedrun/hello_world_gpu_speedrun.py --prefix output
+## USAGE: sbatch run.sh trial_1
+## (where trial_1 is the actual run name)
 
-bash run_offline.sh
+# Check if experiment name is provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 <experiment_name>"
+    echo "Example: $0 trial_llama_75m_adamax"
+    exit 1
+fi
+
+EXPERIMENT_NAME="$1"
+
+bash run_offline.sh "${EXPERIMENT_NAME}"

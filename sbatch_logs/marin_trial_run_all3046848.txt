@@ -1,0 +1,721 @@
+[0;34m========================================[0m
+[0;34mMarin Training + Sync Pipeline[0m
+[0;34m========================================[0m
+[0;34mExperiment: trial_batch_size_muon[0m
+[0;34mTraining script: /projects/frink/wang.xil/marin/experiments/speedrun/trial_batch_size_muon/trial_batch_size_muon.py[0m
+[0;34mWandB entity: xilin_wang1[0m
+[0;34mWandB project: marin-speedrun[0m
+
+[0;34m┌─ PHASE 1: TRAINING (Offline)[0m
+[0;34m├─────────────────────────────────────[0m
+
+[1;33m[1/4] Setting up training environment...[0m
+[1;33mSaving proxy configuration...[0m
+  http_proxy: http://10.99.0.130:3128
+  https_proxy: http://10.99.0.130:3128
+  ftp_proxy: http://10.99.0.130:3128
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2025 NVIDIA Corporation
+Built on Tue_May_27_02:21:03_PDT_2025
+Cuda compilation tools, release 12.9, V12.9.86
+Build cuda_12.9.r12.9/compiler.36037853_0
+Thu Dec  4 10:53:26 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.86.15              Driver Version: 570.86.15      CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H200                    On  |   00000000:9B:00.0 Off |                    0 |
+| N/A   42C    P0             84W /  700W |       1MiB / 143771MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+[0;32m✓ Training environment configured[0m
+
+[1;33m[2/4] Verifying training script...[0m
+[0;32m✓ Training script found[0m
+
+[1;33m[3/4] Running training (offline mode)...[0m
+  Extra args: 128
+/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+2025-12-04 10:53:43,225	INFO speedrun.py:126 -- Speedrun Configuration:
+2025-12-04 10:53:43,225	INFO speedrun.py:127 -- {
+    "author": {
+        "name": "Rice",
+        "affiliation": "Rice Factory",
+        "url": "N/A"
+    },
+    "description": "50M model batch size 128 (2x Chinchilla optimal tokens)",
+    "model_config": {
+        "cross_entropy_block_size": null,
+        "seq_len": 1024,
+        "hidden_dim": 192,
+        "intermediate_dim": 448,
+        "num_layers": 4,
+        "num_heads": 2,
+        "head_dim": null,
+        "num_kv_heads": 2,
+        "activation_function": "silu",
+        "initializer_range": 0.02,
+        "layer_norm_epsilon": 1e-05,
+        "tie_word_embeddings": false,
+        "hybrid_norm": false,
+        "use_qk_norm": false,
+        "input_embedding_norm": false,
+        "upcast_attn": false,
+        "attn_backend": null,
+        "flash_attention_block_size": null,
+        "gradient_checkpointing": true,
+        "scan_layers": true,
+        "use_bias": false,
+        "use_layer_norm_weight": true,
+        "rope": {
+            "theta": 10000,
+            "factor": 1.0
+        },
+        "reference_checkpoint": "NousResearch/Llama-2-7b-hf",
+        "tokenizer": null
+    },
+    "train_config": {
+        "train_batch_size": 128,
+        "num_train_steps": 15258,
+        "learning_rate": 0.02,
+        "data_seed": null,
+        "weight_decay": null,
+        "beta1": null,
+        "beta2": null,
+        "epsilon": null,
+        "max_grad_norm": null,
+        "warmup": null,
+        "decay": null,
+        "rewarmup": null,
+        "lr_schedule": null,
+        "min_lr_ratio": null,
+        "cycle_length": null,
+        "z_loss_weight": null,
+        "ema_beta": null,
+        "skip_bad_steps": false,
+        "steps_per_eval": 500,
+        "steps_per_export": 10000,
+        "steps_per_task_eval": null,
+        "steps_per_hf_export": null,
+        "per_device_eval_parallelism": null,
+        "max_eval_batches": null,
+        "initialize_from_checkpoint_path": null,
+        "initialize_from_hf": null,
+        "reset_data_loader_on_init": true,
+        "allow_partial_checkpoint": false,
+        "int8": false,
+        "optimizer_config": {
+            "learning_rate": 0.02,
+            "weight_decay": 0.0,
+            "min_lr_ratio": 0,
+            "warmup": 0,
+            "decay": 0.8,
+            "rewarmup": 0.0,
+            "cooldown": null,
+            "cycle_length": null,
+            "cycles": null,
+            "lr_schedule": "linear",
+            "haps": null,
+            "weight_decay_modules": null,
+            "default_weight_decay_mask": null,
+            "lr": 0.02,
+            "adam_lr": 0.004,
+            "momentum": 0.95,
+            "nesterov": true,
+            "backend_steps": 5,
+            "adam_weight_decay": null,
+            "beta1": 0.8,
+            "beta2": 0.98,
+            "epsilon": 1e-15,
+            "muon_epsilon": 1e-05,
+            "max_grad_norm": 1,
+            "use_kimi_scaling": false
+        },
+        "watch": {
+            "watch_targets": [
+                "grads",
+                "params"
+            ],
+            "include_norms": true,
+            "include_per_parameter_norms": true,
+            "include_histograms": false,
+            "split_scan_layers": true,
+            "interval": 10
+        }
+    },
+    "tokenized_dataset": "ExecutorStep(name='tokenized/subcache/fineweb-edu-10B', fn=<function _actually_download_pretokenized_cache at 0x14c6da15ed40>, config=PretokenizedCacheDownloadConfig(cache_path=OutputName(name=None), tokenizer=VersionedValue(value='stanford-crfm/marin-tokenizer'), hf_repo_id=VersionedValue(value='marin-community/fineweb-edu-pretokenized-10B'), hf_revision=VersionedValue(value=None), hf_repo_type_prefix='datasets', hf_token=None, format=TextLmDatasetFormat(text_key='text'), cache_options=None, tags=[]), description=None, override_output_path=None, pip_dependency_groups=None)",
+    "resources": {
+        "gpu_count": 1,
+        "accelerator_type": "H200",
+        "device_flops_override": null
+    }
+}
+2025-12-04 10:53:43,225	INFO speedrun.py:163 -- The rough estimated compute (calculated as (total model FLOPs / Assumed MFU)) for your run is probably between:
+      * 6.68e+17 FLOPs assuming an MFU of 0.5, and
+      * 1.67e+18 FLOPs assuming an MFU of 0.2.
+
+This is calculated based on assumed MFU values and can be used as a rough estimate to guide your config/training setup.
+2025-12-04 10:53:43,225	INFO speedrun.py:131 -- Hardware and Model FLOPS Information:
+2025-12-04 10:53:43,225	INFO speedrun.py:132 -- Number of devices: 1
+2025-12-04 10:53:43,225	INFO speedrun.py:133 -- Number of chips: 1
+2025-12-04 10:53:43,226	INFO speedrun.py:134 -- Device FLOPs: 9.90e+14 FLOP/s
+2025-12-04 10:53:43,226	INFO speedrun.py:135 -- Total peak hardware FLOPs: 9.90e+14 FLOP/s
+2025-12-04 10:53:43,226	INFO speedrun.py:136 -- Model FLOPs: 3.34e+17 FLOP
+2025-12-04 10:53:43,226	INFO speedrun.py:140 -- Model size: 50.87 million parameters
+2025-12-04 10:53:43,226	INFO speedrun.py:336 -- Running speedrun trial_batch_size_muon_bs128
+2025-12-04 10:53:43,226	INFO speedrun.py:126 -- Speedrun Configuration:
+2025-12-04 10:53:43,226	INFO speedrun.py:127 -- {
+    "author": {
+        "name": "Rice",
+        "affiliation": "Rice Factory",
+        "url": "N/A"
+    },
+    "description": "50M model batch size 128 (2x Chinchilla optimal tokens)",
+    "model_config": {
+        "cross_entropy_block_size": null,
+        "seq_len": 1024,
+        "hidden_dim": 192,
+        "intermediate_dim": 448,
+        "num_layers": 4,
+        "num_heads": 2,
+        "head_dim": null,
+        "num_kv_heads": 2,
+        "activation_function": "silu",
+        "initializer_range": 0.02,
+        "layer_norm_epsilon": 1e-05,
+        "tie_word_embeddings": false,
+        "hybrid_norm": false,
+        "use_qk_norm": false,
+        "input_embedding_norm": false,
+        "upcast_attn": false,
+        "attn_backend": null,
+        "flash_attention_block_size": null,
+        "gradient_checkpointing": true,
+        "scan_layers": true,
+        "use_bias": false,
+        "use_layer_norm_weight": true,
+        "rope": {
+            "theta": 10000,
+            "factor": 1.0
+        },
+        "reference_checkpoint": "NousResearch/Llama-2-7b-hf",
+        "tokenizer": null
+    },
+    "train_config": {
+        "train_batch_size": 128,
+        "num_train_steps": 15258,
+        "learning_rate": 0.02,
+        "data_seed": null,
+        "weight_decay": null,
+        "beta1": null,
+        "beta2": null,
+        "epsilon": null,
+        "max_grad_norm": null,
+        "warmup": null,
+        "decay": null,
+        "rewarmup": null,
+        "lr_schedule": null,
+        "min_lr_ratio": null,
+        "cycle_length": null,
+        "z_loss_weight": null,
+        "ema_beta": null,
+        "skip_bad_steps": false,
+        "steps_per_eval": 500,
+        "steps_per_export": 10000,
+        "steps_per_task_eval": null,
+        "steps_per_hf_export": null,
+        "per_device_eval_parallelism": null,
+        "max_eval_batches": null,
+        "initialize_from_checkpoint_path": null,
+        "initialize_from_hf": null,
+        "reset_data_loader_on_init": true,
+        "allow_partial_checkpoint": false,
+        "int8": false,
+        "optimizer_config": {
+            "learning_rate": 0.02,
+            "weight_decay": 0.0,
+            "min_lr_ratio": 0,
+            "warmup": 0,
+            "decay": 0.8,
+            "rewarmup": 0.0,
+            "cooldown": null,
+            "cycle_length": null,
+            "cycles": null,
+            "lr_schedule": "linear",
+            "haps": null,
+            "weight_decay_modules": null,
+            "default_weight_decay_mask": null,
+            "lr": 0.02,
+            "adam_lr": 0.004,
+            "momentum": 0.95,
+            "nesterov": true,
+            "backend_steps": 5,
+            "adam_weight_decay": null,
+            "beta1": 0.8,
+            "beta2": 0.98,
+            "epsilon": 1e-15,
+            "muon_epsilon": 1e-05,
+            "max_grad_norm": 1,
+            "use_kimi_scaling": false
+        },
+        "watch": {
+            "watch_targets": [
+                "grads",
+                "params"
+            ],
+            "include_norms": true,
+            "include_per_parameter_norms": true,
+            "include_histograms": false,
+            "split_scan_layers": true,
+            "interval": 10
+        }
+    },
+    "tokenized_dataset": "ExecutorStep(name='tokenized/subcache/fineweb-edu-10B', fn=<function _actually_download_pretokenized_cache at 0x14c6da15ed40>, config=PretokenizedCacheDownloadConfig(cache_path=OutputName(name=None), tokenizer=VersionedValue(value='stanford-crfm/marin-tokenizer'), hf_repo_id=VersionedValue(value='marin-community/fineweb-edu-pretokenized-10B'), hf_revision=VersionedValue(value=None), hf_repo_type_prefix='datasets', hf_token=None, format=TextLmDatasetFormat(text_key='text'), cache_options=None, tags=[]), description=None, override_output_path=None, pip_dependency_groups=None)",
+    "resources": {
+        "gpu_count": 1,
+        "accelerator_type": "H200",
+        "device_flops_override": null
+    }
+}
+2025-12-04 10:53:43,226	INFO speedrun.py:163 -- The rough estimated compute (calculated as (total model FLOPs / Assumed MFU)) for your run is probably between:
+      * 6.68e+17 FLOPs assuming an MFU of 0.5, and
+      * 1.67e+18 FLOPs assuming an MFU of 0.2.
+
+This is calculated based on assumed MFU values and can be used as a rough estimate to guide your config/training setup.
+2025-12-04 10:53:43,226	INFO speedrun.py:131 -- Hardware and Model FLOPS Information:
+2025-12-04 10:53:43,226	INFO speedrun.py:132 -- Number of devices: 1
+2025-12-04 10:53:43,226	INFO speedrun.py:133 -- Number of chips: 1
+2025-12-04 10:53:43,226	INFO speedrun.py:134 -- Device FLOPs: 9.90e+14 FLOP/s
+2025-12-04 10:53:43,226	INFO speedrun.py:135 -- Total peak hardware FLOPs: 9.90e+14 FLOP/s
+2025-12-04 10:53:43,226	INFO speedrun.py:136 -- Model FLOPs: 3.34e+17 FLOP
+2025-12-04 10:53:43,226	INFO speedrun.py:140 -- Model size: 50.87 million parameters
+2025-12-04 10:53:47,350	INFO worker.py:1879 -- Started a local Ray instance. View the dashboard at [1m[32mhttp://127.0.0.1:8265 [39m[22m
+2025-12-04 10:54:02,902	INFO executor.py:1115 -- Ray init took 19.20s
+2025-12-04 10:54:02,914	INFO executor.py:576 -- ### Inspecting the 2 provided steps ###
+2025-12-04 10:54:02,950	INFO executor.py:584 -- ### Reading 20 statuses ###
+2025-12-04 10:54:02,950	INFO executor.py:594 -- ### Writing metadata ###
+2025-12-04 10:54:02,954	INFO executor.py:915 -- Writing executor info to /projects/frink/wang.xil/marin/output/experiments/trial_batch_size_muon-932d3e.json
+2025-12-04 10:54:02,954	INFO executor.py:916 -- To view the experiment page, go to:
+2025-12-04 10:54:02,954	INFO executor.py:917 -- 
+2025-12-04 10:54:02,954	INFO executor.py:918 -- http://localhost:5000/experiment?path=/projects/frink/wang.xil/marin/output/experiments/trial_batch_size_muon-932d3e.json
+2025-12-04 10:54:02,954	INFO executor.py:919 -- 
+2025-12-04 10:54:03,291	INFO executor.py:597 -- ### Launching 20 steps ###
+2025-12-04 10:54:03,291	INFO executor.py:669 -- raw/paloma-speedrun: marin.download.huggingface.download_hf.download_hf
+2025-12-04 10:54:03,291	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,292	INFO executor.py:671 --   config = {"hf_dataset_id": "allenai/paloma", "revision": "65cd6fc"}
+2025-12-04 10:54:03,292	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-04 10:54:03,528	INFO executor.py:1023 -- Status raw/paloma-speedrun: marin.download.huggingface.download_hf.download_hf : SUCCESS.
+2025-12-04 10:54:03,532	INFO executor.py:1047 -- Step raw/paloma-speedrun: marin.download.huggingface.download_hf.download_hf has already succeeded. Status: SUCCESS
+2025-12-04 10:54:03,540	INFO executor.py:669 -- tokenized/subcache/fineweb-edu-10B: marin.processing.tokenize.download_pretokenized._actually_download_pretokenized_cache
+2025-12-04 10:54:03,540	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/subcache/fineweb-edu-10B-6fbcbb
+2025-12-04 10:54:03,540	INFO executor.py:671 --   config = {"tokenizer": "stanford-crfm/marin-tokenizer", "hf_repo_id": "marin-community/fineweb-edu-pretokenized-10B", "hf_revision": null}
+2025-12-04 10:54:03,540	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-04 10:54:03,547	INFO executor.py:1023 -- Status tokenized/subcache/fineweb-edu-10B: marin.processing.tokenize.download_pretokenized._actually_download_pretokenized_cache : SUCCESS.
+2025-12-04 10:54:03,548	INFO executor.py:1047 -- Step tokenized/subcache/fineweb-edu-10B: marin.processing.tokenize.download_pretokenized._actually_download_pretokenized_cache has already succeeded. Status: SUCCESS
+2025-12-04 10:54:03,557	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step raw/paloma-speedrun
+2025-12-04 10:54:03,557	INFO executor.py:669 -- tokenized/paloma/wikitext_103: marin.processing.tokenize.tokenize.tokenize
+2025-12-04 10:54:03,557	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/wikitext_103-70e03f
+2025-12-04 10:54:03,557	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/wikitext_103/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-04 10:54:03,557	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,557	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-04 10:54:03,562	INFO executor.py:1023 -- Status tokenized/paloma/wikitext_103: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-04 10:54:03,564	INFO executor.py:1047 -- Step tokenized/paloma/wikitext_103: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-04 10:54:03,570	INFO executor.py:669 -- tokenized/paloma/twitterAAE_HELM_fixed: marin.processing.tokenize.tokenize.tokenize
+2025-12-04 10:54:03,570	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/twitterAAE_HELM_fixed-8681d4
+2025-12-04 10:54:03,570	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/twitterAAE_HELM_fixed/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-04 10:54:03,570	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,570	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-04 10:54:03,577	INFO executor.py:1023 -- Status tokenized/paloma/twitterAAE_HELM_fixed: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-04 10:54:03,578	INFO executor.py:1047 -- Step tokenized/paloma/twitterAAE_HELM_fixed: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-04 10:54:03,585	INFO executor.py:669 -- tokenized/paloma/redpajama: marin.processing.tokenize.tokenize.tokenize
+2025-12-04 10:54:03,585	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/redpajama-c4c2cd
+2025-12-04 10:54:03,585	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/redpajama/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-04 10:54:03,585	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,585	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-04 10:54:03,590	INFO executor.py:1023 -- Status tokenized/paloma/redpajama: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-04 10:54:03,591	INFO executor.py:1047 -- Step tokenized/paloma/redpajama: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-04 10:54:03,598	INFO executor.py:669 -- tokenized/paloma/ptb: marin.processing.tokenize.tokenize.tokenize
+2025-12-04 10:54:03,598	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/ptb-34ecda
+2025-12-04 10:54:03,598	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/ptb/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-04 10:54:03,598	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,598	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-04 10:54:03,603	INFO executor.py:1023 -- Status tokenized/paloma/ptb: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-04 10:54:03,604	INFO executor.py:1047 -- Step tokenized/paloma/ptb: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-04 10:54:03,613	INFO executor.py:669 -- tokenized/paloma/mc4: marin.processing.tokenize.tokenize.tokenize
+2025-12-04 10:54:03,613	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/mc4-170a00
+2025-12-04 10:54:03,613	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/mc4/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-04 10:54:03,613	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,613	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-04 10:54:03,619	INFO executor.py:1023 -- Status tokenized/paloma/mc4: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-04 10:54:03,620	INFO executor.py:1047 -- Step tokenized/paloma/mc4: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-04 10:54:03,628	INFO executor.py:669 -- tokenized/paloma/manosphere_meta_sep: marin.processing.tokenize.tokenize.tokenize
+2025-12-04 10:54:03,628	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/manosphere_meta_sep-0d11c3
+2025-12-04 10:54:03,628	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/manosphere_meta_sep/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-04 10:54:03,628	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,628	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-04 10:54:03,632	INFO executor.py:1023 -- Status tokenized/paloma/manosphere_meta_sep: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-04 10:54:03,634	INFO executor.py:1047 -- Step tokenized/paloma/manosphere_meta_sep: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-04 10:54:03,639	INFO executor.py:669 -- tokenized/paloma/m2d2_wikipedia_unsplit: marin.processing.tokenize.tokenize.tokenize
+2025-12-04 10:54:03,639	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43
+2025-12-04 10:54:03,639	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/m2d2_wikipedia_unsplit/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-04 10:54:03,639	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,639	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-04 10:54:03,644	INFO executor.py:1023 -- Status tokenized/paloma/m2d2_wikipedia_unsplit: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-04 10:54:03,645	INFO executor.py:1047 -- Step tokenized/paloma/m2d2_wikipedia_unsplit: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-04 10:54:03,653	INFO executor.py:669 -- tokenized/paloma/m2d2_s2orc_unsplit: marin.processing.tokenize.tokenize.tokenize
+2025-12-04 10:54:03,653	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc
+2025-12-04 10:54:03,653	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/m2d2_s2orc_unsplit/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-04 10:54:03,653	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,653	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-04 10:54:03,658	INFO executor.py:1023 -- Status tokenized/paloma/m2d2_s2orc_unsplit: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-04 10:54:03,659	INFO executor.py:1047 -- Step tokenized/paloma/m2d2_s2orc_unsplit: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-04 10:54:03,670	INFO executor.py:669 -- tokenized/paloma/gab: marin.processing.tokenize.tokenize.tokenize
+2025-12-04 10:54:03,670	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/gab-d3f648
+2025-12-04 10:54:03,670	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/gab/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-04 10:54:03,670	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,670	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-04 10:54:03,676	INFO executor.py:1023 -- Status tokenized/paloma/gab: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-04 10:54:03,677	INFO executor.py:1047 -- Step tokenized/paloma/gab: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-04 10:54:03,684	INFO executor.py:669 -- tokenized/paloma/falcon-refinedweb: marin.processing.tokenize.tokenize.tokenize
+2025-12-04 10:54:03,684	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/falcon-refinedweb-09af65
+2025-12-04 10:54:03,684	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/falcon-refinedweb/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-04 10:54:03,684	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,684	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-04 10:54:03,690	INFO executor.py:1023 -- Status tokenized/paloma/falcon-refinedweb: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-04 10:54:03,691	INFO executor.py:1047 -- Step tokenized/paloma/falcon-refinedweb: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-04 10:54:03,700	INFO executor.py:669 -- tokenized/paloma/dolma_100_subreddits: marin.processing.tokenize.tokenize.tokenize
+2025-12-04 10:54:03,700	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma_100_subreddits-6fdd4c
+2025-12-04 10:54:03,700	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/dolma_100_subreddits/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-04 10:54:03,700	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,700	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-04 10:54:03,703	INFO executor.py:1023 -- Status tokenized/paloma/dolma_100_subreddits: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-04 10:54:03,704	INFO executor.py:1047 -- Step tokenized/paloma/dolma_100_subreddits: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-04 10:54:03,711	INFO executor.py:669 -- tokenized/paloma/dolma_100_programing_languages: marin.processing.tokenize.tokenize.tokenize
+2025-12-04 10:54:03,711	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma_100_programing_languages-9ef134
+2025-12-04 10:54:03,711	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/dolma_100_programing_languages/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-04 10:54:03,711	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,711	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-04 10:54:03,718	INFO executor.py:1023 -- Status tokenized/paloma/dolma_100_programing_languages: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-04 10:54:03,719	INFO executor.py:1047 -- Step tokenized/paloma/dolma_100_programing_languages: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-04 10:54:03,727	INFO executor.py:669 -- tokenized/paloma/dolma-v1_5: marin.processing.tokenize.tokenize.tokenize
+2025-12-04 10:54:03,727	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma-v1_5-591cb4
+2025-12-04 10:54:03,727	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/dolma-v1_5/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-04 10:54:03,727	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,727	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-04 10:54:03,732	INFO executor.py:1023 -- Status tokenized/paloma/dolma-v1_5: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-04 10:54:03,733	INFO executor.py:1047 -- Step tokenized/paloma/dolma-v1_5: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-04 10:54:03,742	INFO executor.py:669 -- tokenized/paloma/c4_en: marin.processing.tokenize.tokenize.tokenize
+2025-12-04 10:54:03,742	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/c4_en-a852aa
+2025-12-04 10:54:03,742	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/c4_en/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-04 10:54:03,742	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,742	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-04 10:54:03,746	INFO executor.py:1023 -- Status tokenized/paloma/c4_en: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-04 10:54:03,747	INFO executor.py:1047 -- Step tokenized/paloma/c4_en: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-04 10:54:03,755	INFO executor.py:669 -- tokenized/paloma/c4_100_domains: marin.processing.tokenize.tokenize.tokenize
+2025-12-04 10:54:03,755	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/c4_100_domains-a0a5bf
+2025-12-04 10:54:03,755	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/c4_100_domains/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-04 10:54:03,755	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,755	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-04 10:54:03,760	INFO executor.py:1023 -- Status tokenized/paloma/c4_100_domains: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-04 10:54:03,761	INFO executor.py:1047 -- Step tokenized/paloma/c4_100_domains: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-04 10:54:03,773	INFO executor.py:669 -- tokenized/paloma/4chan: marin.processing.tokenize.tokenize.tokenize
+2025-12-04 10:54:03,773	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/4chan-6aff8f
+2025-12-04 10:54:03,773	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/4chan_meta_sep/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-04 10:54:03,773	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,773	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-04 10:54:03,779	INFO executor.py:1023 -- Status tokenized/paloma/4chan: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-04 10:54:03,780	INFO executor.py:1047 -- Step tokenized/paloma/4chan: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-04 10:54:03,790	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/subcache/fineweb-edu-10B
+2025-12-04 10:54:03,790	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/wikitext_103
+2025-12-04 10:54:03,791	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/twitterAAE_HELM_fixed
+2025-12-04 10:54:03,792	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/redpajama
+2025-12-04 10:54:03,792	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/ptb
+2025-12-04 10:54:03,793	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/mc4
+2025-12-04 10:54:03,793	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/manosphere_meta_sep
+2025-12-04 10:54:03,794	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/m2d2_wikipedia_unsplit
+2025-12-04 10:54:03,794	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/m2d2_s2orc_unsplit
+2025-12-04 10:54:03,795	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/gab
+2025-12-04 10:54:03,795	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/falcon-refinedweb
+2025-12-04 10:54:03,796	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/dolma_100_subreddits
+2025-12-04 10:54:03,797	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/dolma_100_programing_languages
+2025-12-04 10:54:03,798	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/dolma-v1_5
+2025-12-04 10:54:03,798	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/c4_en
+2025-12-04 10:54:03,799	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/c4_100_domains
+2025-12-04 10:54:03,799	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/4chan
+2025-12-04 10:54:03,800	INFO executor.py:669 -- checkpoints/speedrun/trial_batch_size_muon_bs128: marin.training.training.run_levanter_train_lm
+2025-12-04 10:54:03,800	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_batch_size_muon_bs128-3b5b75
+2025-12-04 10:54:03,800	INFO executor.py:671 --   config = {"train_config.data.tokenizer": "stanford-crfm/marin-tokenizer", "train_config.data.configs.fineweb-edu-10B.cache_dir": "DEP[0]", "train_config.data.configs.paloma/4chan.cache_dir": "DEP[1]", "train_config.data.configs.paloma/4chan.validation_urls.[0]": "DEP[2]/4chan_meta_sep/val/val*.jsonl.gz", "train_config.data.configs.paloma/c4_100_domains.cache_dir": "DEP[3]", "train_config.data.configs.paloma/c4_100_domains.validation_urls.[0]": "DEP[4]/c4_100_domains/val/val*.jsonl.gz", "train_config.data.configs.paloma/c4_en.cache_dir": "DEP[5]", "train_config.data.configs.paloma/c4_en.validation_urls.[0]": "DEP[6]/c4_en/val/val*.jsonl.gz", "train_config.data.configs.paloma/dolma-v1_5.cache_dir": "DEP[7]", "train_config.data.configs.paloma/dolma-v1_5.validation_urls.[0]": "DEP[8]/dolma-v1_5/val/val*.jsonl.gz", "train_config.data.configs.paloma/dolma_100_programing_languages.cache_dir": "DEP[9]", "train_config.data.configs.paloma/dolma_100_programing_languages.validation_urls.[0]": "DEP[10]/dolma_100_programing_languages/val/val*.jsonl.gz", "train_config.data.configs.paloma/dolma_100_subreddits.cache_dir": "DEP[11]", "train_config.data.configs.paloma/dolma_100_subreddits.validation_urls.[0]": "DEP[12]/dolma_100_subreddits/val/val*.jsonl.gz", "train_config.data.configs.paloma/falcon-refinedweb.cache_dir": "DEP[13]", "train_config.data.configs.paloma/falcon-refinedweb.validation_urls.[0]": "DEP[14]/falcon-refinedweb/val/val*.jsonl.gz", "train_config.data.configs.paloma/gab.cache_dir": "DEP[15]", "train_config.data.configs.paloma/gab.validation_urls.[0]": "DEP[16]/gab/val/val*.jsonl.gz", "train_config.data.configs.paloma/m2d2_s2orc_unsplit.cache_dir": "DEP[17]", "train_config.data.configs.paloma/m2d2_s2orc_unsplit.validation_urls.[0]": "DEP[18]/m2d2_s2orc_unsplit/val/val*.jsonl.gz", "train_config.data.configs.paloma/m2d2_wikipedia_unsplit.cache_dir": "DEP[19]", "train_config.data.configs.paloma/m2d2_wikipedia_unsplit.validation_urls.[0]": "DEP[20]/m2d2_wikipedia_unsplit/val/val*.jsonl.gz", "train_config.data.configs.paloma/manosphere_meta_sep.cache_dir": "DEP[21]", "train_config.data.configs.paloma/manosphere_meta_sep.validation_urls.[0]": "DEP[22]/manosphere_meta_sep/val/val*.jsonl.gz", "train_config.data.configs.paloma/mc4.cache_dir": "DEP[23]", "train_config.data.configs.paloma/mc4.validation_urls.[0]": "DEP[24]/mc4/val/val*.jsonl.gz", "train_config.data.configs.paloma/ptb.cache_dir": "DEP[25]", "train_config.data.configs.paloma/ptb.validation_urls.[0]": "DEP[26]/ptb/val/val*.jsonl.gz", "train_config.data.configs.paloma/redpajama.cache_dir": "DEP[27]", "train_config.data.configs.paloma/redpajama.validation_urls.[0]": "DEP[28]/redpajama/val/val*.jsonl.gz", "train_config.data.configs.paloma/twitterAAE_HELM_fixed.cache_dir": "DEP[29]", "train_config.data.configs.paloma/twitterAAE_HELM_fixed.validation_urls.[0]": "DEP[30]/twitterAAE_HELM_fixed/val/val*.jsonl.gz", "train_config.data.configs.paloma/wikitext_103.cache_dir": "DEP[31]", "train_config.data.configs.paloma/wikitext_103.validation_urls.[0]": "DEP[32]/wikitext_103/val/val*.jsonl.gz"}
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/tokenized/subcache/fineweb-edu-10B-6fbcbb
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[1] = /projects/frink/wang.xil/marin/output/tokenized/paloma/4chan-6aff8f
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[2] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[3] = /projects/frink/wang.xil/marin/output/tokenized/paloma/c4_100_domains-a0a5bf
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[4] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[5] = /projects/frink/wang.xil/marin/output/tokenized/paloma/c4_en-a852aa
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[6] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[7] = /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma-v1_5-591cb4
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[8] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[9] = /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma_100_programing_languages-9ef134
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[10] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[11] = /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma_100_subreddits-6fdd4c
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[12] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[13] = /projects/frink/wang.xil/marin/output/tokenized/paloma/falcon-refinedweb-09af65
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[14] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[15] = /projects/frink/wang.xil/marin/output/tokenized/paloma/gab-d3f648
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[16] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[17] = /projects/frink/wang.xil/marin/output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[18] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[19] = /projects/frink/wang.xil/marin/output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[20] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[21] = /projects/frink/wang.xil/marin/output/tokenized/paloma/manosphere_meta_sep-0d11c3
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[22] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[23] = /projects/frink/wang.xil/marin/output/tokenized/paloma/mc4-170a00
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[24] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[25] = /projects/frink/wang.xil/marin/output/tokenized/paloma/ptb-34ecda
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[26] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[27] = /projects/frink/wang.xil/marin/output/tokenized/paloma/redpajama-c4c2cd
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[28] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[29] = /projects/frink/wang.xil/marin/output/tokenized/paloma/twitterAAE_HELM_fixed-8681d4
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[30] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[31] = /projects/frink/wang.xil/marin/output/tokenized/paloma/wikitext_103-70e03f
+2025-12-04 10:54:03,800	INFO executor.py:673 --   DEP[32] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-04 10:54:03,800	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-04 10:54:03,806	INFO executor.py:1023 -- Status checkpoints/speedrun/trial_batch_size_muon_bs128: marin.training.training.run_levanter_train_lm : SUCCESS.
+2025-12-04 10:54:03,807	INFO executor.py:1047 -- Step checkpoints/speedrun/trial_batch_size_muon_bs128: marin.training.training.run_levanter_train_lm has already succeeded. Status: SUCCESS
+2025-12-04 10:54:03,812	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step checkpoints/speedrun/trial_batch_size_muon_bs128
+2025-12-04 10:54:03,812	INFO executor.py:669 -- speedrun/trial_batch_size_muon_bs128-speedrun_results: marin.speedrun.speedrun.speedrun_results
+2025-12-04 10:54:03,812	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/speedrun/trial_batch_size_muon_bs128-speedrun_results-c84536
+2025-12-04 10:54:03,813	INFO executor.py:671 --   config = {"wandb_run_id": "DEP[0]", "speedrun_config.tokenized_dataset": "DEP[1]", "output_path": "DEP[2]/speedrun_results.json"}
+2025-12-04 10:54:03,813	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_batch_size_muon_bs128-3b5b75
+2025-12-04 10:54:03,813	INFO executor.py:673 --   DEP[1] = /projects/frink/wang.xil/marin/output/tokenized/subcache/fineweb-edu-10B-6fbcbb
+2025-12-04 10:54:03,813	INFO executor.py:673 --   DEP[2] = /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_batch_size_muon_bs128-3b5b75
+2025-12-04 10:54:03,813	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-04 10:54:03,818	INFO executor.py:1023 -- Status speedrun/trial_batch_size_muon_bs128-speedrun_results: marin.speedrun.speedrun.speedrun_results : SUCCESS.
+2025-12-04 10:54:03,819	INFO executor.py:1047 -- Step speedrun/trial_batch_size_muon_bs128-speedrun_results: marin.speedrun.speedrun.speedrun_results has already succeeded. Status: SUCCESS
+2025-12-04 10:54:03,827	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step speedrun/trial_batch_size_muon_bs128-speedrun_results
+2025-12-04 10:54:03,827	INFO executor.py:600 -- ### Waiting for all steps to finish ###
+2025-12-04 10:54:03,828	INFO executor.py:1145 -- Executor run took 0.93s
+2025-12-04 10:54:03,828	INFO executor.py:1147 -- Executor info written to /projects/frink/wang.xil/marin/output/experiments/trial_batch_size_muon-932d3e.json
+2025-12-04 10:54:03,828	INFO executor.py:1148 -- View the experiment at http://localhost:5000/experiment?path=/projects/frink/wang.xil/marin/output/experiments/trial_batch_size_muon-932d3e.json
+
+============================================================
+Batch Size Ablation Study - 50M Model
+============================================================
+Batch Size:       128
+Learning Rate:    0.020000 (base: 0.020000)
+Total Tokens:     2,000,000,000 (2x Chinchilla = 40x params)
+Tokens/Step:      131,072
+Training Steps:   15,258
+============================================================
+
+[36m(StatusActor pid=241639)[0m StatusActor initialized
+[0;32m✓ Training completed successfully[0m
+
+[0;34m├─────────────────────────────────────[0m
+[0;34m└─ PHASE 2: SYNC TO WANDB (Online)[0m
+
+[1;33m[4/4] Setting up sync environment...[0m
+  ✓ Restored http_proxy: http://10.99.0.130:3128
+  ✓ Restored https_proxy: http://10.99.0.130:3128
+  ✓ Restored ftp_proxy: http://10.99.0.130:3128
+[0;32m✓ Sync environment configured[0m
+
+[1;33mFinding checkpoint directory...[0m
+[0;32m✓ Found checkpoint: /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_batch_size_muon_bs128-3b5b75[0m
+
+[1;33mProcessing checkpoint (sync to WandB & generate results)...[0m
+  Run ID: trial_batch_size_muon_bs128-3b5b75
+  [1;33m→ Syncing to WandB...[0m
+  Syncing: /projects/frink/wang.xil/marin/wandb/offline-run-20251204_000441-trial_batch_size_muon_bs128-3b5b75
+/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+Find logs at: /projects/frink/wang.xil/marin/wandb/debug-cli.wang.xil.log
+Syncing: https://wandb.ai/xilin_wang1/marin-speedrun/runs/trial_batch_size_muon_bs128-3b5b75 ... done.
+  [0;32m✓ WandB sync completed[0m
+  [1;33m→ Generating speedrun_results.json...[0m
+/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+2025-12-04 10:59:37,625	INFO speedrun.py:126 -- Speedrun Configuration:
+2025-12-04 10:59:37,625	INFO speedrun.py:127 -- {
+    "author": {
+        "name": "Rice",
+        "affiliation": "Rice Factory",
+        "url": "N/A"
+    },
+    "description": "50M model batch size 128 (2x Chinchilla optimal tokens)",
+    "model_config": {
+        "cross_entropy_block_size": null,
+        "seq_len": 1024,
+        "hidden_dim": 192,
+        "intermediate_dim": 448,
+        "num_layers": 4,
+        "num_heads": 2,
+        "head_dim": null,
+        "num_kv_heads": 2,
+        "activation_function": "silu",
+        "initializer_range": 0.02,
+        "layer_norm_epsilon": 1e-05,
+        "tie_word_embeddings": false,
+        "hybrid_norm": false,
+        "use_qk_norm": false,
+        "input_embedding_norm": false,
+        "upcast_attn": false,
+        "attn_backend": null,
+        "flash_attention_block_size": null,
+        "gradient_checkpointing": true,
+        "scan_layers": true,
+        "use_bias": false,
+        "use_layer_norm_weight": true,
+        "rope": {
+            "theta": 10000,
+            "factor": 1.0
+        },
+        "reference_checkpoint": "NousResearch/Llama-2-7b-hf",
+        "tokenizer": null
+    },
+    "train_config": {
+        "train_batch_size": 128,
+        "num_train_steps": 15258,
+        "learning_rate": 0.02,
+        "data_seed": null,
+        "weight_decay": null,
+        "beta1": null,
+        "beta2": null,
+        "epsilon": null,
+        "max_grad_norm": null,
+        "warmup": null,
+        "decay": null,
+        "rewarmup": null,
+        "lr_schedule": null,
+        "min_lr_ratio": null,
+        "cycle_length": null,
+        "z_loss_weight": null,
+        "ema_beta": null,
+        "skip_bad_steps": false,
+        "steps_per_eval": 500,
+        "steps_per_export": 10000,
+        "steps_per_task_eval": null,
+        "steps_per_hf_export": null,
+        "per_device_eval_parallelism": null,
+        "max_eval_batches": null,
+        "initialize_from_checkpoint_path": null,
+        "initialize_from_hf": null,
+        "reset_data_loader_on_init": true,
+        "allow_partial_checkpoint": false,
+        "int8": false,
+        "optimizer_config": {
+            "learning_rate": 0.02,
+            "weight_decay": 0.0,
+            "min_lr_ratio": 0,
+            "warmup": 0,
+            "decay": 0.8,
+            "rewarmup": 0.0,
+            "cooldown": null,
+            "cycle_length": null,
+            "cycles": null,
+            "lr_schedule": "linear",
+            "haps": null,
+            "weight_decay_modules": null,
+            "default_weight_decay_mask": null,
+            "lr": 0.02,
+            "adam_lr": 0.004,
+            "momentum": 0.95,
+            "nesterov": true,
+            "backend_steps": 5,
+            "adam_weight_decay": null,
+            "beta1": 0.8,
+            "beta2": 0.98,
+            "epsilon": 1e-15,
+            "muon_epsilon": 1e-05,
+            "max_grad_norm": 1,
+            "use_kimi_scaling": false
+        },
+        "watch": {
+            "watch_targets": [
+                "grads",
+                "params"
+            ],
+            "include_norms": true,
+            "include_per_parameter_norms": true,
+            "include_histograms": false,
+            "split_scan_layers": true,
+            "interval": 10
+        }
+    },
+    "tokenized_dataset": "ExecutorStep(name='tokenized/subcache/fineweb-edu-10B', fn=<function _actually_download_pretokenized_cache at 0x145d928e5b20>, config=PretokenizedCacheDownloadConfig(cache_path=OutputName(name=None), tokenizer=VersionedValue(value='stanford-crfm/marin-tokenizer'), hf_repo_id=VersionedValue(value='marin-community/fineweb-edu-pretokenized-10B'), hf_revision=VersionedValue(value=None), hf_repo_type_prefix='datasets', hf_token=None, format=TextLmDatasetFormat(text_key='text'), cache_options=None, tags=[]), description=None, override_output_path=None, pip_dependency_groups=None)",
+    "resources": {
+        "gpu_count": 1,
+        "accelerator_type": "H200",
+        "device_flops_override": null
+    }
+}
+2025-12-04 10:59:37,625	INFO speedrun.py:163 -- The rough estimated compute (calculated as (total model FLOPs / Assumed MFU)) for your run is probably between:
+      * 6.68e+17 FLOPs assuming an MFU of 0.5, and
+      * 1.67e+18 FLOPs assuming an MFU of 0.2.
+
+This is calculated based on assumed MFU values and can be used as a rough estimate to guide your config/training setup.
+2025-12-04 10:59:37,625	INFO speedrun.py:131 -- Hardware and Model FLOPS Information:
+2025-12-04 10:59:37,625	INFO speedrun.py:132 -- Number of devices: 1
+2025-12-04 10:59:37,625	INFO speedrun.py:133 -- Number of chips: 1
+2025-12-04 10:59:37,625	INFO speedrun.py:134 -- Device FLOPs: 9.90e+14 FLOP/s
+2025-12-04 10:59:37,625	INFO speedrun.py:135 -- Total peak hardware FLOPs: 9.90e+14 FLOP/s
+2025-12-04 10:59:37,625	INFO speedrun.py:136 -- Model FLOPs: 3.34e+17 FLOP
+2025-12-04 10:59:37,625	INFO speedrun.py:140 -- Model size: 50.87 million parameters
+2025-12-04 10:59:41,935	INFO speedrun.py:163 -- The rough estimated compute (calculated as (total model FLOPs / Assumed MFU)) for your run is probably between:
+      * 6.68e+17 FLOPs assuming an MFU of 0.5, and
+      * 1.67e+18 FLOPs assuming an MFU of 0.2.
+
+This is calculated based on assumed MFU values and can be used as a rough estimate to guide your config/training setup.
+2025-12-04 10:59:41,936	INFO speedrun.py:240 -- Training time: 3310.90 seconds
+2025-12-04 10:59:41,936	INFO speedrun.py:242 -- Number of devices: 1
+2025-12-04 10:59:41,936	INFO speedrun.py:243 -- Number of chips: 1
+2025-12-04 10:59:41,936	INFO speedrun.py:244 -- Device FLOPs: 9.90e+14 FLOPs
+2025-12-04 10:59:41,936	INFO speedrun.py:245 -- Training hardware FLOPs: 3.28e+18 FLOPs
+2025-12-04 10:59:42,419	INFO speedrun.py:303 -- Speedrun info and results: {'author': {'name': 'Rice', 'affiliation': 'Rice Factory', 'url': 'N/A'}, 'description': '50M model batch size 128 (2x Chinchilla optimal tokens)', 'model_config': {'cross_entropy_block_size': None, 'seq_len': 1024, 'hidden_dim': 192, 'intermediate_dim': 448, 'num_layers': 4, 'num_heads': 2, 'head_dim': None, 'num_kv_heads': 2, 'activation_function': <ActivationFunctionEnum.silu: 'silu'>, 'initializer_range': 0.02, 'layer_norm_epsilon': 1e-05, 'tie_word_embeddings': False, 'hybrid_norm': False, 'use_qk_norm': False, 'input_embedding_norm': False, 'upcast_attn': False, 'attn_backend': None, 'flash_attention_block_size': None, 'gradient_checkpointing': True, 'scan_layers': True, 'use_bias': False, 'use_layer_norm_weight': True, 'rope': {'theta': 10000, 'factor': 1.0}, 'reference_checkpoint': 'NousResearch/Llama-2-7b-hf', 'tokenizer': None}, 'train_config': {'train_batch_size': 128, 'num_train_steps': 15258, 'learning_rate': 0.02, 'data_seed': None, 'weight_decay': None, 'beta1': None, 'beta2': None, 'epsilon': None, 'max_grad_norm': None, 'warmup': None, 'decay': None, 'rewarmup': None, 'lr_schedule': None, 'min_lr_ratio': None, 'cycle_length': None, 'z_loss_weight': None, 'ema_beta': None, 'skip_bad_steps': False, 'steps_per_eval': 500, 'steps_per_export': 10000, 'steps_per_task_eval': None, 'steps_per_hf_export': None, 'per_device_eval_parallelism': None, 'max_eval_batches': None, 'initialize_from_checkpoint_path': None, 'initialize_from_hf': None, 'reset_data_loader_on_init': True, 'allow_partial_checkpoint': False, 'int8': False, 'optimizer_config': {'learning_rate': 0.02, 'weight_decay': 0.0, 'min_lr_ratio': 0, 'warmup': 0, 'decay': 0.8, 'rewarmup': 0.0, 'cooldown': None, 'cycle_length': None, 'cycles': None, 'lr_schedule': 'linear', 'haps': None, 'weight_decay_modules': None, 'default_weight_decay_mask': None, 'lr': 0.02, 'adam_lr': 0.004, 'momentum': 0.95, 'nesterov': True, 'backend_steps': 5, 'adam_weight_decay': None, 'beta1': 0.8, 'beta2': 0.98, 'epsilon': 1e-15, 'muon_epsilon': 1e-05, 'max_grad_norm': 1, 'use_kimi_scaling': False}, 'watch': {'watch_targets': ['grads', 'params'], 'include_norms': True, 'include_per_parameter_norms': True, 'include_histograms': False, 'split_scan_layers': True, 'interval': 10}}, 'tokenized_dataset': "ExecutorStep(name='tokenized/subcache/fineweb-edu-10B', fn=<function _actually_download_pretokenized_cache at 0x145d928e5b20>, config=PretokenizedCacheDownloadConfig(cache_path=OutputName(name=None), tokenizer=VersionedValue(value='stanford-crfm/marin-tokenizer'), hf_repo_id=VersionedValue(value='marin-community/fineweb-edu-pretokenized-10B'), hf_revision=VersionedValue(value=None), hf_repo_type_prefix='datasets', hf_token=None, format=TextLmDatasetFormat(text_key='text'), cache_options=None, tags=[]), description=None, override_output_path=None, pip_dependency_groups=None)", 'resources': {'gpu_count': 1, 'accelerator_type': 'H200', 'device_flops_override': None}, 'model_size': 50874048, 'total_tokens': 1999896576, 'model_flops': 3.339705688208179e+17, 'num_devices': 1, 'num_chips': 1, 'device_flops': 989500000000000.0, 'training_time': 3310.895122077316, 'training_hardware_flops': 3.2761307232955044e+18, 'eval/paloma/c4_en/bpb': 1.3670099973678589, 'run_completion_timestamp': '2025-12-04 08:01:10 UTC', 'wandb_run_link': 'https://wandb.ai/xilin_wang1/marin-speedrun/runs/trial_batch_size_muon_bs128-3b5b75'}
+2025-12-04 10:59:42,500	INFO speedrun.py:308 -- Speedrun info and results written to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_batch_size_muon_bs128-3b5b75/speedrun_results.json
+
+============================================================
+Batch Size Ablation Study - 50M Model
+============================================================
+Batch Size:       128
+Learning Rate:    0.020000 (base: 0.020000)
+Total Tokens:     2,000,000,000 (2x Chinchilla = 40x params)
+Tokens/Step:      131,072
+Training Steps:   15,258
+============================================================
+
+Generating speedrun_results.json...
+Done!
+  [0;32m✓ Results generated[0m
+
+[0;34m========================================[0m
+[0;32m✓ Checkpoint processed successfully![0m
+[0;34m========================================[0m
+
+[0;34m========================================[0m
+[0;32m✓ Complete pipeline finished successfully![0m
+[0;34m========================================[0m
+
+[1;33mSummary:[0m
+  📊 Training: COMPLETE
+  📤 WandB Sync: COMPLETE
+  📁 Results: Available in checkpoint directories
+
+

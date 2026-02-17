@@ -1,0 +1,709 @@
+[0;34m========================================[0m
+[0;34mMarin Training + Sync Pipeline[0m
+[0;34m========================================[0m
+[0;34mExperiment: trial_batch_size_muon_sweep_warmup[0m
+[0;34mTraining script: /projects/frink/wang.xil/marin/experiments/speedrun/trial_batch_size_muon_sweep_warmup/trial_batch_size_muon_sweep_warmup.py[0m
+[0;34mWandB entity: xilin_wang1[0m
+[0;34mWandB project: marin-speedrun[0m
+
+[0;34m┌─ PHASE 1: TRAINING (Offline)[0m
+[0;34m├─────────────────────────────────────[0m
+
+[1;33m[1/4] Setting up training environment...[0m
+[1;33mSaving proxy configuration...[0m
+  http_proxy: http://10.99.0.130:3128
+  https_proxy: http://10.99.0.130:3128
+  ftp_proxy: http://10.99.0.130:3128
+[1;33mBatch size > 128, using XLA_PYTHON_CLIENT_ALLOCATOR=platform[0m
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2025 NVIDIA Corporation
+Built on Tue_May_27_02:21:03_PDT_2025
+Cuda compilation tools, release 12.9, V12.9.86
+Build cuda_12.9.r12.9/compiler.36037853_0
+Sun Dec  7 16:46:08 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.86.15              Driver Version: 570.86.15      CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H200                    On  |   00000000:5D:00.0 Off |                    0 |
+| N/A   41C    P0             80W /  700W |       1MiB / 143771MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+[0;32m✓ Training environment configured[0m
+
+[1;33m[2/4] Verifying training script...[0m
+[0;32m✓ Training script found[0m
+
+[1;33m[3/4] Running training (offline mode)...[0m
+  Extra args: 512
+/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+2025-12-07 16:46:30,509	INFO speedrun.py:126 -- Speedrun Configuration:
+2025-12-07 16:46:30,509	INFO speedrun.py:127 -- {
+    "author": {
+        "name": "Rice",
+        "affiliation": "Rice Factory",
+        "url": "N/A"
+    },
+    "description": "50M model batch size 512 (2x Chinchilla optimal tokens)",
+    "model_config": {
+        "cross_entropy_block_size": null,
+        "seq_len": 1024,
+        "hidden_dim": 192,
+        "intermediate_dim": 448,
+        "num_layers": 4,
+        "num_heads": 2,
+        "head_dim": null,
+        "num_kv_heads": 2,
+        "activation_function": "silu",
+        "initializer_range": 0.02,
+        "layer_norm_epsilon": 1e-05,
+        "tie_word_embeddings": false,
+        "hybrid_norm": false,
+        "use_qk_norm": false,
+        "input_embedding_norm": false,
+        "upcast_attn": false,
+        "attn_backend": null,
+        "flash_attention_block_size": null,
+        "gradient_checkpointing": true,
+        "scan_layers": true,
+        "use_bias": false,
+        "use_layer_norm_weight": true,
+        "rope": {
+            "theta": 10000,
+            "factor": 1.0
+        },
+        "reference_checkpoint": "NousResearch/Llama-2-7b-hf",
+        "tokenizer": null
+    },
+    "train_config": {
+        "train_batch_size": 512,
+        "num_train_steps": 3814,
+        "learning_rate": 0.04,
+        "data_seed": null,
+        "weight_decay": null,
+        "beta1": null,
+        "beta2": null,
+        "epsilon": null,
+        "max_grad_norm": null,
+        "warmup": null,
+        "decay": null,
+        "rewarmup": null,
+        "lr_schedule": null,
+        "min_lr_ratio": null,
+        "cycle_length": null,
+        "z_loss_weight": null,
+        "ema_beta": null,
+        "skip_bad_steps": false,
+        "steps_per_eval": 500,
+        "steps_per_export": 10000,
+        "steps_per_task_eval": null,
+        "steps_per_hf_export": null,
+        "per_device_eval_parallelism": null,
+        "max_eval_batches": null,
+        "initialize_from_checkpoint_path": null,
+        "initialize_from_hf": null,
+        "reset_data_loader_on_init": true,
+        "allow_partial_checkpoint": false,
+        "int8": false,
+        "optimizer_config": {
+            "learning_rate": 0.04,
+            "weight_decay": 0.0,
+            "min_lr_ratio": 0,
+            "warmup": 190,
+            "decay": 0.8,
+            "rewarmup": 0.0,
+            "cooldown": null,
+            "cycle_length": null,
+            "cycles": null,
+            "lr_schedule": "linear",
+            "haps": null,
+            "weight_decay_modules": null,
+            "default_weight_decay_mask": null,
+            "lr": 0.02,
+            "adam_lr": 0.004,
+            "momentum": 0.95,
+            "nesterov": true,
+            "backend_steps": 5,
+            "adam_weight_decay": null,
+            "beta1": 0.8,
+            "beta2": 0.98,
+            "epsilon": 1e-15,
+            "muon_epsilon": 1e-05,
+            "max_grad_norm": 1,
+            "use_kimi_scaling": false
+        },
+        "watch": {
+            "watch_targets": [
+                "grads",
+                "params"
+            ],
+            "include_norms": true,
+            "include_per_parameter_norms": true,
+            "include_histograms": false,
+            "split_scan_layers": true,
+            "interval": 10
+        }
+    },
+    "tokenized_dataset": "ExecutorStep(name='tokenized/subcache/fineweb-edu-10B', fn=<function _actually_download_pretokenized_cache at 0x151946d56ac0>, config=PretokenizedCacheDownloadConfig(cache_path=OutputName(name=None), tokenizer=VersionedValue(value='stanford-crfm/marin-tokenizer'), hf_repo_id=VersionedValue(value='marin-community/fineweb-edu-pretokenized-10B'), hf_revision=VersionedValue(value=None), hf_repo_type_prefix='datasets', hf_token=None, format=TextLmDatasetFormat(text_key='text'), cache_options=None, tags=[]), description=None, override_output_path=None, pip_dependency_groups=None)",
+    "resources": {
+        "gpu_count": 1,
+        "accelerator_type": "H200",
+        "device_flops_override": null
+    }
+}
+2025-12-07 16:46:30,509	INFO speedrun.py:163 -- The rough estimated compute (calculated as (total model FLOPs / Assumed MFU)) for your run is probably between:
+      * 6.68e+17 FLOPs assuming an MFU of 0.5, and
+      * 1.67e+18 FLOPs assuming an MFU of 0.2.
+
+This is calculated based on assumed MFU values and can be used as a rough estimate to guide your config/training setup.
+2025-12-07 16:46:30,509	INFO speedrun.py:131 -- Hardware and Model FLOPS Information:
+2025-12-07 16:46:30,509	INFO speedrun.py:132 -- Number of devices: 1
+2025-12-07 16:46:30,509	INFO speedrun.py:133 -- Number of chips: 1
+2025-12-07 16:46:30,509	INFO speedrun.py:134 -- Device FLOPs: 9.90e+14 FLOP/s
+2025-12-07 16:46:30,509	INFO speedrun.py:135 -- Total peak hardware FLOPs: 9.90e+14 FLOP/s
+2025-12-07 16:46:30,509	INFO speedrun.py:136 -- Model FLOPs: 3.34e+17 FLOP
+2025-12-07 16:46:30,509	INFO speedrun.py:140 -- Model size: 50.87 million parameters
+2025-12-07 16:46:30,509	INFO speedrun.py:336 -- Running speedrun trial_batch_size_muon_sweep_warmup_bs512
+2025-12-07 16:46:30,509	INFO speedrun.py:126 -- Speedrun Configuration:
+2025-12-07 16:46:30,509	INFO speedrun.py:127 -- {
+    "author": {
+        "name": "Rice",
+        "affiliation": "Rice Factory",
+        "url": "N/A"
+    },
+    "description": "50M model batch size 512 (2x Chinchilla optimal tokens)",
+    "model_config": {
+        "cross_entropy_block_size": null,
+        "seq_len": 1024,
+        "hidden_dim": 192,
+        "intermediate_dim": 448,
+        "num_layers": 4,
+        "num_heads": 2,
+        "head_dim": null,
+        "num_kv_heads": 2,
+        "activation_function": "silu",
+        "initializer_range": 0.02,
+        "layer_norm_epsilon": 1e-05,
+        "tie_word_embeddings": false,
+        "hybrid_norm": false,
+        "use_qk_norm": false,
+        "input_embedding_norm": false,
+        "upcast_attn": false,
+        "attn_backend": null,
+        "flash_attention_block_size": null,
+        "gradient_checkpointing": true,
+        "scan_layers": true,
+        "use_bias": false,
+        "use_layer_norm_weight": true,
+        "rope": {
+            "theta": 10000,
+            "factor": 1.0
+        },
+        "reference_checkpoint": "NousResearch/Llama-2-7b-hf",
+        "tokenizer": null
+    },
+    "train_config": {
+        "train_batch_size": 512,
+        "num_train_steps": 3814,
+        "learning_rate": 0.04,
+        "data_seed": null,
+        "weight_decay": null,
+        "beta1": null,
+        "beta2": null,
+        "epsilon": null,
+        "max_grad_norm": null,
+        "warmup": null,
+        "decay": null,
+        "rewarmup": null,
+        "lr_schedule": null,
+        "min_lr_ratio": null,
+        "cycle_length": null,
+        "z_loss_weight": null,
+        "ema_beta": null,
+        "skip_bad_steps": false,
+        "steps_per_eval": 500,
+        "steps_per_export": 10000,
+        "steps_per_task_eval": null,
+        "steps_per_hf_export": null,
+        "per_device_eval_parallelism": null,
+        "max_eval_batches": null,
+        "initialize_from_checkpoint_path": null,
+        "initialize_from_hf": null,
+        "reset_data_loader_on_init": true,
+        "allow_partial_checkpoint": false,
+        "int8": false,
+        "optimizer_config": {
+            "learning_rate": 0.04,
+            "weight_decay": 0.0,
+            "min_lr_ratio": 0,
+            "warmup": 190,
+            "decay": 0.8,
+            "rewarmup": 0.0,
+            "cooldown": null,
+            "cycle_length": null,
+            "cycles": null,
+            "lr_schedule": "linear",
+            "haps": null,
+            "weight_decay_modules": null,
+            "default_weight_decay_mask": null,
+            "lr": 0.02,
+            "adam_lr": 0.004,
+            "momentum": 0.95,
+            "nesterov": true,
+            "backend_steps": 5,
+            "adam_weight_decay": null,
+            "beta1": 0.8,
+            "beta2": 0.98,
+            "epsilon": 1e-15,
+            "muon_epsilon": 1e-05,
+            "max_grad_norm": 1,
+            "use_kimi_scaling": false
+        },
+        "watch": {
+            "watch_targets": [
+                "grads",
+                "params"
+            ],
+            "include_norms": true,
+            "include_per_parameter_norms": true,
+            "include_histograms": false,
+            "split_scan_layers": true,
+            "interval": 10
+        }
+    },
+    "tokenized_dataset": "ExecutorStep(name='tokenized/subcache/fineweb-edu-10B', fn=<function _actually_download_pretokenized_cache at 0x151946d56ac0>, config=PretokenizedCacheDownloadConfig(cache_path=OutputName(name=None), tokenizer=VersionedValue(value='stanford-crfm/marin-tokenizer'), hf_repo_id=VersionedValue(value='marin-community/fineweb-edu-pretokenized-10B'), hf_revision=VersionedValue(value=None), hf_repo_type_prefix='datasets', hf_token=None, format=TextLmDatasetFormat(text_key='text'), cache_options=None, tags=[]), description=None, override_output_path=None, pip_dependency_groups=None)",
+    "resources": {
+        "gpu_count": 1,
+        "accelerator_type": "H200",
+        "device_flops_override": null
+    }
+}
+2025-12-07 16:46:30,509	INFO speedrun.py:163 -- The rough estimated compute (calculated as (total model FLOPs / Assumed MFU)) for your run is probably between:
+      * 6.68e+17 FLOPs assuming an MFU of 0.5, and
+      * 1.67e+18 FLOPs assuming an MFU of 0.2.
+
+This is calculated based on assumed MFU values and can be used as a rough estimate to guide your config/training setup.
+2025-12-07 16:46:30,509	INFO speedrun.py:131 -- Hardware and Model FLOPS Information:
+2025-12-07 16:46:30,509	INFO speedrun.py:132 -- Number of devices: 1
+2025-12-07 16:46:30,509	INFO speedrun.py:133 -- Number of chips: 1
+2025-12-07 16:46:30,509	INFO speedrun.py:134 -- Device FLOPs: 9.90e+14 FLOP/s
+2025-12-07 16:46:30,509	INFO speedrun.py:135 -- Total peak hardware FLOPs: 9.90e+14 FLOP/s
+2025-12-07 16:46:30,509	INFO speedrun.py:136 -- Model FLOPs: 3.34e+17 FLOP
+2025-12-07 16:46:30,509	INFO speedrun.py:140 -- Model size: 50.87 million parameters
+2025-12-07 16:46:35,917	INFO worker.py:1879 -- Started a local Ray instance. View the dashboard at [1m[32mhttp://127.0.0.1:8265 [39m[22m
+2025-12-07 16:46:51,199	INFO executor.py:1115 -- Ray init took 20.22s
+2025-12-07 16:46:51,212	INFO executor.py:576 -- ### Inspecting the 2 provided steps ###
+2025-12-07 16:46:51,250	INFO executor.py:584 -- ### Reading 20 statuses ###
+2025-12-07 16:46:51,250	INFO executor.py:594 -- ### Writing metadata ###
+2025-12-07 16:46:51,255	INFO executor.py:915 -- Writing executor info to /projects/frink/wang.xil/marin/output/experiments/trial_batch_size_muon_sweep_warmup-34f737.json
+2025-12-07 16:46:51,255	INFO executor.py:916 -- To view the experiment page, go to:
+2025-12-07 16:46:51,255	INFO executor.py:917 -- 
+2025-12-07 16:46:51,255	INFO executor.py:918 -- http://localhost:5000/experiment?path=/projects/frink/wang.xil/marin/output/experiments/trial_batch_size_muon_sweep_warmup-34f737.json
+2025-12-07 16:46:51,255	INFO executor.py:919 -- 
+2025-12-07 16:46:51,500	INFO executor.py:597 -- ### Launching 20 steps ###
+2025-12-07 16:46:51,500	INFO executor.py:669 -- raw/paloma-speedrun: marin.download.huggingface.download_hf.download_hf
+2025-12-07 16:46:51,500	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:51,501	INFO executor.py:671 --   config = {"hf_dataset_id": "allenai/paloma", "revision": "65cd6fc"}
+2025-12-07 16:46:51,501	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-07 16:46:51,738	INFO executor.py:1023 -- Status raw/paloma-speedrun: marin.download.huggingface.download_hf.download_hf : SUCCESS.
+2025-12-07 16:46:51,739	INFO executor.py:1047 -- Step raw/paloma-speedrun: marin.download.huggingface.download_hf.download_hf has already succeeded. Status: SUCCESS
+2025-12-07 16:46:51,749	INFO executor.py:669 -- tokenized/subcache/fineweb-edu-10B: marin.processing.tokenize.download_pretokenized._actually_download_pretokenized_cache
+2025-12-07 16:46:51,749	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/subcache/fineweb-edu-10B-6fbcbb
+2025-12-07 16:46:51,749	INFO executor.py:671 --   config = {"tokenizer": "stanford-crfm/marin-tokenizer", "hf_repo_id": "marin-community/fineweb-edu-pretokenized-10B", "hf_revision": null}
+2025-12-07 16:46:51,749	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-07 16:46:51,755	INFO executor.py:1023 -- Status tokenized/subcache/fineweb-edu-10B: marin.processing.tokenize.download_pretokenized._actually_download_pretokenized_cache : SUCCESS.
+2025-12-07 16:46:51,756	INFO executor.py:1047 -- Step tokenized/subcache/fineweb-edu-10B: marin.processing.tokenize.download_pretokenized._actually_download_pretokenized_cache has already succeeded. Status: SUCCESS
+2025-12-07 16:46:51,765	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step raw/paloma-speedrun
+2025-12-07 16:46:51,765	INFO executor.py:669 -- tokenized/paloma/wikitext_103: marin.processing.tokenize.tokenize.tokenize
+2025-12-07 16:46:51,765	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/wikitext_103-70e03f
+2025-12-07 16:46:51,765	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/wikitext_103/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-07 16:46:51,765	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:51,765	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-07 16:46:51,774	INFO executor.py:1023 -- Status tokenized/paloma/wikitext_103: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-07 16:46:51,775	INFO executor.py:1047 -- Step tokenized/paloma/wikitext_103: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-07 16:46:51,784	INFO executor.py:669 -- tokenized/paloma/twitterAAE_HELM_fixed: marin.processing.tokenize.tokenize.tokenize
+2025-12-07 16:46:51,784	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/twitterAAE_HELM_fixed-8681d4
+2025-12-07 16:46:51,784	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/twitterAAE_HELM_fixed/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-07 16:46:51,784	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:51,784	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-07 16:46:51,789	INFO executor.py:1023 -- Status tokenized/paloma/twitterAAE_HELM_fixed: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-07 16:46:51,790	INFO executor.py:1047 -- Step tokenized/paloma/twitterAAE_HELM_fixed: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-07 16:46:51,802	INFO executor.py:669 -- tokenized/paloma/redpajama: marin.processing.tokenize.tokenize.tokenize
+2025-12-07 16:46:51,802	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/redpajama-c4c2cd
+2025-12-07 16:46:51,802	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/redpajama/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-07 16:46:51,802	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:51,802	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-07 16:46:51,807	INFO executor.py:1023 -- Status tokenized/paloma/redpajama: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-07 16:46:51,808	INFO executor.py:1047 -- Step tokenized/paloma/redpajama: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-07 16:46:51,818	INFO executor.py:669 -- tokenized/paloma/ptb: marin.processing.tokenize.tokenize.tokenize
+2025-12-07 16:46:51,818	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/ptb-34ecda
+2025-12-07 16:46:51,818	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/ptb/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-07 16:46:51,818	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:51,818	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-07 16:46:51,823	INFO executor.py:1023 -- Status tokenized/paloma/ptb: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-07 16:46:51,824	INFO executor.py:1047 -- Step tokenized/paloma/ptb: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-07 16:46:51,834	INFO executor.py:669 -- tokenized/paloma/mc4: marin.processing.tokenize.tokenize.tokenize
+2025-12-07 16:46:51,834	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/mc4-170a00
+2025-12-07 16:46:51,834	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/mc4/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-07 16:46:51,834	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:51,834	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-07 16:46:51,838	INFO executor.py:1023 -- Status tokenized/paloma/mc4: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-07 16:46:51,839	INFO executor.py:1047 -- Step tokenized/paloma/mc4: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-07 16:46:51,846	INFO executor.py:669 -- tokenized/paloma/manosphere_meta_sep: marin.processing.tokenize.tokenize.tokenize
+2025-12-07 16:46:51,846	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/manosphere_meta_sep-0d11c3
+2025-12-07 16:46:51,846	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/manosphere_meta_sep/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-07 16:46:51,846	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:51,846	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-07 16:46:51,852	INFO executor.py:1023 -- Status tokenized/paloma/manosphere_meta_sep: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-07 16:46:51,853	INFO executor.py:1047 -- Step tokenized/paloma/manosphere_meta_sep: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-07 16:46:51,864	INFO executor.py:669 -- tokenized/paloma/m2d2_wikipedia_unsplit: marin.processing.tokenize.tokenize.tokenize
+2025-12-07 16:46:51,864	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43
+2025-12-07 16:46:51,864	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/m2d2_wikipedia_unsplit/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-07 16:46:51,864	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:51,864	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-07 16:46:51,870	INFO executor.py:1023 -- Status tokenized/paloma/m2d2_wikipedia_unsplit: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-07 16:46:51,871	INFO executor.py:1047 -- Step tokenized/paloma/m2d2_wikipedia_unsplit: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-07 16:46:51,880	INFO executor.py:669 -- tokenized/paloma/m2d2_s2orc_unsplit: marin.processing.tokenize.tokenize.tokenize
+2025-12-07 16:46:51,880	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc
+2025-12-07 16:46:51,880	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/m2d2_s2orc_unsplit/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-07 16:46:51,880	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:51,880	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-07 16:46:51,886	INFO executor.py:1023 -- Status tokenized/paloma/m2d2_s2orc_unsplit: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-07 16:46:51,887	INFO executor.py:1047 -- Step tokenized/paloma/m2d2_s2orc_unsplit: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-07 16:46:51,898	INFO executor.py:669 -- tokenized/paloma/gab: marin.processing.tokenize.tokenize.tokenize
+2025-12-07 16:46:51,898	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/gab-d3f648
+2025-12-07 16:46:51,898	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/gab/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-07 16:46:51,898	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:51,898	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-07 16:46:51,903	INFO executor.py:1023 -- Status tokenized/paloma/gab: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-07 16:46:51,904	INFO executor.py:1047 -- Step tokenized/paloma/gab: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-07 16:46:51,914	INFO executor.py:669 -- tokenized/paloma/falcon-refinedweb: marin.processing.tokenize.tokenize.tokenize
+2025-12-07 16:46:51,914	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/falcon-refinedweb-09af65
+2025-12-07 16:46:51,914	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/falcon-refinedweb/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-07 16:46:51,914	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:51,914	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-07 16:46:51,919	INFO executor.py:1023 -- Status tokenized/paloma/falcon-refinedweb: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-07 16:46:51,920	INFO executor.py:1047 -- Step tokenized/paloma/falcon-refinedweb: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-07 16:46:51,930	INFO executor.py:669 -- tokenized/paloma/dolma_100_subreddits: marin.processing.tokenize.tokenize.tokenize
+2025-12-07 16:46:51,930	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma_100_subreddits-6fdd4c
+2025-12-07 16:46:51,930	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/dolma_100_subreddits/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-07 16:46:51,930	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:51,930	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-07 16:46:51,937	INFO executor.py:1023 -- Status tokenized/paloma/dolma_100_subreddits: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-07 16:46:51,937	INFO executor.py:1047 -- Step tokenized/paloma/dolma_100_subreddits: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-07 16:46:51,950	INFO executor.py:669 -- tokenized/paloma/dolma_100_programing_languages: marin.processing.tokenize.tokenize.tokenize
+2025-12-07 16:46:51,950	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma_100_programing_languages-9ef134
+2025-12-07 16:46:51,950	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/dolma_100_programing_languages/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-07 16:46:51,950	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:51,950	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-07 16:46:51,957	INFO executor.py:1023 -- Status tokenized/paloma/dolma_100_programing_languages: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-07 16:46:51,958	INFO executor.py:1047 -- Step tokenized/paloma/dolma_100_programing_languages: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-07 16:46:51,966	INFO executor.py:669 -- tokenized/paloma/dolma-v1_5: marin.processing.tokenize.tokenize.tokenize
+2025-12-07 16:46:51,966	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma-v1_5-591cb4
+2025-12-07 16:46:51,966	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/dolma-v1_5/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-07 16:46:51,966	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:51,966	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-07 16:46:51,973	INFO executor.py:1023 -- Status tokenized/paloma/dolma-v1_5: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-07 16:46:51,974	INFO executor.py:1047 -- Step tokenized/paloma/dolma-v1_5: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-07 16:46:51,982	INFO executor.py:669 -- tokenized/paloma/c4_en: marin.processing.tokenize.tokenize.tokenize
+2025-12-07 16:46:51,982	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/c4_en-a852aa
+2025-12-07 16:46:51,982	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/c4_en/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-07 16:46:51,982	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:51,982	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-07 16:46:51,987	INFO executor.py:1023 -- Status tokenized/paloma/c4_en: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-07 16:46:51,988	INFO executor.py:1047 -- Step tokenized/paloma/c4_en: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-07 16:46:51,996	INFO executor.py:669 -- tokenized/paloma/c4_100_domains: marin.processing.tokenize.tokenize.tokenize
+2025-12-07 16:46:51,996	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/c4_100_domains-a0a5bf
+2025-12-07 16:46:51,996	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/c4_100_domains/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-07 16:46:51,996	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:51,996	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-07 16:46:52,004	INFO executor.py:1023 -- Status tokenized/paloma/c4_100_domains: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-07 16:46:52,005	INFO executor.py:1047 -- Step tokenized/paloma/c4_100_domains: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-07 16:46:52,015	INFO executor.py:669 -- tokenized/paloma/4chan: marin.processing.tokenize.tokenize.tokenize
+2025-12-07 16:46:52,015	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/tokenized/paloma/4chan-6aff8f
+2025-12-07 16:46:52,015	INFO executor.py:671 --   config = {"validation_paths.[0]": "DEP[0]/4chan_meta_sep/val/val*.jsonl.gz", "tokenizer": "stanford-crfm/marin-tokenizer"}
+2025-12-07 16:46:52,015	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:52,015	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-07 16:46:52,020	INFO executor.py:1023 -- Status tokenized/paloma/4chan: marin.processing.tokenize.tokenize.tokenize : SUCCESS.
+2025-12-07 16:46:52,021	INFO executor.py:1047 -- Step tokenized/paloma/4chan: marin.processing.tokenize.tokenize.tokenize has already succeeded. Status: SUCCESS
+2025-12-07 16:46:52,030	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/subcache/fineweb-edu-10B
+2025-12-07 16:46:52,030	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/wikitext_103
+2025-12-07 16:46:52,031	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/twitterAAE_HELM_fixed
+2025-12-07 16:46:52,032	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/redpajama
+2025-12-07 16:46:52,032	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/ptb
+2025-12-07 16:46:52,033	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/mc4
+2025-12-07 16:46:52,033	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/manosphere_meta_sep
+2025-12-07 16:46:52,034	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/m2d2_wikipedia_unsplit
+2025-12-07 16:46:52,035	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/m2d2_s2orc_unsplit
+2025-12-07 16:46:52,035	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/gab
+2025-12-07 16:46:52,036	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/falcon-refinedweb
+2025-12-07 16:46:52,036	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/dolma_100_subreddits
+2025-12-07 16:46:52,037	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/dolma_100_programing_languages
+2025-12-07 16:46:52,038	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/dolma-v1_5
+2025-12-07 16:46:52,038	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/c4_en
+2025-12-07 16:46:52,039	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/c4_100_domains
+2025-12-07 16:46:52,039	INFO executor.py:637 -- Waiting for ObjectRef(00ffffffffffffffffffffffffffffffffffffff0100000001e1f505) to finish for step tokenized/paloma/4chan
+2025-12-07 16:46:52,040	INFO executor.py:669 -- checkpoints/speedrun/trial_batch_size_muon_sweep_warmup_bs512: marin.training.training.run_levanter_train_lm
+2025-12-07 16:46:52,040	INFO executor.py:670 --   output_path = /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_batch_size_muon_sweep_warmup_bs512-68f332
+2025-12-07 16:46:52,040	INFO executor.py:671 --   config = {"train_config.data.tokenizer": "stanford-crfm/marin-tokenizer", "train_config.data.configs.fineweb-edu-10B.cache_dir": "DEP[0]", "train_config.data.configs.paloma/4chan.cache_dir": "DEP[1]", "train_config.data.configs.paloma/4chan.validation_urls.[0]": "DEP[2]/4chan_meta_sep/val/val*.jsonl.gz", "train_config.data.configs.paloma/c4_100_domains.cache_dir": "DEP[3]", "train_config.data.configs.paloma/c4_100_domains.validation_urls.[0]": "DEP[4]/c4_100_domains/val/val*.jsonl.gz", "train_config.data.configs.paloma/c4_en.cache_dir": "DEP[5]", "train_config.data.configs.paloma/c4_en.validation_urls.[0]": "DEP[6]/c4_en/val/val*.jsonl.gz", "train_config.data.configs.paloma/dolma-v1_5.cache_dir": "DEP[7]", "train_config.data.configs.paloma/dolma-v1_5.validation_urls.[0]": "DEP[8]/dolma-v1_5/val/val*.jsonl.gz", "train_config.data.configs.paloma/dolma_100_programing_languages.cache_dir": "DEP[9]", "train_config.data.configs.paloma/dolma_100_programing_languages.validation_urls.[0]": "DEP[10]/dolma_100_programing_languages/val/val*.jsonl.gz", "train_config.data.configs.paloma/dolma_100_subreddits.cache_dir": "DEP[11]", "train_config.data.configs.paloma/dolma_100_subreddits.validation_urls.[0]": "DEP[12]/dolma_100_subreddits/val/val*.jsonl.gz", "train_config.data.configs.paloma/falcon-refinedweb.cache_dir": "DEP[13]", "train_config.data.configs.paloma/falcon-refinedweb.validation_urls.[0]": "DEP[14]/falcon-refinedweb/val/val*.jsonl.gz", "train_config.data.configs.paloma/gab.cache_dir": "DEP[15]", "train_config.data.configs.paloma/gab.validation_urls.[0]": "DEP[16]/gab/val/val*.jsonl.gz", "train_config.data.configs.paloma/m2d2_s2orc_unsplit.cache_dir": "DEP[17]", "train_config.data.configs.paloma/m2d2_s2orc_unsplit.validation_urls.[0]": "DEP[18]/m2d2_s2orc_unsplit/val/val*.jsonl.gz", "train_config.data.configs.paloma/m2d2_wikipedia_unsplit.cache_dir": "DEP[19]", "train_config.data.configs.paloma/m2d2_wikipedia_unsplit.validation_urls.[0]": "DEP[20]/m2d2_wikipedia_unsplit/val/val*.jsonl.gz", "train_config.data.configs.paloma/manosphere_meta_sep.cache_dir": "DEP[21]", "train_config.data.configs.paloma/manosphere_meta_sep.validation_urls.[0]": "DEP[22]/manosphere_meta_sep/val/val*.jsonl.gz", "train_config.data.configs.paloma/mc4.cache_dir": "DEP[23]", "train_config.data.configs.paloma/mc4.validation_urls.[0]": "DEP[24]/mc4/val/val*.jsonl.gz", "train_config.data.configs.paloma/ptb.cache_dir": "DEP[25]", "train_config.data.configs.paloma/ptb.validation_urls.[0]": "DEP[26]/ptb/val/val*.jsonl.gz", "train_config.data.configs.paloma/redpajama.cache_dir": "DEP[27]", "train_config.data.configs.paloma/redpajama.validation_urls.[0]": "DEP[28]/redpajama/val/val*.jsonl.gz", "train_config.data.configs.paloma/twitterAAE_HELM_fixed.cache_dir": "DEP[29]", "train_config.data.configs.paloma/twitterAAE_HELM_fixed.validation_urls.[0]": "DEP[30]/twitterAAE_HELM_fixed/val/val*.jsonl.gz", "train_config.data.configs.paloma/wikitext_103.cache_dir": "DEP[31]", "train_config.data.configs.paloma/wikitext_103.validation_urls.[0]": "DEP[32]/wikitext_103/val/val*.jsonl.gz"}
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[0] = /projects/frink/wang.xil/marin/output/tokenized/subcache/fineweb-edu-10B-6fbcbb
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[1] = /projects/frink/wang.xil/marin/output/tokenized/paloma/4chan-6aff8f
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[2] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[3] = /projects/frink/wang.xil/marin/output/tokenized/paloma/c4_100_domains-a0a5bf
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[4] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[5] = /projects/frink/wang.xil/marin/output/tokenized/paloma/c4_en-a852aa
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[6] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[7] = /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma-v1_5-591cb4
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[8] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[9] = /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma_100_programing_languages-9ef134
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[10] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[11] = /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma_100_subreddits-6fdd4c
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[12] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[13] = /projects/frink/wang.xil/marin/output/tokenized/paloma/falcon-refinedweb-09af65
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[14] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[15] = /projects/frink/wang.xil/marin/output/tokenized/paloma/gab-d3f648
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[16] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[17] = /projects/frink/wang.xil/marin/output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[18] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[19] = /projects/frink/wang.xil/marin/output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[20] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[21] = /projects/frink/wang.xil/marin/output/tokenized/paloma/manosphere_meta_sep-0d11c3
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[22] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[23] = /projects/frink/wang.xil/marin/output/tokenized/paloma/mc4-170a00
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[24] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[25] = /projects/frink/wang.xil/marin/output/tokenized/paloma/ptb-34ecda
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[26] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[27] = /projects/frink/wang.xil/marin/output/tokenized/paloma/redpajama-c4c2cd
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[28] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[29] = /projects/frink/wang.xil/marin/output/tokenized/paloma/twitterAAE_HELM_fixed-8681d4
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[30] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[31] = /projects/frink/wang.xil/marin/output/tokenized/paloma/wikitext_103-70e03f
+2025-12-07 16:46:52,040	INFO executor.py:673 --   DEP[32] = /projects/frink/wang.xil/marin/output/raw/paloma-speedrun-1d28d7
+2025-12-07 16:46:52,040	WARNING runtime_context.py:207 -- This method is only available when the process is a worker. Current mode: 0
+2025-12-07 16:46:52,042	INFO executor.py:1023 -- Status checkpoints/speedrun/trial_batch_size_muon_sweep_warmup_bs512: marin.training.training.run_levanter_train_lm : None.
+[36m(_doublecheck_paths pid=1678695)[0m Could not determine the region of the VM. This is fine if you're running locally.
+[36m(train_lm_task pid=1681631)[0m WARNING:levanter.distributed:SLURM_STEP_TASKS_PER_NODE not set in environment, assuming a single task per node
+[36m(train_lm_task pid=1681631)[0m WARNING:2025-12-07 16:47:26,444:jax._src.distributed:127: JAX detected proxy variable(s) in the environment as distributed setup: VSCODE_PROXY_URI. On some systems, this may cause a hang of distributed.initialize and you may need to unset these ENV variable(s)
+[36m(train_lm_task pid=1681631)[0m WARNING:jax._src.distributed:JAX detected proxy variable(s) in the environment as distributed setup: VSCODE_PROXY_URI. On some systems, this may cause a hang of distributed.initialize and you may need to unset these ENV variable(s)
+[36m(train_lm_task pid=1681631)[0m /projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+[36m(train_lm_task pid=1681631)[0m   warnings.warn(
+[36m(train_lm_task pid=1681631)[0m /projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+[36m(train_lm_task pid=1681631)[0m   warnings.warn(
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:29 - 0 - levanter.tracker.wandb - wandb.py:254 - INFO :: Setting wandb code_dir to /projects/frink/wang.xil/marin
+[36m(train_lm_task pid=1681631)[0m wandb: WARNING `resume` will be ignored since W&B syncing is set to `offline`. Starting a new run with run id trial_batch_size_muon_sweep_warmup_bs512-68f332.
+[36m(train_lm_task pid=1681631)[0m wandb: Tracking run with wandb version 0.22.2
+[36m(train_lm_task pid=1681631)[0m wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+[36m(train_lm_task pid=1681631)[0m wandb: Run data is saved locally in /projects/frink/wang.xil/marin/wandb/offline-run-20251207_164729-trial_batch_size_muon_sweep_warmup_bs512-68f332
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:31 - 0 - levanter.tracker.wandb - wandb.py:254 - INFO :: Setting wandb code_dir to /projects/frink/wang.xil/marin
+[36m(train_lm_task pid=1681631)[0m wandb: wandb.init() called while a run is active and reinit is set to 'default', so returning the previous run.
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:31 - 0 - levanter.checkpoint - checkpoint.py:602 - WARNING :: No checkpoints found in /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_batch_size_muon_sweep_warmup_bs512-68f332/checkpoints
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.main.train_lm - train_lm.py:119 - INFO :: Overriding data seed with 42
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/subcache/fineweb-edu-10B-6fbcbb/train
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.store.cache - cache.py:515 - WARNING :: Metadata mismatch: { 'type_changes': { 'root.preprocessor_metadata': { 'new_type': <class 'dict'>,
+[36m(train_lm_task pid=1681631)[0m                                                     'new_value': { 'append_bos': False,
+[36m(train_lm_task pid=1681631)[0m                                                                    'append_eos': True,
+[36m(train_lm_task pid=1681631)[0m                                                                    'max_length': 131072,
+[36m(train_lm_task pid=1681631)[0m                                                                    'padding': False,
+[36m(train_lm_task pid=1681631)[0m                                                                    'return_attention_mask': False,
+[36m(train_lm_task pid=1681631)[0m                                                                    'tokenizer': 'stanford-crfm/marin-tokenizer',
+[36m(train_lm_task pid=1681631)[0m                                                                    'vocab_size': 128256},
+[36m(train_lm_task pid=1681631)[0m                                                     'old_type': <class 'NoneType'>,
+[36m(train_lm_task pid=1681631)[0m                                                     'old_value': None}}}
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.data.text - text.py:1385 - INFO :: Not waiting for train caches to finish building
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/subcache/fineweb-edu-10B-6fbcbb/validation
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.data.text - text.py:1367 - WARNING :: No source for fineweb-edu-10B in validation split and no cache either, skipping
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/4chan-6aff8f/validation
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/c4_100_domains-a0a5bf/validation
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/c4_en-a852aa/validation
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma-v1_5-591cb4/validation
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma_100_programing_languages-9ef134/validation
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/dolma_100_subreddits-6fdd4c/validation
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/falcon-refinedweb-09af65/validation
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/gab-d3f648/validation
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/m2d2_s2orc_unsplit-e886dc/validation
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/m2d2_wikipedia_unsplit-f69b43/validation
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/manosphere_meta_sep-0d11c3/validation
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/mc4-170a00/validation
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/ptb-34ecda/validation
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/redpajama-c4c2cd/validation
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/twitterAAE_HELM_fixed-8681d4/validation
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:32 - 0 - levanter.store.cache - cache.py:303 - INFO :: Loading cache from /projects/frink/wang.xil/marin/output/tokenized/paloma/wikitext_103-70e03f/validation
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:35 - 0 - levanter.main.train_lm - train_lm.py:175 - INFO :: No checkpoint found. Starting from scratch.
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:54 - 0 - root - loader.py:492 - WARNING :: Data loading is taking a long time: 10.0 seconds. Waiting for 16384 items.
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:47:55 - 0 - levanter.data.loader - loader.py:261 - INFO :: Prefetch wasn't fast enough: 13.595.
+[36m(train_lm_task pid=1681631)[0m /projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/levanter/layers/attention.py:473: UserWarning: transformer_engine is not installed. Please install it to use NVIDIA's optimized fused attention.. Falling back to the reference implementation.
+[36m(train_lm_task pid=1681631)[0m   warnings.warn(f"{msg}. Falling back to the reference implementation.")
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:48:10 - 0 - root - loader.py:492 - WARNING :: Data loading is taking a long time: 10.0 seconds. Waiting for 16384 items.
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:22.548628: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:22.549037: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 125.25GiB (134486163456 bytes), down from 125.25GiB (134486163456 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:22.692775: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:22.693136: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 125.25GiB (134486163456 bytes), down from 125.25GiB (134486163456 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:22.846017: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:22.846335: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 125.25GiB (134486163456 bytes), down from 125.25GiB (134486163456 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:23.859769: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:23.860189: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 192.00MiB (201326592 bytes), down from 192.00MiB (201326592 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:24.464912: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:24.466043: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 192.00MiB (201326592 bytes), down from 192.00MiB (201326592 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:25.373541: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:25.373824: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 192.00MiB (201326592 bytes), down from 192.00MiB (201326592 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:25.446862: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:25.507120: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 125.25GiB (134486163456 bytes), down from 125.25GiB (134486163456 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:26.115385: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:26.115768: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 125.25GiB (134486163456 bytes), down from 125.25GiB (134486163456 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:26.837405: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:26.838783: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 192.00MiB (201326592 bytes), down from 192.00MiB (201326592 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:27.050015: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:27.062493: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 125.25GiB (134486163456 bytes), down from 125.25GiB (134486163456 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:28.209375: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:28.210525: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 125.25GiB (134486163456 bytes), down from 125.25GiB (134486163456 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:28.476907: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:28.477480: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 46.97MiB (49250304 bytes), down from 46.97MiB (49250304 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:29.506933: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:29.507381: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 46.97MiB (49250304 bytes), down from 46.97MiB (49250304 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:30.291157: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:30.291659: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 125.25GiB (134486163456 bytes), down from 125.25GiB (134486163456 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:31.780702: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:31.781106: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 224.00MiB (234881040 bytes), down from 224.00MiB (234881040 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:31.781889: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:31.782233: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 192.00MiB (201326592 bytes), down from 192.00MiB (201326592 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:31.880503: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:31.880826: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 46.97MiB (49250304 bytes), down from 46.97MiB (49250304 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:32.651906: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:32.652763: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 192.00MiB (201326592 bytes), down from 192.00MiB (201326592 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:33.380450: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:33.380970: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 46.97MiB (49250304 bytes), down from 46.97MiB (49250304 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:33.628138: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:33.628613: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 192.00MiB (201326592 bytes), down from 192.00MiB (201326592 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:33.812634: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:33.812998: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 192.00MiB (201326592 bytes), down from 192.00MiB (201326592 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:34.039560: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:34.039931: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 192.00MiB (201326592 bytes), down from 192.00MiB (201326592 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:34.150573: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:34.151004: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 46.97MiB (49250304 bytes), down from 46.97MiB (49250304 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:34.402937: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:34.403452: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 192.00MiB (201326592 bytes), down from 192.00MiB (201326592 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:34.475678: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:34.476085: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 46.97MiB (49250304 bytes), down from 46.97MiB (49250304 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:34.617084: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:34.618337: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 192.00MiB (201326592 bytes), down from 192.00MiB (201326592 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:34.711897: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:34.713388: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 192.00MiB (201326592 bytes), down from 192.00MiB (201326592 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:34.843069: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:34.843981: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 46.97MiB (49250304 bytes), down from 46.97MiB (49250304 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:34.848006: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:34.848309: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 46.97MiB (49250304 bytes), down from 46.97MiB (49250304 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:48:34 - 0 - root - loader.py:492 - WARNING :: Data loading is taking a long time: 10.0 seconds. Waiting for 16384 items.
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:35.000669: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:35.001078: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 46.97MiB (49250304 bytes), down from 46.97MiB (49250304 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:35.159335: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:35.159641: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 125.28GiB (134519717904 bytes), down from 125.28GiB (134519717904 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:35.713890: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:35.714671: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 78.97MiB (82804752 bytes), down from 78.97MiB (82804752 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:35.715534: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:35.715851: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 192.00MiB (201326592 bytes), down from 192.00MiB (201326592 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:35.746097: E external/xla/xla/service/gpu/gpu_hlo_schedule.cc:795] The byte size of input/output arguments (134736740352) exceeds the base limit (120097236582). This indicates an error in the calculation!
+[36m(train_lm_task pid=1681631)[0m 2025-12-07 16:48:35.746656: W external/xla/xla/hlo/transforms/simplifiers/hlo_rematerialization.cc:3023] Can't reduce memory use below 0B (0 bytes) by rematerialization; only reduced to 125.25GiB (134486163456 bytes), down from 125.25GiB (134486163456 bytes) originally
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:48:50 - 0 - root - loader.py:492 - WARNING :: Data loading is taking a long time: 10.0 seconds. Waiting for 16384 items.
+[36m(train_lm_task pid=1681631)[0m 2025-12-07T16:49:09 - 0 - root - loader.py:492 - WARNING :: Data loading is taking a long time: 10.0 seconds. Waiting for 16384 items.
+2025-12-07 16:49:32,170	INFO executor.py:637 -- Waiting for ObjectRef(6efb86ef2d286c40ffffffffffffffffffffffff0100000001000000) to finish for step checkpoints/speedrun/trial_batch_size_muon_sweep_warmup_bs512
+
+============================================================
+Batch Size Ablation Study - 50M Model
+============================================================
+Batch Size:       512
+Learning Rate:    0.040000 (base: 0.020000)
+Warmup Steps:     190 (5% of training steps)
+Total Tokens:     2,000,000,000 (2x Chinchilla = 40x params)
+Tokens/Step:      524,288
+Training Steps:   3,814
+============================================================
+
+[36m(StatusActor pid=1667545)[0m StatusActor initialized
+Traceback (most recent call last):
+  File "/projects/frink/wang.xil/marin/experiments/speedrun/trial_batch_size_muon_sweep_warmup/trial_batch_size_muon_sweep_warmup.py", line 165, in <module>
+    executor_main(steps=default_speedrun(experiment_name, speedrun_config))
+  File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/draccus/argparsing.py", line 228, in wrapper_inner
+    response = fn(cfg, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/frink/wang.xil/marin/src/marin/execution/executor.py", line 1143, in executor_main
+    executor.run(steps=steps, dry_run=config.dry_run, run_only=config.run_only, force_run_failed=config.force_run_failed)
+  File "/projects/frink/wang.xil/marin/src/marin/execution/executor.py", line 598, in run
+    self._run_steps(steps_to_run, dry_run=dry_run, force_run_failed=force_run_failed)
+  File "/projects/frink/wang.xil/marin/src/marin/execution/executor.py", line 638, in _run_steps
+    ray.get(ref)
+  File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 2822, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/ray/_private/worker.py", line 930, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(XlaRuntimeError): [36mray::run_levanter_train_lm:checkpoints/speedrun/trial_batch_size_muon_sweep_warmup_bs512()[39m (pid=1678048, ip=10.99.104.55)
+  File "/projects/frink/wang.xil/marin/src/marin/training/training.py", line 223, in run_levanter_train_lm
+    return ray.get(train_lm_task.remote())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ray.exceptions.RayTaskError(XlaRuntimeError): [36mray::train_lm_task()[39m (pid=1681631, ip=10.99.104.55)
+  File "/projects/frink/wang.xil/marin/src/marin/training/training.py", line 209, in train_lm_task
+    train_lm.main(train_config)
+  File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/levanter/main/train_lm.py", line 268, in main
+    last_info = trainer.train(state, train_loader)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/levanter/trainer.py", line 529, in train
+    for info in self.training_steps(state, train_loader):
+  File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/levanter/trainer.py", line 517, in training_steps
+    info = self.train_step(state, example)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/levanter/trainer.py", line 476, in train_step
+    result = self._maybe_save_jaxpr("train_step", self._jit_train_step_fn, state, batch, batch_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/levanter/trainer.py", line 740, in _maybe_save_jaxpr
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/haliax/partitioning.py", line 388, in __call__
+    return self._call(False, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/equinox/_module/_prebuilt.py", line 33, in __call__
+    return self.__func__(self.__self__, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/haliax/partitioning.py", line 464, in _call
+    out, out_static = cached_pjitted_fun(dynamic_donated, dynamic_reserved, static)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+jaxlib._jax.XlaRuntimeError: RESOURCE_EXHAUSTED: Failed to allocate request for 125.25GiB (134486163456B) on device ordinal 0
+--------------------
+For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+--------------------
+For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+--------------------
+For simplicity, JAX has removed its internal frames from the traceback of the following exception. Set JAX_TRACEBACK_FILTERING=off to include these.
+[36m(train_lm_task pid=1681631)[0m Exception ignored in atexit callback: <function _start_and_connect_service.<locals>.teardown_atexit at 0x144f9a2db880>
+[36m(train_lm_task pid=1681631)[0m Traceback (most recent call last):
+[36m(train_lm_task pid=1681631)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/wandb/sdk/lib/service/service_connection.py", line 61, in teardown_atexit
+[36m(train_lm_task pid=1681631)[0m     conn.teardown(hooks.exit_code)
+[36m(train_lm_task pid=1681631)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/wandb/sdk/lib/service/service_connection.py", line 236, in teardown
+[36m(train_lm_task pid=1681631)[0m     self._asyncer.run(publish_teardown_and_close)
+[36m(train_lm_task pid=1681631)[0m   File "/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/wandb/sdk/lib/asyncio_manager.py", line 136, in run
+[36m(train_lm_task pid=1681631)[0m     
+[36m(train_lm_task pid=1681631)[0m return future.result()
+[36m(train_lm_task pid=1681631)[0m   
+[36m(train_lm_task pid=1681631)[0m   

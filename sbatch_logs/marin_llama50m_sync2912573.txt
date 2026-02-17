@@ -1,0 +1,157 @@
+[0;34m========================================[0m
+[0;34mWandB Sync & Results Generation[0m
+[0;34m========================================[0m
+[0;34mSubmission name: trial_llama_50m[0m
+[0;34mSubmission dir: /projects/frink/wang.xil/marin/experiments/speedrun/trial_llama_50m[0m
+[0;34mWandB entity: xilin_wang1[0m
+[0;34mWandB project: marin-speedrun[0m
+
+[1;33m[1/3] Setting up environment...[0m
+[0;32m✓ Environment configured[0m
+
+[1;33m[2/3] Finding checkpoint directories...[0m
+[0;32m✓ Found 1 checkpoint(s)[0m
+
+[1;33m[3/3] Processing checkpoints (sync to WandB & generate results)...[0m
+
+[0;34mProcessing checkpoint 1/1: /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m-0b1cd5[0m
+  Run ID: trial_llama_50m-0b1cd5
+  [1;33m→ Syncing to WandB...[0m
+  Syncing: /projects/frink/wang.xil/marin/wandb/offline-run-20251122_234054-trial_llama_50m-0b1cd5
+/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+Find logs at: /projects/frink/wang.xil/marin/wandb/debug-cli.wang.xil.log
+Syncing: https://wandb.ai/xilin_wang1/marin-speedrun/runs/trial_llama_50m-0b1cd5 ... done.
+  [0;32m✓ WandB sync completed[0m
+  [1;33m→ Generating speedrun_results.json...[0m
+/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+/projects/frink/wang.xil/marin/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+2025-11-23 01:11:18,401	INFO speedrun.py:126 -- Speedrun Configuration:
+2025-11-23 01:11:18,402	INFO speedrun.py:127 -- {
+    "author": {
+        "name": "Rice",
+        "affiliation": "Rice Factory",
+        "url": "N/A"
+    },
+    "description": "50M param model trial",
+    "model_config": {
+        "cross_entropy_block_size": null,
+        "seq_len": 1024,
+        "hidden_dim": 192,
+        "intermediate_dim": 448,
+        "num_layers": 4,
+        "num_heads": 2,
+        "head_dim": null,
+        "num_kv_heads": 2,
+        "activation_function": "silu",
+        "initializer_range": 0.02,
+        "layer_norm_epsilon": 1e-05,
+        "tie_word_embeddings": false,
+        "hybrid_norm": false,
+        "use_qk_norm": false,
+        "input_embedding_norm": false,
+        "upcast_attn": false,
+        "attn_backend": null,
+        "flash_attention_block_size": null,
+        "gradient_checkpointing": true,
+        "scan_layers": true,
+        "use_bias": false,
+        "use_layer_norm_weight": true,
+        "rope": {
+            "theta": 10000,
+            "factor": 1.0
+        },
+        "reference_checkpoint": "NousResearch/Llama-2-7b-hf",
+        "tokenizer": null
+    },
+    "train_config": {
+        "train_batch_size": 64,
+        "num_train_steps": 15200,
+        "learning_rate": 0.003,
+        "data_seed": null,
+        "weight_decay": 0.1,
+        "beta1": null,
+        "beta2": null,
+        "epsilon": null,
+        "max_grad_norm": null,
+        "warmup": null,
+        "decay": null,
+        "rewarmup": null,
+        "lr_schedule": null,
+        "min_lr_ratio": null,
+        "cycle_length": null,
+        "z_loss_weight": null,
+        "ema_beta": null,
+        "skip_bad_steps": false,
+        "steps_per_eval": 500,
+        "steps_per_export": 10000,
+        "steps_per_task_eval": null,
+        "steps_per_hf_export": null,
+        "per_device_eval_parallelism": null,
+        "max_eval_batches": null,
+        "initialize_from_checkpoint_path": null,
+        "initialize_from_hf": null,
+        "reset_data_loader_on_init": true,
+        "allow_partial_checkpoint": false,
+        "int8": false,
+        "optimizer_config": null,
+        "watch": {
+            "watch_targets": [
+                "grads",
+                "params"
+            ],
+            "include_norms": true,
+            "include_per_parameter_norms": true,
+            "include_histograms": false,
+            "split_scan_layers": true,
+            "interval": 10
+        }
+    },
+    "tokenized_dataset": "ExecutorStep(name='tokenized/subcache/fineweb-edu-10B', fn=<function _actually_download_pretokenized_cache at 0x14bad5a4da80>, config=PretokenizedCacheDownloadConfig(cache_path=OutputName(name=None), tokenizer=VersionedValue(value='stanford-crfm/marin-tokenizer'), hf_repo_id=VersionedValue(value='marin-community/fineweb-edu-pretokenized-10B'), hf_revision=VersionedValue(value=None), hf_repo_type_prefix='datasets', hf_token=None, format=TextLmDatasetFormat(text_key='text'), cache_options=None, tags=[]), description=None, override_output_path=None, pip_dependency_groups=None)",
+    "resources": {
+        "gpu_count": 1,
+        "accelerator_type": "H200",
+        "device_flops_override": null
+    }
+}
+2025-11-23 01:11:18,402	INFO speedrun.py:163 -- The rough estimated compute (calculated as (total model FLOPs / Assumed MFU)) for your run is probably between:
+      * 3.33e+17 FLOPs assuming an MFU of 0.5, and
+      * 8.32e+17 FLOPs assuming an MFU of 0.2.
+
+This is calculated based on assumed MFU values and can be used as a rough estimate to guide your config/training setup.
+2025-11-23 01:11:18,402	INFO speedrun.py:131 -- Hardware and Model FLOPS Information:
+2025-11-23 01:11:18,402	INFO speedrun.py:132 -- Number of devices: 1
+2025-11-23 01:11:18,402	INFO speedrun.py:133 -- Number of chips: 1
+2025-11-23 01:11:18,402	INFO speedrun.py:134 -- Device FLOPs: 9.90e+14 FLOP/s
+2025-11-23 01:11:18,402	INFO speedrun.py:135 -- Total peak hardware FLOPs: 9.90e+14 FLOP/s
+2025-11-23 01:11:18,402	INFO speedrun.py:136 -- Model FLOPs: 1.66e+17 FLOP
+2025-11-23 01:11:18,402	INFO speedrun.py:140 -- Model size: 50.87 million parameters
+2025-11-23 01:11:22,190	INFO speedrun.py:163 -- The rough estimated compute (calculated as (total model FLOPs / Assumed MFU)) for your run is probably between:
+      * 3.33e+17 FLOPs assuming an MFU of 0.5, and
+      * 8.32e+17 FLOPs assuming an MFU of 0.2.
+
+This is calculated based on assumed MFU values and can be used as a rough estimate to guide your config/training setup.
+2025-11-23 01:11:22,190	INFO speedrun.py:240 -- Training time: 1787.14 seconds
+2025-11-23 01:11:22,190	INFO speedrun.py:242 -- Number of devices: 1
+2025-11-23 01:11:22,190	INFO speedrun.py:243 -- Number of chips: 1
+2025-11-23 01:11:22,190	INFO speedrun.py:244 -- Device FLOPs: 9.90e+14 FLOPs
+2025-11-23 01:11:22,190	INFO speedrun.py:245 -- Training hardware FLOPs: 1.77e+18 FLOPs
+2025-11-23 01:11:23,049	INFO speedrun.py:303 -- Speedrun info and results: {'author': {'name': 'Rice', 'affiliation': 'Rice Factory', 'url': 'N/A'}, 'description': '50M param model trial', 'model_config': {'cross_entropy_block_size': None, 'seq_len': 1024, 'hidden_dim': 192, 'intermediate_dim': 448, 'num_layers': 4, 'num_heads': 2, 'head_dim': None, 'num_kv_heads': 2, 'activation_function': <ActivationFunctionEnum.silu: 'silu'>, 'initializer_range': 0.02, 'layer_norm_epsilon': 1e-05, 'tie_word_embeddings': False, 'hybrid_norm': False, 'use_qk_norm': False, 'input_embedding_norm': False, 'upcast_attn': False, 'attn_backend': None, 'flash_attention_block_size': None, 'gradient_checkpointing': True, 'scan_layers': True, 'use_bias': False, 'use_layer_norm_weight': True, 'rope': {'theta': 10000, 'factor': 1.0}, 'reference_checkpoint': 'NousResearch/Llama-2-7b-hf', 'tokenizer': None}, 'train_config': {'train_batch_size': 64, 'num_train_steps': 15200, 'learning_rate': 0.003, 'data_seed': None, 'weight_decay': 0.1, 'beta1': None, 'beta2': None, 'epsilon': None, 'max_grad_norm': None, 'warmup': None, 'decay': None, 'rewarmup': None, 'lr_schedule': None, 'min_lr_ratio': None, 'cycle_length': None, 'z_loss_weight': None, 'ema_beta': None, 'skip_bad_steps': False, 'steps_per_eval': 500, 'steps_per_export': 10000, 'steps_per_task_eval': None, 'steps_per_hf_export': None, 'per_device_eval_parallelism': None, 'max_eval_batches': None, 'initialize_from_checkpoint_path': None, 'initialize_from_hf': None, 'reset_data_loader_on_init': True, 'allow_partial_checkpoint': False, 'int8': False, 'optimizer_config': None, 'watch': {'watch_targets': ['grads', 'params'], 'include_norms': True, 'include_per_parameter_norms': True, 'include_histograms': False, 'split_scan_layers': True, 'interval': 10}}, 'tokenized_dataset': "ExecutorStep(name='tokenized/subcache/fineweb-edu-10B', fn=<function _actually_download_pretokenized_cache at 0x14bad5a4da80>, config=PretokenizedCacheDownloadConfig(cache_path=OutputName(name=None), tokenizer=VersionedValue(value='stanford-crfm/marin-tokenizer'), hf_repo_id=VersionedValue(value='marin-community/fineweb-edu-pretokenized-10B'), hf_revision=VersionedValue(value=None), hf_repo_type_prefix='datasets', hf_token=None, format=TextLmDatasetFormat(text_key='text'), cache_options=None, tags=[]), description=None, override_output_path=None, pip_dependency_groups=None)", 'resources': {'gpu_count': 1, 'accelerator_type': 'H200', 'device_flops_override': None}, 'model_size': 50874048, 'total_tokens': 996147200, 'model_flops': 1.66350525825024e+17, 'num_devices': 1, 'num_chips': 1, 'device_flops': 989500000000000.0, 'training_time': 1787.1434938535094, 'training_hardware_flops': 1.7683784871680476e+18, 'eval/paloma/c4_en/bpb': 1.414705753326416, 'run_completion_timestamp': '2025-11-23 06:52:15 UTC', 'wandb_run_link': 'https://wandb.ai/xilin_wang1/marin-speedrun/runs/trial_llama_50m-0b1cd5'}
+2025-11-23 01:11:23,058	INFO speedrun.py:308 -- Speedrun info and results written to /projects/frink/wang.xil/marin/output/checkpoints/speedrun/trial_llama_50m-0b1cd5/speedrun_results.json
+Generating speedrun_results.json...
+Done!
+  [0;32m✓ Results copied to /projects/frink/wang.xil/marin/experiments/speedrun/trial_llama_50m//speedrun_results.json[0m
+
+[0;34m========================================[0m
+[0;32mProcessed 1 checkpoint(s) successfully![0m
+[0;34m========================================[0m
+
+[0;34mResults organized by model size:[0m
+  📂 Directory: /projects/frink/wang.xil/marin/experiments/speedrun/trial_llama_50m
+
+[0;32mDone![0m
+

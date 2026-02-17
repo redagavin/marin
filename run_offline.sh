@@ -1,6 +1,8 @@
 #!/bin/bash
 # Marin Speedrun Training Pipeline
 # This script runs the complete training pipeline and generates results
+# Usage: ./run_offline.sh <experiment_name>
+# Example: ./run_offline.sh trial_llama_75m_adamax
 
 set -e  # Exit on error
 
@@ -15,14 +17,25 @@ echo -e "${BLUE}========================================${NC}"
 echo -e "${BLUE}Marin Speedrun Training Pipeline${NC}"
 echo -e "${BLUE}========================================${NC}"
 
+# Check if experiment name is provided
+if [ -z "$1" ]; then
+    echo -e "${RED}Error: Experiment name not provided${NC}"
+    echo "Usage: $0 <experiment_name>"
+    echo "Example: $0 trial_llama_75m_adamax"
+    exit 1
+fi
+
 # Configuration
-SUBMISSION_NAME="hello_world_gpu_speedrun"
-SUBMISSION_PY="hello_world_gpu_speedrun.py"
+EXPERIMENT_NAME="$1"
+SUBMISSION_NAME="${EXPERIMENT_NAME}"
+SUBMISSION_PY="${EXPERIMENT_NAME}"
 MARIN_DIR="/projects/frink/wang.xil/marin"
 OUTPUT_PREFIX="/projects/frink/wang.xil/marin/output"
 VENV_PATH="${MARIN_DIR}/.venv"
-TRAIN_SCRIPT="${MARIN_DIR}/experiments/speedrun/${SUBMISSION_NAME}/${SUBMISSION_PY}"
+TRAIN_SCRIPT="${MARIN_DIR}/experiments/speedrun/${SUBMISSION_NAME}/${SUBMISSION_PY}.py"
 SUBMISSION_DIR="${MARIN_DIR}/experiments/speedrun/${SUBMISSION_NAME}"
+
+echo -e "${BLUE}Experiment: ${EXPERIMENT_NAME}${NC}"
 
 
 # Step 1: Setup environment
@@ -53,7 +66,14 @@ fi
 
 # Step 3: Find the checkpoint directory
 echo -e "\n${YELLOW}[3/5] Locating checkpoint directory...${NC}"
-CHECKPOINT_DIR=$(find "${OUTPUT_PREFIX}/checkpoints/speedrun" -name "llama_nano_gpu_speedrun-*" -type d | head -1)
+# Convert experiment name to checkpoint prefix (replace underscores with first letters if needed)
+# CHECKPOINT_PREFIX="${SUBMISSION_NAME:0:1}${SUBMISSION_NAME:7:1}"  # e.g., "trial_llama_75m_adamax" -> "tl"
+CHECKPOINT_DIR=$(find "${OUTPUT_PREFIX}/checkpoints/speedrun" -name "${SUBMISSION_NAME}-*" -type d | head -1)
+
+# If not found with full name, try a more flexible pattern
+if [ -z "$CHECKPOINT_DIR" ]; then
+    CHECKPOINT_DIR=$(find "${OUTPUT_PREFIX}/checkpoints/speedrun" -name "${SUBMISSION_NAME:0:3}*" -type d | head -1)
+fi
 
 if [ -z "$CHECKPOINT_DIR" ]; then
     echo -e "${RED}✗ Could not find checkpoint directory${NC}"
@@ -62,13 +82,17 @@ fi
 
 echo -e "${GREEN}✓ Found checkpoint at: ${CHECKPOINT_DIR}${NC}"
 
-# Extract run ID from checkpoint directory name
+# Extract run ID from checkpoinet directory name
 RUN_ID=$(basename "${CHECKPOINT_DIR}")
 echo -e "${BLUE}  Run ID: ${RUN_ID}${NC}"
 
+
+
+
+
 # Step 4: Sync to WandB
 echo -e "\n${YELLOW}[4/5] Syncing to WandB...${NC}"
-WANDB_DIR="${MARIN_DIR}/wandb/offline-run-*-${RUN_ID}"
+# WANDB_DIR="${MARIN_DIR}/wandb/offline-run-*-${RUN_ID}"
 
 # Find the WandB offline directory
 WANDB_OFFLINE_DIR=$(find "${MARIN_DIR}/wandb" -name "offline-run-*-${RUN_ID}" -type d | head -1)
@@ -88,6 +112,8 @@ else
     echo -e "${RED}✗ WandB sync failed${NC}"
     exit 1
 fi
+
+
 
 # Step 5: Generate speedrun_results.json
 echo -e "\n${YELLOW}[5/5] Generating speedrun_results.json...${NC}"
@@ -125,7 +151,7 @@ echo -e "\n${BLUE}========================================${NC}"
 echo -e "${GREEN}Pipeline completed successfully!${NC}"
 echo -e "${BLUE}========================================${NC}"
 echo -e "\n${BLUE}Submission files:${NC}"
-echo -e "  📄 Training script: ${SUBMISSION_DIR}/${SUBMISSION_PY}"
+echo -e "  📄 Training script: ${SUBMISSION_DIR}/${SUBMISSION_PY}.py"
 echo -e "  📊 Results file:    ${SUBMISSION_DIR}/speedrun_results.json"
 echo -e "  📋 README:          ${SUBMISSION_DIR}/README.md"
 echo -e "  💾 Checkpoint:      ${CHECKPOINT_DIR}/hf/step-99/"
